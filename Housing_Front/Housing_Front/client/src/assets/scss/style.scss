@@ -1,0 +1,24 @@
+/*
+* Template Name: Property
+* Template Author: Untree.co
+* Template License: https://creativecommons.org/licenses/by/3.0/
+* Author URI: https://untree.co/
+
+* Twitter: https://twitter.com/Untree_co
+* Facebook: https://web.facebook.com/Untree.co/
+*/
+$primary: #00204a;
+$secondary: #005555;
+$font-family-sans-serif: 'Work Sans', sans-serif;
+$font-family-sans-serif-secondary: 'Work Sans', sans-serif;
+
+@import 'src/assets/scss/bootstrap/mixins';
+@import 'src/assets/scss/bootstrap/functions';
+@import 'src/assets/scss/bootstrap/variables';
+
+@import 'src/assets/scss/bootstrap/bootstrap';
+
+@import 'src/assets/scss/components/site-navbar';
+@import 'src/assets/scss/components/site-base';
+@import 'src/assets/scss/components/site-blocks';
+@import 'src/assets/scss/components/site-footer';

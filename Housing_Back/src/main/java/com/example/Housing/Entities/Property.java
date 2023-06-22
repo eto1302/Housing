@@ -5,12 +5,13 @@ import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name="properties")
 public class Property {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String name;
@@ -29,14 +30,16 @@ public class Property {
 
     //addCharacteristics
     private boolean includingUtilities;
-
-    @OneToMany(mappedBy = "property", cascade = CascadeType.REMOVE)
-    private List<Photo> photos;
+    @OneToMany(
+            cascade = CascadeType.MERGE,
+            orphanRemoval = true
+    )
+    private Set<Photo> photos;
 
     public Property(){
     }
 
-    public Property(String name, String description, Address address, double price, Date dateOfAvailability, int numberOfRooms, boolean includingUtilities, List<Photo> photos) {
+    public Property(String name, String description, Address address, double price, Date dateOfAvailability, int numberOfRooms, boolean includingUtilities, Set<Photo> photos) {
         this.name = name;
         this.description = description;
         this.address = address;
@@ -107,11 +110,11 @@ public class Property {
         this.includingUtilities = includingUtilities;
     }
 
-    public List<Photo> getPhotos() {
+    public Set<Photo> getPhotos() {
         return photos;
     }
 
-    public void setPhotos(List<Photo> photos) {
+    public void setPhotos(Set<Photo> photos) {
         this.photos = photos;
     }
 

@@ -1,0 +1,13 @@
+<div class="hero bg-light">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-9 text-center">
+        <div *ngFor="let property of properties | async">
+          <a [routerLink]="'/property/' + property.id">
+            <img class="imageIcons" [src]="getPath(property.photos[0]?.photo)" alt="Property Image">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

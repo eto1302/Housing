@@ -9,23 +9,18 @@ import java.util.Objects;
 @Table(name="photos")
 public class Photo {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Lob
     @Column(name = "photo", columnDefinition="BLOB")
     private byte[] photo;
 
-    @ManyToOne
-    @JoinColumn(name = "property_id")
-    private Property property;
-
     public Photo() {
     }
 
     public Photo(byte[] photo) {
         this.photo = photo;
-        this.property = property;
     }
 
     public long getId() {
@@ -40,27 +35,25 @@ public class Photo {
         this.photo = photo;
     }
 
-    public Property getProperty() {
-        return property;
-    }
-
-    public void setProperty(Property property) {
-        this.property = property;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Photo photo1)) return false;
-        return id == photo1.id && Arrays.equals(photo, photo1.photo) && Objects.equals(property, photo1.property);
+        return id == photo1.id && Arrays.equals(photo, photo1.photo);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, property);
+        int result = Objects.hash(id);
         result = 31 * result + Arrays.hashCode(photo);
         return result;
     }
 
-
+    @Override
+    public String toString() {
+        return "Photo{" +
+                "id=" + id +
+                ", photo=" + Arrays.toString(photo) +
+                '}';
+    }
 }

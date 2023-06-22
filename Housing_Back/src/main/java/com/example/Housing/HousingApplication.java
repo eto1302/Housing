@@ -18,10 +18,9 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.*;
 
 @SpringBootApplication
 public class HousingApplication {
@@ -46,8 +45,6 @@ public class HousingApplication {
 			ImageIO.write(image, "jpg", baos);
 			byte[] byteArray = baos.toByteArray();
 
-			// Do something with the byte array
-
 			// Close the ByteArrayOutputStream
 			baos.close();
 			photoRepository.save(new Photo(byteArray));
@@ -56,9 +53,12 @@ public class HousingApplication {
 			System.out.println(e.getMessage());
 		}
 		if(!photoRepository.findAll().isEmpty()){
-			propertyRepository.save(new Property(
+			Property property = new Property(
 					"testName", "testDescription", addressRepository.findAll().get(0), 13.70,
-					new Date(2023, 6, 29), 4, false, Collections.singletonList(photoRepository.findAll().get(0))));
+					Date.from(LocalDate.of(2023, 6, 29).atStartOfDay(ZoneId.systemDefault()).toInstant()),
+					4, false, new HashSet<Photo>(Arrays.asList(photoRepository.findAll().get(0))));
+			System.out.println(property.getId());
+			propertyRepository.save(property);
 		}
 	}
 }
