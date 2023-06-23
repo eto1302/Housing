@@ -52,12 +52,12 @@ public class HousingApplication {
 		catch(IOException e){
 			System.out.println(e.getMessage());
 		}
-		if(!photoRepository.findAll().isEmpty()){
+		var photos = photoRepository.findAll();
+		if(!photos.isEmpty()){
 			Property property = new Property(
 					"testName", "testDescription", addressRepository.findAll().get(0), 13.70,
 					Date.from(LocalDate.of(2023, 6, 29).atStartOfDay(ZoneId.systemDefault()).toInstant()),
-					4, false, new HashSet<Photo>(Arrays.asList(photoRepository.findAll().get(0))));
-			System.out.println(property.getId());
+					4, false, new HashSet<Photo>(Collections.singletonList(photos.get(photos.size() - 1))));
 			propertyRepository.save(property);
 		}
 	}

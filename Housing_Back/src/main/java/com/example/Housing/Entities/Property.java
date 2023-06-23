@@ -31,7 +31,7 @@ public class Property {
     //addCharacteristics
     private boolean includingUtilities;
     @OneToMany(
-            cascade = CascadeType.MERGE,
+            cascade = CascadeType.REMOVE,
             orphanRemoval = true
     )
     private Set<Photo> photos;
