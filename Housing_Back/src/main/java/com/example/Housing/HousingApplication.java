@@ -36,29 +36,32 @@ public class HousingApplication {
 
 	private void populateDatabase(PropertyRepository propertyRepository, PhotoRepository photoRepository, AddressRepository addressRepository) {
 		addressRepository.save(new Address("testStreet 25", "Varna", "Coast", "Bulgaria", "9000", 43.20230700815063, 27.92398286015827));
-		try{
-			File imageFile = new File("src/main/resources/arc_reactor.jpg");
-			BufferedImage image = ImageIO.read(imageFile);
+		for(int i = 0; i < 6; ++i){
+			try{
+				File imageFile = new File("src/main/resources/image" + i + ".jpg");
+				BufferedImage image = ImageIO.read(imageFile);
 
-			// Convert the image to byte array
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			ImageIO.write(image, "jpg", baos);
-			byte[] byteArray = baos.toByteArray();
+				// Convert the image to byte array
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				ImageIO.write(image, "jpg", baos);
+				byte[] byteArray = baos.toByteArray();
 
-			// Close the ByteArrayOutputStream
-			baos.close();
-			photoRepository.save(new Photo(byteArray));
-		}
-		catch(IOException e){
-			System.out.println(e.getMessage());
-		}
-		var photos = photoRepository.findAll();
-		if(!photos.isEmpty()){
-			Property property = new Property(
-					"testName", "testDescription", addressRepository.findAll().get(0), 13.70,
-					Date.from(LocalDate.of(2023, 6, 29).atStartOfDay(ZoneId.systemDefault()).toInstant()),
-					4, false, new HashSet<Photo>(Collections.singletonList(photos.get(photos.size() - 1))));
-			propertyRepository.save(property);
+				// Close the ByteArrayOutputStream
+				baos.close();
+				photoRepository.save(new Photo(byteArray));
+			}
+			catch(IOException e){
+				System.out.println(e.getMessage());
+			}
+			var photos = photoRepository.findAll();
+			if(!photos.isEmpty()){
+				Property property = new Property(
+						"Test Housing, No_" + i, "testDescription", addressRepository.findAll().get(0), 13.70,
+						Date.from(LocalDate.of(2023, 6, 29).atStartOfDay(ZoneId.systemDefault()).toInstant()),
+						4, false, new HashSet<Photo>(Collections.singletonList(photos.get(photos.size() - 1))));
+				propertyRepository.save(property);
+			}
+
 		}
 	}
 }

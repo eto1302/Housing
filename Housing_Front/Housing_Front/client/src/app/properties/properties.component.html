@@ -1,21 +1,29 @@
-<div class="hero bg-light">
-  <div class="container">
-    <div class="row justify-content-center align-items-center">
-      <div class="radio-btns" role="radiogroup">
-        <div class="radio-btns__btn" role="radio" aria-checked="false" tabindex="-1" aria-label="Select image one" *ngFor="let property of properties | async">
-          <a [routerLink]="'/property/' + property.id">
+<div class="hero primary-color">
+  <div class="container bg-light">
+    <section class="properties">
+      <div class="property-card" *ngFor="let property of properties | async">
+        <a
+          [routerLink]="'/property/' + property.id" class="inner-card">
+          <div class="property-image">
             <img class="imageIcons" [src]="getPath(property.photos[0]?.photo)" alt="Property Image">
-          </a>
-        </div>
-
-        <div class="radio-btns__btn" role="radio" aria-checked="false" tabindex="-1" aria-label="Select image two">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/cdn-36_img-2.jpg" alt="Image description">
-        </div>
-
-        <div class="radio-btns__btn" role="radio" aria-checked="false" tabindex="-1" aria-label="Select image three">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/cdn-36_img-3.jpg" alt="Image description">
-        </div>
+          </div>
+          <div class="property-info">
+            <h5>{{property.name}}</h5>
+            <h6>${{property.price}}</h6>
+          </div>
+        </a>
       </div>
-    </div>
+    </section>
   </div>
 </div>
+
+
+<!--<div class="row justify-content-center align-items-center">-->
+<!--  <div class="radio-btns" role="radiogroup">-->
+<!--    <div class="radio-btns__btn" role="radio" aria-checked="false" tabindex="-1" aria-label="Select image" *ngFor="let property of properties | async">-->
+<!--      <a [routerLink]="'/property/' + property.id" style="overflow: auto">-->
+<!--        <img class="imageIcons" [src]="getPath(property.photos[0]?.photo)" alt="Property Image">-->
+<!--      </a>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

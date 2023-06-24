@@ -3,8 +3,12 @@
     <div class="row justify-content-center align-items-center">
       <div class="col-lg-9 text-center">
         <h1 class="heading">Property</h1>
-        <button class="third-color button-1">Buying</button>
-        <button class="third-color button-1">Selling</button>
+        <a href="#popularProperties">
+          <button class="third-color button-1" href="#popularProperties">Buying</button>
+        </a>
+        <a href="#popularProperties">
+          <button class="third-color button-1">Selling</button>
+        </a>
       </div>
     </div>
   </div>
@@ -40,208 +44,211 @@
 </div>
 
 <div class="section section-5 secondary-color">
-  <div class="container">
-    <div class="row justify-content-center text-center mb-5">
-      <div class="col-lg-6 mb-6">
-        <h2 class="font-weight-bold heading text-primary mb-4">
-          Popular Properties
-        </h2>
-        <p>
-          <a
-            href="/properties"
-            target="_blank"
-            class="btn btn-primary text-white py-3 px-4"
-          >View all properties</a>
-        </p>
+  <section id="popularProperties">
+    <div class="container">
+      <div class="row justify-content-center text-center mb-5">
+        <div class="col-lg-6 mb-6">
+          <h2 class="font-weight-bold heading text-primary mb-4">
+            Popular Properties
+          </h2>
+          <p>
+            <a
+              href="/properties"
+              target="_blank"
+              class="btn btn-primary text-white py-3 px-4"
+            >View all properties</a>
+          </p>
+        </div>
       </div>
-    </div>
-    <div
-      id="carouselMultiItemExample"
-      class="carousel slide carousel-dark text-center"
-      data-mdb-ride="carousel"
-    >
-      <div class="d-flex justify-content-center mb-4">
-        <button
-          class="carousel-control-prev position-relative"
-          type="button"
-          data-bs-target="#carouselMultiItemExample"
-          data-bs-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button
-          class="carousel-control-next position-relative"
-          type="button"
-          data-bs-target="#carouselMultiItemExample"
-          data-bs-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-      <div class="carousel-inner py-4" >
-        <div class="carousel-item" *ngFor="let property of (properties | async) let index = index" [class.active]="index == 0">
-          <div class="container">
-            <div class="row justify-content-center">
-              <div class="col-lg-4 col-md-12">
-                <div class="card">
-                  <a class="img">
-                    <img class="img-fluid" [src]="getPath(property.photos[0]?.photo)"
-                         alt="Property Image">
-                  </a>
-                  <div class="card-body">
-                    <div class="price mb-2"><span>${{property.price}}</span></div>
-                    <div>
+      <div
+        id="carouselMultiItemExample"
+        class="carousel slide carousel-dark text-center"
+        data-mdb-ride="carousel"
+      >
+        <div class="d-flex justify-content-center mb-4">
+          <button
+            class="carousel-control-prev position-relative"
+            type="button"
+            data-bs-target="#carouselMultiItemExample"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next position-relative"
+            type="button"
+            data-bs-target="#carouselMultiItemExample"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        <div class="carousel-inner py-4">
+          <div class="carousel-item" *ngFor="let property of (properties | async) let index = index"
+               [class.active]="index == 0">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-12">
+                  <div class="card">
+                    <a class="img">
+                      <img class="img-fluid" [src]="getPath(property.photos[0]?.photo)"
+                           alt="Property Image">
+                    </a>
+                    <div class="card-body">
+                      <div class="price mb-2"><span>${{property.price}}</span></div>
+                      <div>
                       <span class="d-block mb-2 text-black-50"
                       >{{property.address.postalCode}} {{property.address.street}}</span
                       >
-                      <span class="city d-block mb-3">{{property.address.city}}
-                        , {{property.address.region}}, {{property.address.country}}</span>
+                        <span class="city d-block mb-3">{{property.address.city}}
+                          , {{property.address.region}}, {{property.address.country}}</span>
 
-                      <div class="specs d-flex mb-4">
+                        <div class="specs d-flex mb-4">
                         <span class="d-block d-flex align-items-center me-3">
                           <span class="icon-bed me-2"></span>
                           <span class="caption">{{property.numberOfRooms}} rooms</span>
                         </span>
+                        </div>
+                        <a
+                          [routerLink]="'/property/' + property.id"
+                          class="btn btn-primary py-2 px-3"
+                        >See details</a>
                       </div>
-
-                      <a
-                        [routerLink]="'/property/' + property.id"
-                        class="btn btn-primary py-2 px-3"
-                      >See details</a>
                     </div>
+                  </div>
                 </div>
-              </div>
               </div>
             </div>
           </div>
         </div>
+        <!-- Inner -->
       </div>
-      <!-- Inner -->
+      <!-- Carousel wrapper -->
     </div>
-    <!-- Carousel wrapper -->
-  </div>
+  </section>
 </div>
 
+<div class="section section-5 primary-color">
+  <section id="agents">
+    <div class="container">
+      <div class="row justify-content-center text-center mb-5">
+        <div class="col-lg-6 mb-5">
+          <h2 class="font-weight-bold heading text-primary mb-4">
+            Our Agents
+          </h2>
+          <p class="text-white-50">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
+            enim pariatur similique debitis vel nisi qui reprehenderit totam?
+            Quod maiores.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
+          <div class="h-100 person">
+            <img
+              src="../../assets/resources/images/person_1-min.jpg"
+              alt="Image"
+              class="img-fluid"
+            />
 
-<div class="section section-5 bg-light">
-  <div class="container">
-    <div class="row justify-content-center text-center mb-5">
-      <div class="col-lg-6 mb-5">
-        <h2 class="font-weight-bold heading text-primary mb-4">
-          Our Agents
-        </h2>
-        <p class="text-black-50">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-          enim pariatur similique debitis vel nisi qui reprehenderit totam?
-          Quod maiores.
-        </p>
+            <div class="person-contents">
+              <h2 class="mb-0"><a href="#">James Doe</a></h2>
+              <span class="meta d-block mb-3">Real Estate Agent</span>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Facere officiis inventore cumque tenetur laboriosam, minus
+                culpa doloremque odio, neque molestias?
+              </p>
+
+              <ul class="social list-unstyled list-inline dark-hover">
+                <li class="list-inline-item">
+                  <a href="#"><span class="icon-twitter"></span></a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#"><span class="icon-facebook"></span></a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#"><span class="icon-linkedin"></span></a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#"><span class="icon-instagram"></span></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
+          <div class="h-100 person">
+            <img
+              src="../../assets/resources/images/person_2-min.jpg"
+              alt="Image"
+              class="img-fluid"
+            />
+
+            <div class="person-contents">
+              <h2 class="mb-0"><a href="#">Jean Smith</a></h2>
+              <span class="meta d-block mb-3">Real Estate Agent</span>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Facere officiis inventore cumque tenetur laboriosam, minus
+                culpa doloremque odio, neque molestias?
+              </p>
+
+              <ul class="social list-unstyled list-inline dark-hover">
+                <li class="list-inline-item">
+                  <a href="#"><span class="icon-twitter"></span></a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#"><span class="icon-facebook"></span></a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#"><span class="icon-linkedin"></span></a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#"><span class="icon-instagram"></span></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
+          <div class="h-100 person">
+            <img
+              src="../../assets/resources/images/person_3-min.jpg"
+              alt="Image"
+              class="img-fluid"
+            />
+
+            <div class="person-contents">
+              <h2 class="mb-0"><a href="#">Alicia Huston</a></h2>
+              <span class="meta d-block mb-3">Real Estate Agent</span>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Facere officiis inventore cumque tenetur laboriosam, minus
+                culpa doloremque odio, neque molestias?
+              </p>
+
+              <ul class="social list-unstyled list-inline dark-hover">
+                <li class="list-inline-item">
+                  <a href="#"><span class="icon-twitter"></span></a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#"><span class="icon-facebook"></span></a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#"><span class="icon-linkedin"></span></a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#"><span class="icon-instagram"></span></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
-        <div class="h-100 person">
-          <img
-            src="../../assets/resources/images/person_1-min.jpg"
-            alt="Image"
-            class="img-fluid"
-          />
-
-          <div class="person-contents">
-            <h2 class="mb-0"><a href="#">James Doe</a></h2>
-            <span class="meta d-block mb-3">Real Estate Agent</span>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Facere officiis inventore cumque tenetur laboriosam, minus
-              culpa doloremque odio, neque molestias?
-            </p>
-
-            <ul class="social list-unstyled list-inline dark-hover">
-              <li class="list-inline-item">
-                <a href="#"><span class="icon-twitter"></span></a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#"><span class="icon-facebook"></span></a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#"><span class="icon-linkedin"></span></a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#"><span class="icon-instagram"></span></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
-        <div class="h-100 person">
-          <img
-            src="../../assets/resources/images/person_2-min.jpg"
-            alt="Image"
-            class="img-fluid"
-          />
-
-          <div class="person-contents">
-            <h2 class="mb-0"><a href="#">Jean Smith</a></h2>
-            <span class="meta d-block mb-3">Real Estate Agent</span>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Facere officiis inventore cumque tenetur laboriosam, minus
-              culpa doloremque odio, neque molestias?
-            </p>
-
-            <ul class="social list-unstyled list-inline dark-hover">
-              <li class="list-inline-item">
-                <a href="#"><span class="icon-twitter"></span></a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#"><span class="icon-facebook"></span></a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#"><span class="icon-linkedin"></span></a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#"><span class="icon-instagram"></span></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
-        <div class="h-100 person">
-          <img
-            src="../../assets/resources/images/person_3-min.jpg"
-            alt="Image"
-            class="img-fluid"
-          />
-
-          <div class="person-contents">
-            <h2 class="mb-0"><a href="#">Alicia Huston</a></h2>
-            <span class="meta d-block mb-3">Real Estate Agent</span>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Facere officiis inventore cumque tenetur laboriosam, minus
-              culpa doloremque odio, neque molestias?
-            </p>
-
-            <ul class="social list-unstyled list-inline dark-hover">
-              <li class="list-inline-item">
-                <a href="#"><span class="icon-twitter"></span></a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#"><span class="icon-facebook"></span></a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#"><span class="icon-linkedin"></span></a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#"><span class="icon-instagram"></span></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  </section>
 </div>

@@ -1,56 +1,45 @@
-.radio-btns {
-  display: grid;
-  gap: 2%;
-  grid-template-columns: repeat(3, 33%);
-  grid-template-rows: repeat(3, 50%);
-
+.properties {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.radio-btns:hover .radio-btns__btn:not(:hover) {
-  filter: grayscale(100%);
-  opacity: 0.75;
+.property-card {
+  flex-grow: 1;
+  flex-basis: 16%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: medium solid #005555;
+  margin: 2%;
+  border-radius: 20px;
 }
 
-.radio-btns:hover .radio-btns__btn:not(:hover)::after {
-  background-color: rgba(#000, 0.5);
-}
-
-@media (min-width: 30rem) {
-  .radio-btns {
-    grid-template-columns: repeat(3, 33%);
-  }
-}
-
-.radio-btns__btn {
-  position: relative;
-  cursor: pointer;
-  transition: .3s;
-  float: left;
-}
-
-.radio-btns__btn::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(#000, 0);
-  transition: .3s;
-}
-
-.radio-btns__btn img {
-  display: block;
-  width: 100%;
-  height: 100%;
+.property-image .img {
   max-width: 100%;
 }
 
-/* demo stuff */
-body {
-  padding: 1em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+.property-info {
+  margin-top: auto;
+}
+
+.inner-card {
+  padding: 10%;
+  color: black;
+  text-decoration: none
+}
+
+.property-image:hover{
+  filter: grayscale(50%);
+  opacity: 0.50;
+}
+
+.property-image:hover .property-image:not(:hover)::after {
+  background-color: rgba(#000, 0.5);
+}
+
+@media (max-width: 920px) {
+  .product-card {
+    flex: 1 21%;
+  }
 }
