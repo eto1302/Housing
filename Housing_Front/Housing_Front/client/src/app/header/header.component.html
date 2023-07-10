@@ -21,7 +21,7 @@
             <a href="/properties">Properties</a>
             <ul class="dropdown">
               <li><a href="#popularProperties">Buy Property</a></li>
-              <li><a href="#">Sell Property</a></li>
+              <li><a [routerLink]="'/sell/'" >Sell Property</a></li>
               <li class="has-children">
                 <a href="#">Dropdown</a>
                 <ul class="dropdown">
@@ -34,7 +34,7 @@
           </li>
           <li><a href="services.html">Services</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#agents">Contact Us</a></li>
+          <li><a [routerLink]="'/contact/'" >Contact Us</a></li>
         </ul>
 
         <a
