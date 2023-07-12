@@ -1,12 +1,39 @@
 .primary-color {
-  background-color: rgba(25,25,25,0.93)
-}
-.secondary-color{
-  background-color: #f2f4f6;
-}
-.navbar-color{
+  //background-color: rgba(25,25,25,0.93)
   background-color: #005555;
 }
-.third-color{
+
+.secondary-color {
+  background-color: #f2f4f6;
+}
+
+.navbar-color {
+  background-color: #005555;
+}
+
+.third-color {
   background-color: #dbc3a1;
+}
+
+.diagonal {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: auto auto auto -10%;
+  transform: rotate(-5deg);
+  z-index: 99;
+  height: 100%;
+  width: 120%;
+  overflow: hidden;
+}
+
+@media (max-width: 1023px) {
+  .diagonal {
+    transform: rotate(0deg);
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400&display=swap');
+.logoHeading{
+  font-family: 'Oswald', sans-serif;
 }
