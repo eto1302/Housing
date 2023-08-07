@@ -7,20 +7,20 @@
   <div class="site-mobile-menu-body"></div>
 </div>
 
-<nav class="site-nav primary-color">
+<nav class="site-nav primary-color" id="navbar">
   <div class="container">
-    <div class="menu-bg-wrap navbar-color">
+    <div class="menu-bg-wrap navbar-color" style="box-shadow: 0 0 0 0">
       <div class="site-navigation">
-        <a href="index.html" class="logo m-0 float-start logoHeading">SiGo Properties</a>
+        <a target="_self" href="index.html" class="logo m-0 float-start logoHeading">SiGo Properties</a>
 
         <ul
           class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end"
         >
           <li class="has-children">
-            <a href="/properties">Properties</a>
+            <a target="_self" href="/properties">Properties</a>
             <ul class="dropdown">
-              <li><a href="#popularProperties">Buy Property</a></li>
-              <li><a [routerLink]="'/sell/'" >Sell Property</a></li>
+              <li><a target="_self" href="#popularProperties">Buy Property</a></li>
+              <li><a target="_self" [routerLink]="'/sell/'" >Sell Property</a></li>
               <li class="has-children">
                 <a href="#">Dropdown</a>
                 <ul class="dropdown">
@@ -31,8 +31,8 @@
               </li>
             </ul>
           </li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="#about">About</a></li>
+          <li><a target="_self" href="services.html">Services</a></li>
+          <li><a target="_self" href="#about">About</a></li>
           <li><a [routerLink]="'/contact/'" >Contact Us</a></li>
         </ul>
 

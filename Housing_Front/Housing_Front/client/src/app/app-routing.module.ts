@@ -5,11 +5,16 @@ import {PropertiesComponent} from './properties/properties.component';
 import {PropertyComponent} from './property/property.component';
 import {ContactComponent} from './contact/contact.component';
 import {SellComponent} from './sell/sell.component';
+import {CreatePropertyComponent} from './create-property/create-property.component';
 
 const routes: Routes = [
   {
     path: 'properties',
     component: PropertiesComponent
+  },
+  {
+    path: 'createProperty',
+    component: CreatePropertyComponent
   },
   {
     path: 'property/:id',

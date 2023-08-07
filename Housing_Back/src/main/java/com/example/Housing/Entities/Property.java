@@ -8,11 +8,13 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name="properties")
+@Table(name = "properties")
 public class Property {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    private String agentName;
 
     private String name;
 
@@ -28,6 +30,8 @@ public class Property {
 
     private int numberOfRooms;
 
+    private String videoLink;
+
     //addCharacteristics
     private boolean includingUtilities;
     @OneToMany(
@@ -36,16 +40,21 @@ public class Property {
     )
     private Set<Photo> photos;
 
-    public Property(){
+    public Property() {
     }
 
-    public Property(String name, String description, Address address, double price, Date dateOfAvailability, int numberOfRooms, boolean includingUtilities, Set<Photo> photos) {
+    public Property(String agentName, String name, String description, Address address,
+                    double price, Date dateOfAvailability, int numberOfRooms, String videoLink,
+                    boolean includingUtilities, Set<Photo> photos) {
+        this.id = id;
+        this.agentName = agentName;
         this.name = name;
         this.description = description;
         this.address = address;
         this.price = price;
         this.dateOfAvailability = dateOfAvailability;
         this.numberOfRooms = numberOfRooms;
+        this.videoLink = videoLink;
         this.includingUtilities = includingUtilities;
         this.photos = photos;
     }
@@ -122,24 +131,42 @@ public class Property {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Property property)) return false;
-        return id == property.id && Double.compare(property.price, price) == 0 && numberOfRooms == property.numberOfRooms && includingUtilities == property.includingUtilities && Objects.equals(name, property.name) && Objects.equals(description, property.description) && Objects.equals(address, property.address) && Objects.equals(dateOfAvailability, property.dateOfAvailability) && Objects.equals(photos, property.photos);
+        return getId() == property.getId() && Double.compare(property.getPrice(), getPrice()) == 0 && getNumberOfRooms() == property.getNumberOfRooms() && isIncludingUtilities() == property.isIncludingUtilities() && Objects.equals(getAgentName(), property.getAgentName()) && Objects.equals(getName(), property.getName()) && Objects.equals(getDescription(), property.getDescription()) && Objects.equals(getAddress(), property.getAddress()) && Objects.equals(getDateOfAvailability(), property.getDateOfAvailability()) && Objects.equals(getVideoLink(), property.getVideoLink()) && Objects.equals(getPhotos(), property.getPhotos());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, address, price, dateOfAvailability, numberOfRooms, includingUtilities, photos);
+        return Objects.hash(getId(), getAgentName(), getName(), getDescription(), getAddress(), getPrice(), getDateOfAvailability(), getNumberOfRooms(), getVideoLink(), isIncludingUtilities(), getPhotos());
+    }
+
+    public String getAgentName() {
+        return agentName;
+    }
+
+    public void setAgentName(String agentName) {
+        this.agentName = agentName;
+    }
+
+    public String getVideoLink() {
+        return videoLink;
+    }
+
+    public void setVideoLink(String videoLink) {
+        this.videoLink = videoLink;
     }
 
     @Override
     public String toString() {
         return "Property{" +
                 "id=" + id +
+                ", agentName='" + agentName + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", address=" + address +
                 ", price=" + price +
                 ", dateOfAvailability=" + dateOfAvailability +
                 ", numberOfRooms=" + numberOfRooms +
+                ", videoLink='" + videoLink + '\'' +
                 ", includingUtilities=" + includingUtilities +
                 ", photos=" + photos +
                 '}';

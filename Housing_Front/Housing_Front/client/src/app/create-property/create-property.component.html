@@ -1,0 +1,42 @@
+<div class="section section-4 primary-color">
+  <div class="container mx-auto">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-8 contact-us">
+        <form [formGroup]="createPropertyForm" (ngSubmit)="onSubmit()" >
+          <label for="agentName">AGENT NAME <em>&#x2a;</em></label>
+          <select name="agentName" id="agentName" formControlName="agentName">
+            <option value="Силвия Гочева">Силвия Гочева</option>
+            <!-- <option *ngFor="let itemParentesco of parentescos" [ngValue]="itemParentesco.name">
+              {{itemParentesco.name }}</option> -->
+          </select>
+          <label for="name">PROPERTY NAME<em>&#x2a;</em></label>
+          <input id="name" name="name" required="" type="text" formControlName="name"/>
+          <label for="description">PROPERTY DESCRIPTION <em>&#x2a;</em></label>
+          <textarea id="description"
+                    name="description"
+                    required=""
+                    rows="4"formControlName="description"></textarea>
+          <label for="numberOfRooms">PROPERTY NUMBER OF ROOMS<em>&#x2a;</em></label>
+          <input id="numberOfRooms" name="numberOfRooms" required="" type="number" formControlName="numberOfRooms"/>
+          <label for="propertyStreet">PROPERTY STREET<em>&#x2a;</em></label>
+          <input id="propertyStreet" name="propertyStreet" required="" type="text" formControlName="propertyStreet"/>
+          <label for="propertyCity">PROPERTY CITY<em>&#x2a;</em></label>
+          <input id="propertyCity" name="propertyCity" required="" type="text" formControlName="propertyCity"/>
+          <label for="propertyRegion">PROPERTY REGION<em>&#x2a;</em></label>
+          <input id="propertyRegion" name="propertyRegion" required="" type="text" formControlName="propertyRegion"/>
+          <label for="propertyCountry">PROPERTY COUNTRY<em>&#x2a;</em></label>
+          <input id="propertyCountry" name="propertyCountry" required="" type="text" formControlName="propertyCountry"/>
+          <label for="propertyPostal">PROPERTY POSTAL CODE<em>&#x2a;</em></label>
+          <input id="propertyPostal" name="propertyPostal" required="" type="text" formControlName="propertyPostal"/>
+          <label for="propertyX">PROPERTY X<em>&#x2a;</em></label>
+          <input id="propertyX" name="propertyX" required="" type="text" formControlName="propertyX"/>
+          <label for="propertyY">PROPERTY Y<em>&#x2a;</em></label>
+          <input id="propertyY" name="propertyY" required="" type="text" formControlName="propertyY"/>
+          <label for="videoLink">PROPERTY VIDEO<em>&#x2a;</em></label>
+          <input id="videoLink" name="videoLink" required="" type="text" formControlName="videoLink"/>
+          <button id="createProperty" type="submit">SUBMIT</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

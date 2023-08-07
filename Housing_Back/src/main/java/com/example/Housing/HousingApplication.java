@@ -6,12 +6,13 @@ import com.example.Housing.Entities.Property;
 import com.example.Housing.Repositories.AddressRepository;
 import com.example.Housing.Repositories.PhotoRepository;
 import com.example.Housing.Repositories.PropertyRepository;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.passay.CharacterRule;
+import org.passay.EnglishCharacterData;
+import org.passay.PasswordGenerator;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.provider.HibernateUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -24,6 +25,7 @@ import java.util.*;
 
 @SpringBootApplication
 public class HousingApplication {
+	private static String pwd;
 
 	public static void main(String[] args) {
 		SpringApplication.run(HousingApplication.class, args);
@@ -31,7 +33,19 @@ public class HousingApplication {
 
 	@Bean
 	CommandLineRunner init(PropertyRepository propertyRepository, PhotoRepository photoRepository, AddressRepository addressRepository) {
-		return args -> populateDatabase(propertyRepository, photoRepository, addressRepository);
+		return args -> {
+			generatePassword();
+			populateDatabase(propertyRepository, photoRepository, addressRepository);
+		};
+	}
+
+	private void generatePassword() {
+		List rules = Arrays.asList(new CharacterRule(EnglishCharacterData.UpperCase, 1),
+				new CharacterRule(EnglishCharacterData.LowerCase, 1), new CharacterRule(EnglishCharacterData.Digit, 1),new CharacterRule(EnglishCharacterData.Special, 1));
+
+		PasswordGenerator generator = new PasswordGenerator();
+		pwd = generator.generatePassword(16, rules);
+		System.out.println(pwd);
 	}
 
 	private void populateDatabase(PropertyRepository propertyRepository, PhotoRepository photoRepository, AddressRepository addressRepository) {
@@ -55,10 +69,10 @@ public class HousingApplication {
 			}
 			var photos = photoRepository.findAll();
 			if(!photos.isEmpty()){
-				Property property = new Property(
+				Property property = new Property("Силвия Гочева",
 						"Test Housing, No_" + i, "testDescription", addressRepository.findAll().get(0), 13.70,
 						Date.from(LocalDate.of(2023, 6, 29).atStartOfDay(ZoneId.systemDefault()).toInstant()),
-						4, false, new HashSet<Photo>(Collections.singletonList(photos.get(photos.size() - 1))));
+						4, "testLink", false, new HashSet<Photo>(Collections.singletonList(photos.get(photos.size() - 1))));
 				propertyRepository.save(property);
 			}
 
