@@ -20,7 +20,7 @@ public class Property {
 
     private String description;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "addressId", referencedColumnName = "id")
     private Address address;
 
@@ -39,14 +39,12 @@ public class Property {
             orphanRemoval = true
     )
     private Set<Photo> photos;
-
     public Property() {
     }
 
     public Property(String agentName, String name, String description, Address address,
                     double price, Date dateOfAvailability, int numberOfRooms, String videoLink,
                     boolean includingUtilities, Set<Photo> photos) {
-        this.id = id;
         this.agentName = agentName;
         this.name = name;
         this.description = description;

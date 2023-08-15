@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class PropertyController {
 
     public PropertyController(PropertyRepository propertyRepository) {
@@ -24,6 +25,7 @@ public class PropertyController {
 
     @PostMapping("/properties")
     void addProperty(@RequestBody Property property) {
+        System.out.println("Property Added: " + property.toString());
         propertyRepository.save(property);
     }
     @GetMapping("/properties/{id}")

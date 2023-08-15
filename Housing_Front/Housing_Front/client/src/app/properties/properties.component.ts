@@ -22,4 +22,15 @@ export class PropertiesComponent implements OnInit {
     const imageUrl = 'data:image/jpg;base64,' + photo;
     return this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
   }
+
+  getClass(i: number) {
+    if (i % 4 === 0) {
+      return 'blue';
+    } else if (i % 4 === 1) {
+      return 'red';
+    } else if (i % 4 === 2) {
+      return 'green';
+    }
+    return 'yellow';
+  }
 }

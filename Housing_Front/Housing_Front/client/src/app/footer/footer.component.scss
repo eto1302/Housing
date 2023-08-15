@@ -1,6 +1,26 @@
 .custom-footer{
-  background: linear-gradient(0deg, rgba(136,136,136,1) 0%, rgba(41,41,41,1) 55%)
+  background-color: #262626;
+  bottom: 0;
+  display: flex;
+  position: fixed;
+  height: 400px;
+  width: 100%;
+  z-index: -1;
 }
 .site-footer .widget h3, .site-footer .widget .h3 {
   color: #2352f6;
+
+}
+
+.fixed-footer {
+  align-items: center;
+  background-color: #262626;
+  bottom: 0;
+  color: #666666;
+  display: flex;
+  height: 400px;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+  z-index: -1;
 }

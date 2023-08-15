@@ -5,19 +5,20 @@
         <form [formGroup]="createPropertyForm" (ngSubmit)="onSubmit()" >
           <label for="agentName">AGENT NAME <em>&#x2a;</em></label>
           <select name="agentName" id="agentName" formControlName="agentName">
-            <option value="Силвия Гочева">Силвия Гочева</option>
-            <!-- <option *ngFor="let itemParentesco of parentescos" [ngValue]="itemParentesco.name">
-              {{itemParentesco.name }}</option> -->
+            <option *ngFor="let item of agents" [ngValue]="item.name">
+              {{item.name }}</option>
           </select>
           <label for="name">PROPERTY NAME<em>&#x2a;</em></label>
-          <input id="name" name="name" required="" type="text" formControlName="name"/>
+          <input id="name" name="name" required="" type="text" formControlName="propertyName"/>
           <label for="description">PROPERTY DESCRIPTION <em>&#x2a;</em></label>
           <textarea id="description"
                     name="description"
                     required=""
-                    rows="4"formControlName="description"></textarea>
+                    rows="4"formControlName="propertyDescription"></textarea>
+          <label for="price">PROPERTY PRICE <em>&#x2a;</em></label>
+          <input id="price" name="price" required="" type="number" formControlName="price"/>
           <label for="numberOfRooms">PROPERTY NUMBER OF ROOMS<em>&#x2a;</em></label>
-          <input id="numberOfRooms" name="numberOfRooms" required="" type="number" formControlName="numberOfRooms"/>
+          <input id="numberOfRooms" name="numberOfRooms" required="" type="number" formControlName="propertyRooms"/>
           <label for="propertyStreet">PROPERTY STREET<em>&#x2a;</em></label>
           <input id="propertyStreet" name="propertyStreet" required="" type="text" formControlName="propertyStreet"/>
           <label for="propertyCity">PROPERTY CITY<em>&#x2a;</em></label>
@@ -33,7 +34,7 @@
           <label for="propertyY">PROPERTY Y<em>&#x2a;</em></label>
           <input id="propertyY" name="propertyY" required="" type="text" formControlName="propertyY"/>
           <label for="videoLink">PROPERTY VIDEO<em>&#x2a;</em></label>
-          <input id="videoLink" name="videoLink" required="" type="text" formControlName="videoLink"/>
+          <input id="videoLink" name="videoLink" required="" type="text" formControlName="propertyVideo"/>
           <button id="createProperty" type="submit">SUBMIT</button>
         </form>
       </div>
