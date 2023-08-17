@@ -13,10 +13,10 @@ export class HeaderComponent implements AfterContentInit{
       let nav = document.getElementById('navbar');
       window.addEventListener('scroll', () => {
         if (window.scrollY > 1.5) {
-          nav.classList.add("fixed");
+          nav.classList.add('fixed');
           document.body.style.paddingTop = '70';
         } else {
-          nav.classList.remove("fixed");
+          nav.classList.remove('fixed');
           document.body.style.paddingTop = '0';
         }
       });

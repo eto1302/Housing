@@ -49,10 +49,10 @@ public class HousingApplication {
 	}
 
 	private void populateDatabase(PropertyRepository propertyRepository, PhotoRepository photoRepository, AddressRepository addressRepository) {
-		for(int i = 0; i < 6; ++i){
+		for(int i = 0; i < 100; ++i){
 			addressRepository.save(new Address("testStreet 25", "Varna", "Coast", "Bulgaria", "9000", 43.20230700815063, 27.92398286015827));
 			try{
-				File imageFile = new File("src/main/resources/image" + i + ".jpg");
+				File imageFile = new File("src/main/resources/image" + (i%6) + ".jpg");
 				BufferedImage image = ImageIO.read(imageFile);
 
 				// Convert the image to byte array
@@ -72,7 +72,7 @@ public class HousingApplication {
 				Property property = new Property("Силвия Гочева",
 						"Test Housing, No_" + i, "testDescription", addressRepository.findAll().get(i), 13.70,
 						Date.from(LocalDate.of(2023, 6, 29).atStartOfDay(ZoneId.systemDefault()).toInstant()),
-						4, "testLink", false, new HashSet<>());
+						4, "testLink", false, new HashSet<>(Arrays.asList(photos.get(i))));
 				propertyRepository.save(property);
 			}
 

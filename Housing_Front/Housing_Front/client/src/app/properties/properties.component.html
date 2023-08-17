@@ -1,52 +1,16 @@
 <div class="dark-color properties-body">
-  <!--    <section class="properties">-->
-  <!--      <div class="property-card" *ngFor="let property of properties | async">-->
-  <!--        <a-->
-  <!--          [routerLink]="'/property/' + property.id" class="inner-card">-->
-  <!--          <div class="property-image">-->
-  <!--            <img class="imageIcons" [src]="getPath(property.photos[0]?.photo)" alt="Property Image">-->
-  <!--          </div>-->
-  <!--          <div class="property-info">-->
-  <!--            <h5>{{property.name}}</h5>-->
-  <!--            <h6>${{property.price}}</h6>-->
-  <!--          </div>-->
-  <!--        </a>-->
-  <!--      </div>-->
-  <!--    </section>-->
   <section class="dark dark-color">
     <div class="container py-4">
       <h1 class="h1 text-center" id="header">All Properties</h1>
-      <article class="postcard dark blue">
-        <a class="postcard__img_link" href="#">
-          <img class="postcard__img" src="https://picsum.photos/1000/1000" alt="Image Title" />
-        </a>
-        <div class="postcard__text">
-          <h1 class="postcard__title blue"><a href="#">Podcast Title</a></h1>
-          <div class="postcard__subtitle small">
-            <time datetime="2020-05-25 12:00:00">
-              <i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
-            </time>
-          </div>
-          <div class="postcard__bar"></div>
-          <div class="postcard__preview-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, fugiat asperiores inventore beatae accusamus odit minima enim, commodi quia, doloribus eius! Ducimus nemo accusantium maiores velit corrupti tempora reiciendis molestiae repellat vero. Eveniet ipsam adipisci illo iusto quibusdam, sunt neque nulla unde ipsum dolores nobis enim quidem excepturi, illum quos!</div>
-          <ul class="postcard__tagbox">
-            <li class="tag__item"><i class="fas fa-tag mr-2"></i>Podcast</li>
-            <li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
-            <li class="tag__item play blue">
-              <a href="#"><i class="fas fa-play mr-2"></i>Play Episode</a>
-            </li>
-          </ul>
-        </div>
-      </article>
       <article *ngFor="let property of properties | async; let i = index"
                [class]="'postcard dark ' + getClass(i)">
         <a class="postcard__img_link" href="#">
-          <img class="postcard__img" src="getPath(property.photos[0]?.photo)"
+          <img class="postcard__img" [src]="getPath(property.photos[0]?.photo)"
                alt="{{property.name}}"/>
         </a>
         <div class="postcard__text">
           <h1 [class]="'postcard__title ' + getClass(i)"><a
-            [routerLink]="'/property/' + property.id">{{property.name}}</a></h1>
+            (click)='redirect("/property/" + property.id)'>{{property.name}}</a></h1>
           <div class="postcard__subtitle small">
             <time>
               <i class="fas fa-calendar-alt mr-2"></i>{{property.dateOfAvailability}}
@@ -59,7 +23,7 @@
             <li class="tag__item"><i class="fas fa-clock mr-2"></i>{{property.numberOfRooms}} rooms
             </li>
             <li [class]="'tag__item play ' + getClass(i)">
-              <a [routerLink]="'/property/' + property.id"><i
+              <a (click)='redirect("/property/" + property.id)'><i
                 class="fas fa-play mr-2"></i>Details</a>
             </li>
           </ul>
@@ -69,13 +33,3 @@
   </section>
 </div>
 
-
-<!--<div class="row justify-content-center align-items-center">-->
-<!--  <div class="radio-btns" role="radiogroup">-->
-<!--    <div class="radio-btns__btn" role="radio" aria-checked="false" tabindex="-1" aria-label="Select image" *ngFor="let property of properties | async">-->
-<!--      <a [routerLink]="'/property/' + property.id" style="overflow: auto">-->
-<!--        <img class="imageIcons" [src]="getPath(property.photos[0]?.photo)" alt="Property Image">-->
-<!--      </a>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
