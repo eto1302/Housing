@@ -1,9 +1,9 @@
 import {Component, OnInit, AfterContentInit, ElementRef} from '@angular/core';
 import {PropertyService} from '../../services/property.service';
 import {Property} from '../../models/property';
-import {Observable} from 'rxjs';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {Router} from '@angular/router';
+import {PaginationService} from '../../services/pagination.service';
 
 @Component({
   selector: 'app-properties',
@@ -11,10 +11,40 @@ import {Router} from '@angular/router';
   styleUrls: ['./properties.component.scss']
 })
 export class PropertiesComponent implements OnInit, AfterContentInit {
-  properties: Observable<Property[]>;
-  private saveScroll: EventListener;
+  properties: Property[];
+  private readonly saveScroll: EventListener;
+  isLoading = false;
+  currentPage = 1;
+  itemsPerPage = 10;
 
-  constructor(private propertyService: PropertyService, private elem: ElementRef, private sanitizer: DomSanitizer, private router: Router) {
+  toggleLoading = () => this.isLoading = !this.isLoading;
+
+  // it will be called when this component gets initialized.
+  loadData = () => {
+    this.toggleLoading();
+    this.paginationService.getItems(this.currentPage, this.itemsPerPage).subscribe({
+      next: response => this.properties = response,
+      error: err => console.log(err),
+      complete: () => this.toggleLoading()
+    });
+  }
+  appendData = () => {
+    this.toggleLoading();
+    this.paginationService.getItems(this.currentPage, this.itemsPerPage).subscribe({
+      next: response => this.properties = [...this.properties, ...response],
+      error: err => console.log(err),
+      complete: () => this.toggleLoading()
+    });
+  }
+
+  onScroll = () => {
+    this.currentPage++;
+    this.appendData();
+  }
+
+  constructor(private propertyService: PropertyService, private elem: ElementRef,
+              private sanitizer: DomSanitizer, private router: Router,
+              private paginationService: PaginationService) {
     this.saveScroll = () => {
       localStorage.setItem('scrollValue', window.scrollY.toString());
       console.log('Scroll: ' + window.scrollY);
@@ -22,15 +52,15 @@ export class PropertiesComponent implements OnInit, AfterContentInit {
   }
 
   ngOnInit() {
-    this.properties = this.propertyService.findAll();
-    console.log(localStorage.getItem('scrollValue'));
+    // this.properties = this.propertyService.findAll();
+    this.loadData();
     // this.elem.nativeElement.querySelector('.properties-body').scrollTo(0, +localStorage.getItem('scrollValue'));
   }
 
   ngAfterContentInit() {
     window.addEventListener('scroll', this.saveScroll);
     setTimeout(() => {
-      console.log("waited");
+      console.log('waited');
       window.scrollTo(0, +localStorage.getItem('scrollValue'));
     }, 1000);
   }

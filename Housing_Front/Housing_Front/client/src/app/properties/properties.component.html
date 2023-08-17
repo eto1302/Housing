@@ -1,8 +1,12 @@
 <div class="dark-color properties-body">
   <section class="dark dark-color">
-    <div class="container py-4">
+    <div class="container py-4" infinite-scroll
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="500"
+         (scrolled)="onScroll()"
+         [scrollWindow]="false">
       <h1 class="h1 text-center" id="header">All Properties</h1>
-      <article *ngFor="let property of properties | async; let i = index"
+      <article *ngFor="let property of properties; let i = index"
                [class]="'postcard dark ' + getClass(i)">
         <a class="postcard__img_link" href="#">
           <img class="postcard__img" [src]="getPath(property.photos[0]?.photo)"
