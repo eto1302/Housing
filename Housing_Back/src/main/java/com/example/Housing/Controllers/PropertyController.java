@@ -5,6 +5,7 @@ import com.example.Housing.Repositories.PropertyRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,5 +40,19 @@ public class PropertyController {
         }
     }
 
+    @GetMapping("/properties/count")
+    public int getCount(){
+        return getProperties().size();
+    }
+
+    @GetMapping("/properties/{begin}/{end}")
+    public List<Property> getPropertiesInRange(@PathVariable Long begin, @PathVariable Long end){
+        List<Property> result = new ArrayList<>();
+        for(Long i = begin; i < end; ++i){
+            var property = propertyRepository.findById(i);
+            if(property.isPresent()) result.add(propertyRepository.findById(i).get());
+        }
+        return result;
+    }
 
 }

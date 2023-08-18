@@ -12,23 +12,11 @@ import {Property} from '../../models/property';
 })
 export class HomeComponent implements OnInit {
   public properties: Observable<Property[]>;
-  public propertyChunks: Property[][];
 
   constructor(private propertyService: PropertyService, private sanitizer: DomSanitizer) {}
 
   ngOnInit() {
     this.properties = this.propertyService.properties;
-    this.properties.subscribe(properties => {
-      this.propertyChunks = this.chunks(properties, 3);
-    });
-  }
-
-  chunks(array: Property[], size: number): Property[][] {
-    const results: Property[][] = [];
-    while (array.length) {
-      results.push(array.splice(0, size));
-    }
-    return results;
   }
 
   getPath(photo: string): SafeResourceUrl {

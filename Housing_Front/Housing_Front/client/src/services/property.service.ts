@@ -9,10 +9,13 @@ import { Property } from '../models/property';
 export class PropertyService {
   private propertiesUrl: string;
   properties: Observable<Property[]>;
+  totalProperties: Observable<Number>;
 
   constructor(private http: HttpClient) {
     this.propertiesUrl = 'http://localhost:8080/properties';
     this.findAll();
+    this.count();
+    console.log(this.totalProperties);
   }
 
   public findAll(): Observable<Property[]> {
@@ -24,7 +27,16 @@ export class PropertyService {
     return this.http.post<Property>(this.propertiesUrl, property);
   }
 
-  getById(id: number) {
+  public getById(id: number) {
     return this.http.get<Property>(this.propertiesUrl + '/' + id);
+  }
+
+  public count(){
+    this.totalProperties = this.http.get<Number>(this.propertiesUrl+'/count');
+    return this.totalProperties;
+  }
+
+  public getInRange(begin: number, end: number) : Observable<Property[]>{
+    return this.http.get<Property[]>(this.propertiesUrl + '/' + begin + '/' + end);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder } from '@angular/forms';
+import {UntypedFormBuilder } from '@angular/forms';
 import {PropertyService} from '../../services/property.service';
 
 @Component({
@@ -39,7 +39,7 @@ export class CreatePropertyComponent {
 
   constructor(
     private propertyService: PropertyService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
   ) {}
 
   onSubmit(): void {

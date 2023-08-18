@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {delay} from 'rxjs/operators';
+import {delay, skipWhile} from 'rxjs/operators';
 import {PropertyService} from './property.service';
 import {Property} from '../models/property';
 
@@ -10,22 +10,61 @@ import {Property} from '../models/property';
 
 export class PaginationService {
 
-  // TODO add properties/count to get that
-  private totalItems = 100;
+  private totalProperties: Number;
+  private properties: Property[];
 
-  getItems(page = 1, itemsPerPage = 10): Observable<Property[]> {
-    const startIndex = (page - 1) * itemsPerPage + 1;
-    const endIndex = startIndex + itemsPerPage;
-    const properties = [];
-    for (let i = startIndex; i < endIndex; i++) {
-      if (i < this.totalItems) {
-        properties.push(this.propertyService.getById(i));
-        console.log(this.propertyService.getById(i));
-      }
+  getItems(page = 1, itemsPerPage = 10): Property[] {
+    while(!this.properties){
+      delay(150);
     }
-    return of(properties).pipe(delay(500));
+    console.log("stopped delaying")
+    const startIndex = (page - 1) * itemsPerPage + 1;
+    const endIndex = Math.min(startIndex + itemsPerPage, +this.totalProperties);
+
+    console.log(this.properties.slice(startIndex, endIndex));
+
+    return this.properties.slice(startIndex, endIndex);
+  }
+
+  processProperties(): void {
+    // Access this.properties and do something with it
+    if (this.properties) {
+      console.log('Processing properties:', this.properties);
+    } else {
+      console.log('Properties are not available yet.');
+    }
+  }
+
+  processTotals(): void {
+    // Access this.properties and do something with it
+    if (this.totalProperties) {
+      console.log('Processing totalProperties:', this.totalProperties);
+    } else {
+      console.log('Total Properties are not available yet.');
+    }
   }
 
   constructor(private propertyService: PropertyService) {
+    propertyService.properties.subscribe(properties => {
+      this.properties = properties;
+      this.processProperties();
+    }, () => {
+      console.log(1)
+    }, () => {
+      console.log("propComp");
+    });
+
+
+    propertyService.totalProperties.subscribe(count => {
+        this.totalProperties = count;
+        this.processTotals();
+      },
+      () => {
+        console.log(2)
+      },
+      () => {
+        console.log("totalComp")
+      });
+      console.log(this.properties);
   }
 }

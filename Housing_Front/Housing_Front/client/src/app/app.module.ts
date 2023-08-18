@@ -8,7 +8,6 @@ import {AppComponent} from './app.component';
 import {UserService} from '../services/user.service';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
-import {AboutComponent} from './about/about.component';
 import {ContactComponent} from './contact/contact.component';
 import {PropertiesComponent} from './properties/properties.component';
 import {PropertyComponent} from './property/property.component';
@@ -16,13 +15,14 @@ import {ServicesComponent} from './services/services.component';
 import {HomeComponent} from './home/home.component';
 import {SellComponent} from './sell/sell.component';
 import {CreatePropertyComponent} from './create-property/create-property.component';
+import {RouterModule} from "@angular/router";
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    AboutComponent,
     ContactComponent,
     PropertiesComponent,
     PropertyComponent,
@@ -30,6 +30,7 @@ import {CreatePropertyComponent} from './create-property/create-property.compone
     HomeComponent,
     SellComponent,
     CreatePropertyComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,11 +38,12 @@ import {CreatePropertyComponent} from './create-property/create-property.compone
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    RouterModule
   ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ],
+  // schemas: [
+  //   CUSTOM_ELEMENTS_SCHEMA
+  // ],
   providers: [UserService],
   bootstrap: [AppComponent]
 })

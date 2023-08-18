@@ -6,6 +6,7 @@ import {PropertyComponent} from './property/property.component';
 import {ContactComponent} from './contact/contact.component';
 import {SellComponent} from './sell/sell.component';
 import {CreatePropertyComponent} from './create-property/create-property.component';
+import {NotFoundComponent} from "./not-found/not-found.component";
 
 const routes: Routes = [
   {
@@ -30,8 +31,12 @@ const routes: Routes = [
   },
   {
     path: '',
-    pathMatch: 'full',
+    pathMatch: "full",
     component: HomeComponent
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   }
 ];
 
