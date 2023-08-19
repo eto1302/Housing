@@ -23,9 +23,10 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
 
+import static com.example.Housing.Controllers.PasswordController.generatePassword;
+
 @SpringBootApplication
 public class HousingApplication {
-	private static String pwd;
 
 	public static void main(String[] args) {
 		SpringApplication.run(HousingApplication.class, args);
@@ -39,14 +40,6 @@ public class HousingApplication {
 		};
 	}
 
-	private void generatePassword() {
-		List rules = Arrays.asList(new CharacterRule(EnglishCharacterData.UpperCase, 1),
-				new CharacterRule(EnglishCharacterData.LowerCase, 1), new CharacterRule(EnglishCharacterData.Digit, 1),new CharacterRule(EnglishCharacterData.Special, 1));
-
-		PasswordGenerator generator = new PasswordGenerator();
-		pwd = generator.generatePassword(16, rules);
-		System.out.println(pwd);
-	}
 
 	private void populateDatabase(PropertyRepository propertyRepository, PhotoRepository photoRepository, AddressRepository addressRepository) {
 		for(int i = 0; i < 100; ++i){

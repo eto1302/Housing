@@ -39,7 +39,7 @@ export class CreatePropertyComponent {
 
   constructor(
     private propertyService: PropertyService,
-    private formBuilder: UntypedFormBuilder,
+    private formBuilder: UntypedFormBuilder
   ) {}
 
   onSubmit(): void {

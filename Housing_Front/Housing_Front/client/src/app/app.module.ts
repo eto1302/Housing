@@ -17,6 +17,9 @@ import {SellComponent} from './sell/sell.component';
 import {CreatePropertyComponent} from './create-property/create-property.component';
 import {RouterModule} from "@angular/router";
 import { NotFoundComponent } from './not-found/not-found.component';
+import { PasswordComponent } from './password/password.component';
+import {AuthService} from "./auth/auth.service";
+import {AuthGuard} from "./auth/auth.guard";
 
 @NgModule({
   declarations: [
@@ -31,6 +34,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     SellComponent,
     CreatePropertyComponent,
     NotFoundComponent,
+    PasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
   // schemas: [
   //   CUSTOM_ELEMENTS_SCHEMA
   // ],
-  providers: [UserService],
+  providers: [UserService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

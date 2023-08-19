@@ -7,6 +7,8 @@ import {ContactComponent} from './contact/contact.component';
 import {SellComponent} from './sell/sell.component';
 import {CreatePropertyComponent} from './create-property/create-property.component';
 import {NotFoundComponent} from "./not-found/not-found.component";
+import {PasswordComponent} from "./password/password.component";
+import {AuthGuard} from "./auth/auth.guard";
 
 const routes: Routes = [
   {
@@ -14,8 +16,13 @@ const routes: Routes = [
     component: PropertiesComponent
   },
   {
-    path: 'createProperty',
-    component: CreatePropertyComponent
+    path: 'password',
+    component: PasswordComponent
+  },
+  {
+    path: 'createProperties',
+    component: CreatePropertyComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'property/:id',
@@ -42,6 +49,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }
