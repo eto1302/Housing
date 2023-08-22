@@ -85,7 +85,7 @@
           </button>
         </div>
         <div class="carousel-inner py-4">
-          <div class="carousel-item" *ngFor="let property of (properties | async) let index = index"
+          <div class="carousel-item" *ngFor="let property of (properties | async); let index = index"
                [class.active]="index == 0">
             <div class="container">
               <div class="row justify-content-center">

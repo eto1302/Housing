@@ -26,8 +26,8 @@ public class PropertyController {
 
     @PostMapping("/properties")
     void addProperty(@RequestBody Property property) {
-        System.out.println("Property Added: " + property.toString());
         propertyRepository.save(property);
+        System.out.println("Property Added: " + property.toString());
     }
     @GetMapping("/properties/{id}")
     public ResponseEntity<Property> getPropertyById(@PathVariable Long id) {

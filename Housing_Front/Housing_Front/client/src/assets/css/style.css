@@ -9952,7 +9952,6 @@ textarea {
 .section-4 {
   background-color: #fff; }
   .section-4 .img-about {
-    background-size: cover;
     background-position: center center; }
     .section-4 .img-about img {
       -o-object-fit: cover;
@@ -9998,8 +9997,11 @@ textarea {
     color: #00204a; }
 
 .img-about img {
+  width: 600px;
+  height: 400px;
   position: relative;
-  z-index: 2; }
+  z-index: 2;
+}
 
 .img-about.dots {
   position: relative; }

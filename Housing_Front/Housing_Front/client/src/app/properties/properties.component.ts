@@ -15,13 +15,13 @@ export class PropertiesComponent implements OnInit, AfterContentInit {
   private saveScroll: EventListener;
 
   constructor(private propertyService: PropertyService, private elem: ElementRef, private sanitizer: DomSanitizer, private router: Router) {
+  }
+
+  ngOnInit() {
     this.saveScroll = () => {
       localStorage.setItem('scrollValue', window.scrollY.toString());
       console.log('Scroll: ' + window.scrollY);
     };
-  }
-
-  ngOnInit() {
     this.properties = this.propertyService.properties;
     console.log(localStorage.getItem('scrollValue'));
     // this.elem.nativeElement.querySelector('.properties-body').scrollTo(0, +localStorage.getItem('scrollValue'));

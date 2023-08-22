@@ -11,22 +11,26 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./property.component.scss']
 })
 export class PropertyComponent implements OnInit {
-  property: Observable<Property>;
+  property: Property;
   private routeSub: Subscription;
   private id: number;
+  current: number;
 
   constructor(private propertyService: PropertyService, private sanitizer: DomSanitizer, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.current = 0;
     this.routeSub = this.route.params.subscribe(params => {
       this.id = params.id;
     });
-    this.property = this.propertyService.getById(this.id);
+    this.propertyService.getById(this.id).subscribe(prop => this.property = prop);
   }
 
   getPath(photo: string): SafeResourceUrl {
     const imageUrl = 'data:image/jpg;base64,' + photo;
     return this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
   }
-
+  move(step: number) {
+    this.current = (this.current + step + this.property.photos.length) % this.property.photos.length;
+  }
 }

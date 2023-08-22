@@ -4,7 +4,7 @@
       <h1 class="h1 text-center" id="header">All Properties</h1>
       <article *ngFor="let property of properties | async; let i = index"
                [class]="'postcard dark ' + getClass(i)">
-        <a class="postcard__img_link" href="#">
+        <a class="postcard__img_link" (click)='redirect("/property/" + property.id)'>
           <img class="postcard__img" [src]="getPath(property.photos[0]?.photo)"
                alt="{{property.name}}"/>
         </a>
