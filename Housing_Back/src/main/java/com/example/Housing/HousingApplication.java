@@ -37,7 +37,7 @@ public class HousingApplication {
     CommandLineRunner init(PropertyRepository propertyRepository, PhotoRepository photoRepository, AddressRepository addressRepository) {
         return args -> {
             generatePassword();
-            populateDatabase(propertyRepository, photoRepository, addressRepository);
+            //populateDatabase(propertyRepository, photoRepository, addressRepository);
         };
     }
 

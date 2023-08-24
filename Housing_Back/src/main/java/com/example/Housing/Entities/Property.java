@@ -21,7 +21,7 @@ public class Property {
     @Column(name = "description", length = 8192)
     private String description;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "addressId", referencedColumnName = "id")
     private Address address;
 
