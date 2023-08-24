@@ -15,7 +15,6 @@ export class PropertyService {
     this.propertiesUrl = 'http://localhost:8080/properties';
     this.findAll();
     this.count();
-    console.log(this.totalProperties);
   }
 
   public findAll(): Observable<Property[]> {
