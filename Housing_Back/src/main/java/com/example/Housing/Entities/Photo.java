@@ -13,7 +13,7 @@ public class Photo {
     private long id;
 
     @Lob
-    @Column(name = "photo", columnDefinition="BLOB")
+    @Column(name = "photo", columnDefinition="BLOB", length = 10485760)
     private byte[] photo;
 
     public Photo() {

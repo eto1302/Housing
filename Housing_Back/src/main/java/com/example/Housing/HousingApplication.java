@@ -81,7 +81,7 @@ public class HousingApplication {
                 Property property = new Property("Силвия Гочева",
                         "Test Housing, No_" + i, loremIpsum, addressRepository.findAll().get(i), 13.70,
                         Date.from(LocalDate.of(2023, 6, 29).atStartOfDay(ZoneId.systemDefault()).toInstant()),
-                        4, "testLink", false, getPhotosBetween(photos, begin, end));
+                        4, null, false, getPhotosBetween(photos, begin, end));
                 propertyRepository.save(property);
                 System.out.println("Property " + i + " printed!");
             }

@@ -1,8 +1,8 @@
-<div class="section section-4 primary-color">
+<div class="section section-4 primary-color body">
   <div class="container mx-auto">
     <div class="row justify-content-center text-center">
       <div class="col-lg-8 contact-us">
-        <form [formGroup]="createPropertyForm" (ngSubmit)="onSubmit()" >
+        <form [formGroup]="createPropertyForm">
           <label for="agentName">AGENT NAME <em>&#x2a;</em></label>
           <select name="agentName" id="agentName" formControlName="agentName">
             <option *ngFor="let item of agents" [ngValue]="item.name">
@@ -14,28 +14,49 @@
           <textarea id="description"
                     name="description"
                     required=""
-                    rows="4"formControlName="propertyDescription"></textarea>
+                    rows="4" formControlName="propertyDescription"></textarea>
           <label for="price">PROPERTY PRICE <em>&#x2a;</em></label>
           <input id="price" name="price" required="" type="number" formControlName="price"/>
           <label for="numberOfRooms">PROPERTY NUMBER OF ROOMS<em>&#x2a;</em></label>
-          <input id="numberOfRooms" name="numberOfRooms" required="" type="number" formControlName="propertyRooms"/>
+          <input id="numberOfRooms" name="numberOfRooms" required="" type="number"
+                 formControlName="propertyRooms"/>
           <label for="propertyStreet">PROPERTY STREET<em>&#x2a;</em></label>
-          <input id="propertyStreet" name="propertyStreet" required="" type="text" formControlName="propertyStreet"/>
+          <input id="propertyStreet" name="propertyStreet" required="" type="text"
+                 formControlName="propertyStreet"/>
           <label for="propertyCity">PROPERTY CITY<em>&#x2a;</em></label>
-          <input id="propertyCity" name="propertyCity" required="" type="text" formControlName="propertyCity"/>
+          <input id="propertyCity" name="propertyCity" required="" type="text"
+                 formControlName="propertyCity"/>
           <label for="propertyRegion">PROPERTY REGION<em>&#x2a;</em></label>
-          <input id="propertyRegion" name="propertyRegion" required="" type="text" formControlName="propertyRegion"/>
+          <input id="propertyRegion" name="propertyRegion" required="" type="text"
+                 formControlName="propertyRegion"/>
           <label for="propertyCountry">PROPERTY COUNTRY<em>&#x2a;</em></label>
-          <input id="propertyCountry" name="propertyCountry" required="" type="text" formControlName="propertyCountry"/>
+          <input id="propertyCountry" name="propertyCountry" required="" type="text"
+                 formControlName="propertyCountry"/>
           <label for="propertyPostal">PROPERTY POSTAL CODE<em>&#x2a;</em></label>
-          <input id="propertyPostal" name="propertyPostal" required="" type="text" formControlName="propertyPostal"/>
+          <input id="propertyPostal" name="propertyPostal" required="" type="text"
+                 formControlName="propertyPostal"/>
           <label for="propertyX">PROPERTY X<em>&#x2a;</em></label>
-          <input id="propertyX" name="propertyX" required="" type="text" formControlName="propertyX"/>
+          <input id="propertyX" name="propertyX" required="" type="text"
+                 formControlName="propertyX"/>
           <label for="propertyY">PROPERTY Y<em>&#x2a;</em></label>
-          <input id="propertyY" name="propertyY" required="" type="text" formControlName="propertyY"/>
+          <input id="propertyY" name="propertyY" required="" type="text"
+                 formControlName="propertyY"/>
           <label for="videoLink">PROPERTY VIDEO<em>&#x2a;</em></label>
-          <input id="videoLink" name="videoLink" required="" type="text" formControlName="propertyVideo"/>
-          <button id="createProperty" type="submit">SUBMIT</button>
+          <input id="videoLink" name="videoLink" required="" type="text"
+                 formControlName="propertyVideo"/>
+          <label >PROPERTY IMAGES<em>&#x2a;</em></label>
+          <input type="file" class="file-input"
+                 (change)="onFileSelected($event)" #fileUpload multiple>
+
+          <div class="file-upload">
+
+            {{fileName || "No file uploaded yet."}}
+
+            <button color="primary" class="upload-btn"
+                    (click)="fileUpload.click()">Upload
+            </button>
+          </div>
+          <button id="createProperty" (click) = "onSubmit()">SUBMIT</button>
         </form>
       </div>
     </div>

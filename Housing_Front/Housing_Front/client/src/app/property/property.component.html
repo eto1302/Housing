@@ -19,7 +19,8 @@
           <ng-container *ngIf="this.property.videoLink">
             <iframe width="600" height="400"
                     [src]="this.property.videoLink | safe"
-                    [class.active]="this.current === 0">
+                    class="carousel-item imageIcons img-fluid"
+                    [class.active]="isActive(-1)">
             </iframe>
           </ng-container>
           <img class="carousel-item imageIcons img-fluid"

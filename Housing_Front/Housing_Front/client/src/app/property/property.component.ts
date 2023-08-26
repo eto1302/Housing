@@ -35,7 +35,7 @@ export class PropertyComponent implements OnInit {
   }
 
   isActive(index: number) {
-    if(this.property.videoLink) return index === this.current + 1;
+    if(this.property.videoLink) return index === this.current - 1;
     return index === this.current;
   }
 }

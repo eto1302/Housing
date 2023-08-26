@@ -9,7 +9,7 @@ import { Property } from '../models/property';
 export class PropertyService {
   private propertiesUrl: string;
   properties: Observable<Property[]>;
-  totalProperties: Observable<Number>;
+  totalProperties: Observable<number>;
 
   constructor(private http: HttpClient) {
     this.propertiesUrl = 'http://localhost:8080/properties';
@@ -32,11 +32,15 @@ export class PropertyService {
   }
 
   public count(){
-    this.totalProperties = this.http.get<Number>(this.propertiesUrl+'/count');
+    this.totalProperties = this.http.get<number>(this.propertiesUrl+'/count');
     return this.totalProperties;
   }
 
   public getInRange(begin: number, end: number) : Observable<Property[]>{
     return this.http.get<Property[]>(this.propertiesUrl + '/' + begin + '/' + end);
+  }
+
+  setPhotos(propertyId: number, ids: number[]) : Observable<string>{
+    return this.http.post<string>(this.propertiesUrl + '/' + 'setPhotos' + '/' + propertyId, ids);
   }
 }
