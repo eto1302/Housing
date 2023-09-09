@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
 import {CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
 import {map, mergeMap, scan, tap, throttleTime} from 'rxjs/operators';
 
-const batchSize = 10;
+const batchSize = 5;
 
 @Component({
   selector: 'app-properties',
@@ -28,7 +28,7 @@ export class PropertiesComponent implements OnInit {
 
   constructor(private propertyService: PropertyService, private elem: ElementRef, private sanitizer: DomSanitizer, private router: Router) {
     const batchMap = this.offset.pipe(
-      throttleTime(500),
+      throttleTime(150),
       mergeMap(n => this.getBatch(n)),
       scan((acc, batch) => {
         return {...acc, ...batch}
@@ -36,12 +36,12 @@ export class PropertiesComponent implements OnInit {
     );
 
     this.infinite = batchMap.pipe(map(v => Object.values(v)));
-    this.infinite.subscribe(a => {console.log(a)});
+    this.infinite.subscribe(a => {
+      console.log(a)
+    });
   }
 
   ngOnInit() {
-    // console.log(localStorage.getItem('scrollValue'));
-    // this.viewport.scrollToIndex(+localStorage.getItem('scrollValue'));
   }
 
   getPath(photo: string): SafeResourceUrl {
@@ -65,16 +65,13 @@ export class PropertiesComponent implements OnInit {
   }
 
   nextBatch(e, offset) {
-    console.log("Entered next Batch")
     if (this.theEnd) {
-      console.log("Returning")
       return;
     }
 
     const end = this.viewport.getRenderedRange().end;
     const total = this.viewport.getDataLength();
 
-    console.log("End/Total: " + end + " " + total);
 
     if (end === total) {
       this.offset.next(offset);

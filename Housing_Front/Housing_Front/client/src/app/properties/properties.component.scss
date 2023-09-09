@@ -172,7 +172,7 @@ a, a:hover {
     }
 
     .postcard__img {
-      max-width: 300px;
+      max-width: 400px;
       max-height: 100%;
       transition: transform 0.3s ease;
     }
@@ -195,24 +195,6 @@ a, a:hover {
     &:hover .postcard__img {
       transform: scale(1.1);
     }
-
-    &:nth-child(2n+1) {
-      flex-direction: row;
-    }
-
-    &:nth-child(2n+0) {
-      flex-direction: row-reverse;
-    }
-
-    &:nth-child(2n+1) .postcard__text::before {
-      left: -12px !important;
-      transform: rotate(4deg);
-    }
-
-    &:nth-child(2n+0) .postcard__text::before {
-      right: -12px !important;
-      transform: rotate(-4deg);
-    }
   }
 }
 
@@ -221,15 +203,6 @@ a, a:hover {
     padding: 2rem 3.5rem;
   }
 
-  .postcard__text:before {
-    content: "";
-    position: absolute;
-    display: block;
-
-    top: -20%;
-    height: 130%;
-    width: 55px;
-  }
 
   .postcard.dark {
     .postcard__text:before {
