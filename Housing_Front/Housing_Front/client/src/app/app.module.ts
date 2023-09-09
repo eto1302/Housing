@@ -4,7 +4,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {AppComponent} from './app.component';
+import {AppComponent, SafePipe} from './app.component';
 import {UserService} from '../services/user.service';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
@@ -24,20 +24,21 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    ContactComponent,
-    PropertiesComponent,
-    PropertyComponent,
-    ServicesComponent,
-    HomeComponent,
-    SellComponent,
-    CreatePropertyComponent,
-    NotFoundComponent,
-    PasswordComponent,
-  ],
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        FooterComponent,
+        ContactComponent,
+        PropertiesComponent,
+        PropertyComponent,
+        ServicesComponent,
+        HomeComponent,
+        SellComponent,
+        CreatePropertyComponent,
+        NotFoundComponent,
+        PasswordComponent,
+        SafePipe,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

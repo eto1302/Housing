@@ -36,7 +36,7 @@ public class Property {
     //addCharacteristics
     private boolean includingUtilities;
     @OneToMany(
-            cascade = CascadeType.REMOVE,
+            cascade = CascadeType.ALL,
             orphanRemoval = true
     )
     private Set<Photo> photos;
@@ -124,6 +124,14 @@ public class Property {
 
     public void setPhotos(Set<Photo> photos) {
         this.photos = photos;
+    }
+
+    public void addPhoto(Photo photo){
+        this.photos.add(photo);
+    }
+
+    public void removePhoto(Photo photo){
+        this.photos.remove(photo);
     }
 
     @Override

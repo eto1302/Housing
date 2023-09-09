@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, SecurityContext} from '@angular/core';
 import {Property} from '../../models/property';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {PropertyService} from '../../services/property.service';
@@ -16,7 +16,7 @@ export class PropertyComponent implements OnInit {
   private id: number;
   current: number;
 
-  constructor(private propertyService: PropertyService, private sanitizer: DomSanitizer, private route: ActivatedRoute) { }
+  constructor(private propertyService: PropertyService, protected sanitizer: DomSanitizer, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.current = 0;
@@ -31,6 +31,11 @@ export class PropertyComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
   }
   move(step: number) {
-    this.current = (this.current + step + this.property.photos.length) % this.property.photos.length;
+    this.current = (this.current + step + this.property.photos.length + 1) % (this.property.photos.length + 1);
+  }
+
+  isActive(index: number) {
+    if(this.property.videoLink) return index === this.current - 1;
+    return index === this.current;
   }
 }

@@ -5,7 +5,7 @@
         <button
           class="primary-color"
           type="button"
-          (click) = 'move(-1)'
+          (click)='move(-1)'
         >
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
@@ -16,15 +16,23 @@
           {{property.name}}
         </h2>
         <div class="img-about">
-          <img class="carousel-item imageIcons img-fluid" *ngFor="let photo of property.photos; let index = index"
-               [class.active]="index == current" [src]="getPath(photo.photo)">
+          <ng-container *ngIf="this.property.videoLink">
+            <iframe width="600" height="400"
+                    [src]="this.property.videoLink | safe"
+                    class="carousel-item imageIcons img-fluid"
+                    [class.active]="isActive(-1)">
+            </iframe>
+          </ng-container>
+          <img class="carousel-item imageIcons img-fluid"
+               *ngFor="let photo of property.photos; let index = index"
+               [class.active]="isActive(index)" [src]="getPath(photo.photo)">
         </div>
       </div>
       <div class="col-lg-2 pagination-button">
         <button
           class="primary-color"
           type="button"
-          (click) = 'move(1)'
+          (click)='move(1)'
         >
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
@@ -75,55 +83,55 @@
         </div>
       </div>
     </div>
-<!--    <div class="row section-counter mt-5">-->
-<!--      <div-->
-<!--        class="col-6 col-sm-6 col-md-6 col-lg-3"-->
-<!--        data-aos="fade-up"-->
-<!--        data-aos-delay="300"-->
-<!--      >-->
-<!--        <div class="counter-wrap mb-5 mb-lg-0">-->
-<!--              <span class="number"-->
-<!--              ><span class="countup text-primary">3298</span></span-->
-<!--              >-->
-<!--          <span class="caption text-black-50"># of Buy Properties</span>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div-->
-<!--        class="col-6 col-sm-6 col-md-6 col-lg-3"-->
-<!--        data-aos="fade-up"-->
-<!--        data-aos-delay="400"-->
-<!--      >-->
-<!--        <div class="counter-wrap mb-5 mb-lg-0">-->
-<!--              <span class="number"-->
-<!--              ><span class="countup text-primary">2181</span></span-->
-<!--              >-->
-<!--          <span class="caption text-black-50"># of Sell Properties</span>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div-->
-<!--        class="col-6 col-sm-6 col-md-6 col-lg-3"-->
-<!--        data-aos="fade-up"-->
-<!--        data-aos-delay="500"-->
-<!--      >-->
-<!--        <div class="counter-wrap mb-5 mb-lg-0">-->
-<!--              <span class="number"-->
-<!--              ><span class="countup text-primary">9316</span></span-->
-<!--              >-->
-<!--          <span class="caption text-black-50"># of All Properties</span>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div-->
-<!--        class="col-6 col-sm-6 col-md-6 col-lg-3"-->
-<!--        data-aos="fade-up"-->
-<!--        data-aos-delay="600"-->
-<!--      >-->
-<!--        <div class="counter-wrap mb-5 mb-lg-0">-->
-<!--              <span class="number"-->
-<!--              ><span class="countup text-primary">7191</span></span-->
-<!--              >-->
-<!--          <span class="caption text-black-50"># of Agents</span>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
+    <!--    <div class="row section-counter mt-5">-->
+    <!--      <div-->
+    <!--        class="col-6 col-sm-6 col-md-6 col-lg-3"-->
+    <!--        data-aos="fade-up"-->
+    <!--        data-aos-delay="300"-->
+    <!--      >-->
+    <!--        <div class="counter-wrap mb-5 mb-lg-0">-->
+    <!--              <span class="number"-->
+    <!--              ><span class="countup text-primary">3298</span></span-->
+    <!--              >-->
+    <!--          <span class="caption text-black-50"># of Buy Properties</span>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div-->
+    <!--        class="col-6 col-sm-6 col-md-6 col-lg-3"-->
+    <!--        data-aos="fade-up"-->
+    <!--        data-aos-delay="400"-->
+    <!--      >-->
+    <!--        <div class="counter-wrap mb-5 mb-lg-0">-->
+    <!--              <span class="number"-->
+    <!--              ><span class="countup text-primary">2181</span></span-->
+    <!--              >-->
+    <!--          <span class="caption text-black-50"># of Sell Properties</span>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div-->
+    <!--        class="col-6 col-sm-6 col-md-6 col-lg-3"-->
+    <!--        data-aos="fade-up"-->
+    <!--        data-aos-delay="500"-->
+    <!--      >-->
+    <!--        <div class="counter-wrap mb-5 mb-lg-0">-->
+    <!--              <span class="number"-->
+    <!--              ><span class="countup text-primary">9316</span></span-->
+    <!--              >-->
+    <!--          <span class="caption text-black-50"># of All Properties</span>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div-->
+    <!--        class="col-6 col-sm-6 col-md-6 col-lg-3"-->
+    <!--        data-aos="fade-up"-->
+    <!--        data-aos-delay="600"-->
+    <!--      >-->
+    <!--        <div class="counter-wrap mb-5 mb-lg-0">-->
+    <!--              <span class="number"-->
+    <!--              ><span class="countup text-primary">7191</span></span-->
+    <!--              >-->
+    <!--          <span class="caption text-black-50"># of Agents</span>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
   </div>
 </div>

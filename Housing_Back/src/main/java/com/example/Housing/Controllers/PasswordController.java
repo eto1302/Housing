@@ -29,15 +29,15 @@ public class PasswordController {
     @ResponseBody
     public boolean checkPassword(@RequestBody String passwordTry){
         System.out.println("Trying password: " + passwordTry);
-        if(lastRequest != null && lastRequest.getSecond() - LocalTime.now().getSecond() < 5){
+        /*if(lastRequest != null && lastRequest.getSecond() - LocalTime.now().getSecond() < 5){
             System.out.println("Not waited long enough!");
             lastRequest = LocalTime.now();
             return false;
         }
-        else {
+        else {*/
             lastRequest = LocalTime.now();
             System.out.println(passwordTry.equals(pwd));
             return passwordTry.equals(pwd);
-        }
+//        }
     }
 }

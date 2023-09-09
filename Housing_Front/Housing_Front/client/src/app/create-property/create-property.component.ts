@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import {UntypedFormBuilder } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {UntypedFormBuilder} from '@angular/forms';
 import {PropertyService} from '../../services/property.service';
+import {HttpErrorResponse} from "@angular/common/http";
+import {PhotoService} from "../../services/photo.service";
+import {Photo} from "../../models/photo";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-create-property',
   templateUrl: './create-property.component.html',
   styleUrls: ['./create-property.component.scss']
 })
-export class CreatePropertyComponent {
+export class CreatePropertyComponent implements OnInit {
   agents = [
     {
       name: 'Силвия Гочева'
@@ -20,9 +24,32 @@ export class CreatePropertyComponent {
     }
   ];
   fileName = '';
+  private property = {
+    id: null,
+    agentName: null,
+    name: null,
+    description: null,
+    address: {
+      id: null,
+      street: null,
+      city: null,
+      region: null,
+      country: null,
+      postalCode: null,
+      latitude: null,
+      longitude: null
+    },
+    price: null,
+    numberOfRooms: null,
+    videoLink: null,
+    dateOfAvailability: null,
+    photos: [],
+    includingUtilities: false
+  };
+  private photos = [];
 
   createPropertyForm = this.formBuilder.group({
-    agentName: [],
+    agentName: '',
     propertyName: '',
     propertyDescription: '',
     price: 0,
@@ -39,35 +66,86 @@ export class CreatePropertyComponent {
 
   constructor(
     private propertyService: PropertyService,
-    private formBuilder: UntypedFormBuilder
-  ) {}
+    private formBuilder: UntypedFormBuilder,
+    private photoService: PhotoService
+  ) {
+  }
 
   onSubmit(): void {
-    const property = {
-      id: null,
-      agentName: this.createPropertyForm.value.agentName,
-      name: this.createPropertyForm.value.propertyName,
-      description: this.createPropertyForm.value.propertyDescription,
-      address: {
-        id: null,
-        street: this.createPropertyForm.value.propertyStreet,
-        city: this.createPropertyForm.value.propertyCity,
-        region: this.createPropertyForm.value.propertyRegion,
-        country: this.createPropertyForm.value.propertyCountry,
-        postalCode: this.createPropertyForm.value.propertyPostal,
-        latitude: this.createPropertyForm.value.propertyX,
-        longitude: this.createPropertyForm.value.propertyY
+    this.setFields();
+    console.log(this.property);
+    this.propertyService.save(this.property).subscribe(
+      prop => {
+        this.property = prop;
+        console.log('Saved ' + prop);
       },
-      price: this.createPropertyForm.value.price,
-      numberOfRooms: this.createPropertyForm.value.propertyRooms,
-      videoLink: this.createPropertyForm.value.propertyVideo,
-      dateOfAvailability: null,
-      photos: [],
-      includingUtilities: false
+      (error: HttpErrorResponse) => {
+        console.log(error);
+      },
+      () => {
+        this.setPhotos().subscribe(() => {
+            console.log('Photos Set!');
+          },
+          error => {
+            console.log(error)
+          },
+          () => {
+            this.createPropertyForm.reset();
+            this.fileName = '';
+            this.photos = [];
+          }
+        );
+      }
+    );
+  }
+
+  private setPhotos(): Observable<any> {
+    const ids: number[] = [];
+    for (const photo of this.photos) {
+      ids.push(photo.id);
+    }
+    return this.propertyService.setPhotos(this.property.id, ids);
+  }
+
+  private setFields() {
+    this.property.agentName = this.createPropertyForm.value.agentName;
+    this.property.name = this.createPropertyForm.value.propertyName;
+    this.property.description = this.createPropertyForm.value.propertyDescription;
+    this.property.address = {
+      id: null,
+      street: this.createPropertyForm.value.propertyStreet,
+      city: this.createPropertyForm.value.propertyCity,
+      region: this.createPropertyForm.value.propertyRegion,
+      country: this.createPropertyForm.value.propertyCountry,
+      postalCode: this.createPropertyForm.value.propertyPostal,
+      latitude: this.createPropertyForm.value.propertyX,
+      longitude: this.createPropertyForm.value.propertyY
     };
-    this.propertyService.save(property);
-    console.warn('Property Saved!', property);
-    console.warn('Property in JSON: ', JSON.stringify(property, null, 2));
-    this.createPropertyForm.reset();
+    this.property.price = this.createPropertyForm.value.price;
+    this.property.numberOfRooms = this.createPropertyForm.value.propertyRooms;
+    this.property.videoLink = this.createPropertyForm.value.propertyVideo;
+    this.property.dateOfAvailability = null;
+    this.property.includingUtilities = false;
+  }
+
+  onFileSelected($event: Event) {
+    const files = ($event.target as HTMLInputElement).files;
+    for (let i = 0; i < files.length; ++i) {
+      const file = files.item(i);
+      this.fileName += file.name + '\n';
+      this.photoService.uploadPhoto(file).subscribe(next => {
+          if (next) {
+            console.log(next);
+            this.photos.push(next);
+          }
+        },
+        error => {
+          console.log(error)
+        });
+    }
+    this.fileName += 'DONE!';
+  }
+
+  ngOnInit(): void {
   }
 }

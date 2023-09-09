@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   constructor(private propertyService: PropertyService, private sanitizer: DomSanitizer) {}
 
   ngOnInit() {
-    this.properties = this.propertyService.getInRange(0, 5);
+    this.properties = this.propertyService.getInRange(1, 4);
   }
 
   getPath(photo: string): SafeResourceUrl {
