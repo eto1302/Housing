@@ -13,13 +13,10 @@ export class PropertyService {
 
   constructor(private http: HttpClient) {
     this.propertiesUrl = 'http://localhost:8080/properties';
-    this.findAll();
     this.count();
-    console.log(this.totalProperties);
   }
 
   public findAll(): Observable<Property[]> {
-    this.properties = this.http.get<Property[]>(this.propertiesUrl);
     return this.properties;
   }
 

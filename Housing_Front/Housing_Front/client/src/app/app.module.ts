@@ -15,11 +15,13 @@ import {ServicesComponent} from './services/services.component';
 import {HomeComponent} from './home/home.component';
 import {SellComponent} from './sell/sell.component';
 import {CreatePropertyComponent} from './create-property/create-property.component';
-import {RouterModule} from '@angular/router';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { PasswordComponent } from './password/password.component';
-import {AuthService} from './auth/auth.service';
-import {AuthGuard} from './auth/auth.guard';
+import {RouterModule} from "@angular/router";
+import {NotFoundComponent} from './not-found/not-found.component';
+import {PasswordComponent} from './password/password.component';
+import {AuthService} from "./auth/auth.service";
+import {AuthGuard} from "./auth/auth.guard";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
     declarations: [
@@ -44,7 +46,9 @@ import {AuthGuard} from './auth/auth.guard';
     FormsModule,
     ReactiveFormsModule,
     InfiniteScrollModule,
-    RouterModule
+    RouterModule,
+    BrowserAnimationsModule,
+    ScrollingModule
   ],
   // schemas: [
   //   CUSTOM_ELEMENTS_SCHEMA

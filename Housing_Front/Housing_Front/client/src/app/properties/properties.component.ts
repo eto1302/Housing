@@ -1,38 +1,47 @@
-import {Component, OnInit, AfterContentInit, ElementRef} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {PropertyService} from '../../services/property.service';
 import {Property} from '../../models/property';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {Router} from '@angular/router';
+
+import {CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
+import {map, mergeMap, scan, tap, throttleTime} from 'rxjs/operators';
+
+const batchSize = 5;
 
 @Component({
   selector: 'app-properties',
   templateUrl: './properties.component.html',
   styleUrls: ['./properties.component.scss']
 })
-export class PropertiesComponent implements OnInit, AfterContentInit {
-  properties: Observable<Property[]>;
-  private saveScroll: EventListener;
+export class PropertiesComponent implements OnInit {
+
+
+  @ViewChild(CdkVirtualScrollViewport)
+  viewport: CdkVirtualScrollViewport;
+
+  theEnd = false;
+
+  offset = new BehaviorSubject(null);
+  infinite: Observable<Property[]>;
 
   constructor(private propertyService: PropertyService, private elem: ElementRef, private sanitizer: DomSanitizer, private router: Router) {
+    const batchMap = this.offset.pipe(
+      throttleTime(150),
+      mergeMap(n => this.getBatch(n)),
+      scan((acc, batch) => {
+        return {...acc, ...batch}
+      }, {})
+    );
+
+    this.infinite = batchMap.pipe(map(v => Object.values(v)));
+    this.infinite.subscribe(a => {
+      console.log(a)
+    });
   }
 
   ngOnInit() {
-    this.saveScroll = () => {
-      localStorage.setItem('scrollValue', window.scrollY.toString());
-      console.log('Scroll: ' + window.scrollY);
-    };
-    this.properties = this.propertyService.properties;
-    console.log(localStorage.getItem('scrollValue'));
-    // this.elem.nativeElement.querySelector('.properties-body').scrollTo(0, +localStorage.getItem('scrollValue'));
-  }
-
-  ngAfterContentInit() {
-    window.addEventListener('scroll', this.saveScroll);
-    setTimeout(() => {
-      console.log("waited");
-      window.scrollTo(0, +localStorage.getItem('scrollValue'));
-    }, 1000);
   }
 
   getPath(photo: string): SafeResourceUrl {
@@ -52,8 +61,39 @@ export class PropertiesComponent implements OnInit, AfterContentInit {
   }
 
   redirect(s: string) {
-    window.removeEventListener('scroll', this.saveScroll);
-    console.log('Listener Removed');
     this.router.navigate([s]);
+  }
+
+  nextBatch(e, offset) {
+    if (this.theEnd) {
+      return;
+    }
+
+    const end = this.viewport.getRenderedRange().end;
+    const total = this.viewport.getDataLength();
+
+
+    if (end === total) {
+      this.offset.next(offset);
+    }
+  }
+
+  trackByIndex(i) {
+    return i;
+  }
+
+  getBatch(lastSeen: number) {
+    console.log(lastSeen);
+    lastSeen = lastSeen == null ? 1 : lastSeen;
+    console.log("Getting between " + lastSeen + " " + (lastSeen + batchSize));
+    return this.propertyService.getInRange(lastSeen, lastSeen + batchSize).pipe(
+      tap(arr => (arr.length ? null : (this.theEnd = true))),
+      map(arr => {
+        return arr.reduce((acc, curr) => {
+          const id = curr.id;
+          return {...acc, [id]: curr};
+        }, {});
+      })
+    );
   }
 }

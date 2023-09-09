@@ -59,6 +59,7 @@ public class PropertyController {
 
     @GetMapping("/properties/{begin}/{end}")
     public List<Property> getPropertiesInRange(@PathVariable Long begin, @PathVariable Long end){
+        System.out.println("Getting properties between " + begin + " " + end);
         List<Property> result = new ArrayList<>();
         for(Long i = begin; i < end; ++i){
             var property = propertyRepository.findById(i);
