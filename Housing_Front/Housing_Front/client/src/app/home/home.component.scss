@@ -36,3 +36,13 @@ h1 .heading {
   position: relative;
   overflow: hidden;
 }
+
+.icon-tiktok {
+  background: url(../../assets/resources/images/tiktokWhite.svg) no-repeat;
+  width: 15px;
+  height: 15px;
+}
+
+.tiktokHover:hover > .icon-tiktok{
+  background: url(../../assets/resources/images/tiktokBlue.svg) no-repeat;
+}

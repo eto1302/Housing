@@ -22,3 +22,13 @@
   width: 100%;
   z-index: -1;
 }
+
+.icon-tiktok {
+  background: url(../../assets/resources/images/tiktokGrey.svg) no-repeat;
+  width: 15px;
+  height: 15px;
+}
+
+.tiktokHover:hover > .icon-tiktok{
+  background: url(../../assets/resources/images/tiktokWhite.svg) no-repeat;
+}
