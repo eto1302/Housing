@@ -85,7 +85,7 @@ export class PropertiesComponent implements OnInit {
   }
 
   getBatch(lastSeen: number) {
-    if(lastSeen === this.total) this.theEnd = true;
+    if (lastSeen === this.total) this.theEnd = true;
     console.log(this.theEnd);
     lastSeen = lastSeen == null ? 1 : lastSeen;
     return this.propertyService.getInRange(lastSeen, lastSeen + batchSize).pipe(
@@ -97,5 +97,13 @@ export class PropertiesComponent implements OnInit {
         }, {});
       })
     );
+  }
+
+  openFilter() {
+    document.getElementById('overlayFilter').style.width  = '100%';
+  }
+
+  closeFilter() {
+    document.getElementById('overlayFilter').style.width  = '0%';
   }
 }

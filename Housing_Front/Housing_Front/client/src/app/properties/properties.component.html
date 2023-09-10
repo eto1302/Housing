@@ -1,12 +1,28 @@
 <div class="dark-color properties-body">
+  <div id="overlayFilter" class="overlay">
+
+    <a href="javascript:void(0)" class="close" (click)="closeFilter()">&times;</a>
+
+    <!-- Overlay content -->
+    <div class="overlay-content">
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a>
+    </div>
+
+  </div>
   <section class="dark dark-color">
     <div class="container py-3">
       <h1 class="h1 text-center" id="header">All Properties</h1>
+      <button
+        class="btn btn-primary text-white py-3 px-4" (click)="openFilter()">Filter</button>
       <ng-container *ngIf="infinite | async as properties">
         <cdk-virtual-scroll-viewport itemSize="400"
                                      (scrolledIndexChange)="nextBatch($event, (properties[properties.length - 1].id))">
-          <article *cdkVirtualFor="let property of properties; let i = index; trackBy: trackByIndex; templateCacheSize: 30"
-                   [class]="'postcard dark ' + getClass(i)">
+          <article
+            *cdkVirtualFor="let property of properties; let i = index; trackBy: trackByIndex; templateCacheSize: 30"
+            [class]="'postcard dark ' + getClass(i)">
             <a class="postcard__img_link" (click)='redirect("/property/" + property.id)'>
               <img class="postcard__img" [src]="getPath(property.photos[0]?.photo)"
                    alt="{{property.name}}"/>
