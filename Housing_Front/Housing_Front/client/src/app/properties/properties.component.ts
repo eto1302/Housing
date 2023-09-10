@@ -27,6 +27,9 @@ export class PropertiesComponent implements OnInit {
   infinite: Observable<Property[]>;
 
   constructor(private propertyService: PropertyService, private elem: ElementRef, private sanitizer: DomSanitizer, private router: Router) {
+  }
+
+  ngOnInit() {
     const batchMap = this.offset.pipe(
       throttleTime(150),
       mergeMap(n => this.getBatch(n)),
@@ -39,9 +42,7 @@ export class PropertiesComponent implements OnInit {
     this.infinite.subscribe(a => {
       console.log(a)
     });
-  }
-
-  ngOnInit() {
+    document.getElementsByTagName('body')[0].className += 'noScroll';
   }
 
   getPath(photo: string): SafeResourceUrl {

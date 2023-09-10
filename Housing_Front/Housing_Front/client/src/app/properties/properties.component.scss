@@ -16,16 +16,11 @@ $main-blue-rgb-015: rgba(0, 118, 189, 0.1) !default;
   color: #ffffff;
   text-rendering: optimizeLegibility;
   font-weight: initial;
-  //padding-top: 180px;
 }
 
 cdk-virtual-scroll-viewport{
   height: 90vh;
   width: 80vw;
-  margin: 0 auto;
-  overflow-y: scroll;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
 
 a, a:hover {
@@ -359,4 +354,23 @@ a, a:hover {
         transparent 50%
     );
   }
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
