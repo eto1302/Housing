@@ -23,6 +23,8 @@ export class PropertiesComponent implements OnInit {
 
   theEnd = false;
 
+  total: number;
+
   offset = new BehaviorSubject(null);
   infinite: Observable<Property[]>;
 
@@ -30,6 +32,7 @@ export class PropertiesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.propertyService.totalProperties.subscribe(count => this.total = count);
     const batchMap = this.offset.pipe(
       throttleTime(150),
       mergeMap(n => this.getBatch(n)),
@@ -39,10 +42,7 @@ export class PropertiesComponent implements OnInit {
     );
 
     this.infinite = batchMap.pipe(map(v => Object.values(v)));
-    this.infinite.subscribe(a => {
-      console.log(a)
-    });
-    document.getElementsByTagName('body')[0].className += 'noScroll';
+    document.getElementById('body').style.overflow = 'hidden';
   }
 
   getPath(photo: string): SafeResourceUrl {
@@ -67,6 +67,7 @@ export class PropertiesComponent implements OnInit {
 
   nextBatch(e, offset) {
     if (this.theEnd) {
+      document.getElementById('body').style.overflow = 'auto';
       return;
     }
 
@@ -84,9 +85,9 @@ export class PropertiesComponent implements OnInit {
   }
 
   getBatch(lastSeen: number) {
-    console.log(lastSeen);
+    if(lastSeen === this.total) this.theEnd = true;
+    console.log(this.theEnd);
     lastSeen = lastSeen == null ? 1 : lastSeen;
-    console.log("Getting between " + lastSeen + " " + (lastSeen + batchSize));
     return this.propertyService.getInRange(lastSeen, lastSeen + batchSize).pipe(
       tap(arr => (arr.length ? null : (this.theEnd = true))),
       map(arr => {

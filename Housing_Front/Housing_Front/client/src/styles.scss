@@ -51,21 +51,21 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 0px;
 }
 
 /* Track */
-body::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
 
 /* Handle */
-body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: #888;
 }
 
 /* Handle on hover */
-body::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
   background: #555;
 }

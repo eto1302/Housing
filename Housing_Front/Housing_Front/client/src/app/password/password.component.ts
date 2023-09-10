@@ -12,13 +12,11 @@ import {Router} from "@angular/router";
 export class PasswordComponent implements OnInit {
   ngOnInit(): void {
     var password = prompt('Enter password', '');
-    console.log(password);
     var isValid: boolean;
     this.http.post<boolean>('http://localhost:8080/password', password).subscribe(result => isValid = result,
       () => {
       },
       () => {
-        console.log(isValid);
         if (isValid) {
           this.authService.Authenticate();
           this.router.navigate(['/createProperties']);

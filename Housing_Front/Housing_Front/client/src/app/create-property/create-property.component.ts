@@ -73,18 +73,15 @@ export class CreatePropertyComponent implements OnInit {
 
   onSubmit(): void {
     this.setFields();
-    console.log(this.property);
     this.propertyService.save(this.property).subscribe(
       prop => {
         this.property = prop;
-        console.log('Saved ' + prop);
       },
       (error: HttpErrorResponse) => {
         console.log(error);
       },
       () => {
         this.setPhotos().subscribe(() => {
-            console.log('Photos Set!');
           },
           error => {
             console.log(error)
@@ -135,7 +132,6 @@ export class CreatePropertyComponent implements OnInit {
       this.fileName += file.name + '\n';
       this.photoService.uploadPhoto(file).subscribe(next => {
           if (next) {
-            console.log(next);
             this.photos.push(next);
           }
         },
