@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 
 import {CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
 import {map, mergeMap, scan, tap, throttleTime} from 'rxjs/operators';
+import {AgentService} from '../../services/agent-service.service';
 
 const batchSize = 5;
 
@@ -27,11 +28,14 @@ export class PropertiesComponent implements OnInit {
 
   offset = new BehaviorSubject(null);
   infinite: Observable<Property[]>;
+  agents;
 
-  constructor(private propertyService: PropertyService, private elem: ElementRef, private sanitizer: DomSanitizer, private router: Router) {
+  constructor(private propertyService: PropertyService, private agentService: AgentService,
+              private elem: ElementRef, private sanitizer: DomSanitizer, private router: Router) {
   }
 
   ngOnInit() {
+    this.agents = this.agentService.agents;
     this.propertyService.totalProperties.subscribe(count => this.total = count);
     const batchMap = this.offset.pipe(
       throttleTime(150),
@@ -100,10 +104,75 @@ export class PropertiesComponent implements OnInit {
   }
 
   openFilter() {
-    document.getElementById('overlayFilter').style.width  = '100%';
+    document.getElementById('overlayFilter').style.width = '100%';
   }
 
   closeFilter() {
-    document.getElementById('overlayFilter').style.width  = '0%';
+    document.getElementById('overlayFilter').style.width = '0%';
   }
+
+  private getAll() {
+    return this.propertyService.findAll().pipe(
+      tap(arr => (arr.length ? null : (this.theEnd = true))),
+      map(arr => {
+        return arr.reduce((acc, curr) => {
+          const id = curr.id;
+          return {...acc, [id]: curr};
+        }, {});
+      })
+    );
+  }
+
+  setAgent(agent: string) {
+    console.log('Agent set: ' + agent);
+    // this.propertyService.findAll().subscribe(
+    //   () => {
+    //
+    //   }
+    // )
+    // this.infinite = this.propertyService.findAll().pipe(
+    //   map(properties =>
+    //     properties.filter(property => property.agentName === agent)));
+  }
+
+  setName(name: string) {
+    console.log('Name set: ' + name);
+  }
+
+  setPrice(price: string) {
+    console.log('Price set: ' + price);
+  }
+
+  setRooms(rooms: string) {
+    console.log('Number of rooms set: ' + rooms);
+  }
+
+  setPropertyStreet(street: string) {
+    console.log('Street set: ' + street);
+  }
+
+  setPropertyCity(city: string) {
+    console.log('City set: ' + city);
+  }
+
+  setPropertyRegion(region: string) {
+    console.log('Region set: ' + region);
+  }
+
+  setPropertyCountry(country: string) {
+    console.log('Country set: ' + country);
+  }
+
+  setPropertyPostal(postal: string) {
+    console.log('Postal code set: ' + postal);
+  }
+
+  setPropertyX(x: string) {
+    console.log('Property X set: ' + x);
+  }
+
+  setPropertyY(y: string) {
+    console.log('Property Y set: ' + y);
+  }
+
 }

@@ -21,7 +21,6 @@ $main-blue-rgb-015: rgba(0, 118, 189, 0.1) !default;
 
 cdk-virtual-scroll-viewport{
   height: 90vh;
-  width: 80vw;
 }
 
 a, a:hover {
@@ -361,6 +360,23 @@ a, a:hover {
   overflow: hidden;
 }
 
+#filter{
+  top: 15%;
+  position: absolute; /* Position them relative to the browser window */
+  left: -80px; /* Position them outside of the screen */
+  transition: 0.3s; /* Add transition on hover */
+  padding: 15px; /* 15px padding */
+  width: 100px; /* Set a specific width */
+  text-decoration: none; /* Remove underline */
+  font-size: 20px; /* Increase font size */
+  color: white; /* White text color */
+  border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
+}
+
+#filter:hover{
+  left:0;
+}
+
 .overlay {
   /* Height & width depends on how you want to reveal the overlay (see JS below) */
   height: 100%;
@@ -381,7 +397,10 @@ a, a:hover {
   top: 25%; /* 25% from the top */
   width: 100%; /* 100% width */
   text-align: center; /* Centered text/links */
+  align-items: center;
   margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+  display: inline-flex;
+  flex-direction: column;
 }
 
 /* The navigation links inside the overlay */

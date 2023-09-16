@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {UntypedFormBuilder} from '@angular/forms';
 import {PropertyService} from '../../services/property.service';
-import {HttpErrorResponse} from "@angular/common/http";
-import {PhotoService} from "../../services/photo.service";
-import {Photo} from "../../models/photo";
-import {Observable} from "rxjs";
+import {HttpErrorResponse} from '@angular/common/http';
+import {PhotoService} from '../../services/photo.service';
+import {Observable} from 'rxjs';
+import {AgentService} from '../../services/agent-service.service';
 
 @Component({
   selector: 'app-create-property',
@@ -12,17 +12,7 @@ import {Observable} from "rxjs";
   styleUrls: ['./create-property.component.scss']
 })
 export class CreatePropertyComponent implements OnInit {
-  agents = [
-    {
-      name: 'Силвия Гочева'
-    },
-    {
-      name: 'Agent 1'
-    },
-    {
-      name: 'Agent 2'
-    }
-  ];
+  agents;
   fileName = '';
   private property = {
     id: null,
@@ -67,7 +57,8 @@ export class CreatePropertyComponent implements OnInit {
   constructor(
     private propertyService: PropertyService,
     private formBuilder: UntypedFormBuilder,
-    private photoService: PhotoService
+    private photoService: PhotoService,
+    private agentService: AgentService
   ) {
   }
 
@@ -143,5 +134,6 @@ export class CreatePropertyComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.agents = this.agentService.agents;
   }
 }
