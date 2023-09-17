@@ -27,14 +27,17 @@ export class PropertiesComponent implements OnInit {
   total: number;
 
   offset = new BehaviorSubject(null);
+  lastLoaded;
   infinite: Observable<Property[]>;
   agents;
+  queries;
 
   constructor(private propertyService: PropertyService, private agentService: AgentService,
               private elem: ElementRef, private sanitizer: DomSanitizer, private router: Router) {
   }
 
   ngOnInit() {
+    this.queries = new Array(11);
     this.agents = this.agentService.agents;
     this.propertyService.totalProperties.subscribe(count => this.total = count);
     const batchMap = this.offset.pipe(
@@ -69,7 +72,8 @@ export class PropertiesComponent implements OnInit {
     this.router.navigate([s]);
   }
 
-  nextBatch(e, offset) {
+  nextBatch(offset) {
+    console.log("nextBatch");
     if (this.theEnd) {
       document.getElementById('body').style.overflow = 'auto';
       return;
@@ -78,9 +82,9 @@ export class PropertiesComponent implements OnInit {
     const end = this.viewport.getRenderedRange().end;
     const total = this.viewport.getDataLength();
 
-
-    if (end === total) {
+    if (end >= total) {
       this.offset.next(offset);
+      this.lastLoaded = offset;
     }
   }
 
@@ -88,13 +92,20 @@ export class PropertiesComponent implements OnInit {
     return i;
   }
 
-  getBatch(lastSeen: number) {
-    if (lastSeen === this.total) this.theEnd = true;
-    console.log(this.theEnd);
+  getBatch(lastSeen: number): Observable<any> {
+    console.log("getBatch");
+    if (lastSeen >= this.total) this.theEnd = true;
+
     lastSeen = lastSeen == null ? 1 : lastSeen;
+
     return this.propertyService.getInRange(lastSeen, lastSeen + batchSize).pipe(
-      tap(arr => (arr.length ? null : (this.theEnd = true))),
+      tap(arr => console.log('After getInRange:', arr)),
       map(arr => {
+        console.log('After map:', arr);
+        return this.queryFilter(arr);
+      }),
+      map((arr: any[]) => {
+        console.log('After reduce:', arr);
         return arr.reduce((acc, curr) => {
           const id = curr.id;
           return {...acc, [id]: curr};
@@ -111,68 +122,83 @@ export class PropertiesComponent implements OnInit {
     document.getElementById('overlayFilter').style.width = '0%';
   }
 
-  private getAll() {
-    return this.propertyService.findAll().pipe(
-      tap(arr => (arr.length ? null : (this.theEnd = true))),
-      map(arr => {
-        return arr.reduce((acc, curr) => {
-          const id = curr.id;
-          return {...acc, [id]: curr};
-        }, {});
-      })
-    );
+  queryFilter(arr) {
+    const result = arr.filter(property => {
+      return (
+        (!this.queries[0] || property.agentName === this.queries[0]) &&
+        (!this.queries[1] || property.name === this.queries[1]) &&
+        (!this.queries[2] || property.price === this.queries[2]) &&
+        (!this.queries[3] || property.numberOfRooms === this.queries[3]) &&
+        (!this.queries[4] || property.property.address.street === this.queries[4]) &&
+        (!this.queries[5] || property.property.address.city === this.queries[5]) &&
+        (!this.queries[6] || property.property.address.region === this.queries[6]) &&
+        (!this.queries[7] || property.property.address.country === this.queries[7]) &&
+        (!this.queries[8] || property.property.address.postal === this.queries[8]) &&
+        (!this.queries[9] || property.property.address.x === this.queries[9]) &&
+        (!this.queries[10] || property.property.address.y === this.queries[10])
+      );
+    });
+    if(result.length === 0) {
+      this.lastLoaded += batchSize;
+      console.log("changed lastLoaded to " + this.lastLoaded);
+      this.nextBatch(this.lastLoaded);
+    }
+    return result;
   }
 
   setAgent(agent: string) {
     console.log('Agent set: ' + agent);
-    // this.propertyService.findAll().subscribe(
-    //   () => {
-    //
-    //   }
-    // )
-    // this.infinite = this.propertyService.findAll().pipe(
-    //   map(properties =>
-    //     properties.filter(property => property.agentName === agent)));
+    this.queries[0] = agent;
   }
 
   setName(name: string) {
     console.log('Name set: ' + name);
+    this.queries[1] = name;
   }
 
   setPrice(price: string) {
     console.log('Price set: ' + price);
+    this.queries[2] = price;
   }
 
   setRooms(rooms: string) {
     console.log('Number of rooms set: ' + rooms);
+    this.queries[3] = rooms;
   }
 
   setPropertyStreet(street: string) {
     console.log('Street set: ' + street);
+    this.queries[4] = street;
   }
 
   setPropertyCity(city: string) {
     console.log('City set: ' + city);
+    this.queries[5] = city;
   }
 
   setPropertyRegion(region: string) {
     console.log('Region set: ' + region);
+    this.queries[6] = region;
   }
 
   setPropertyCountry(country: string) {
     console.log('Country set: ' + country);
+    this.queries[7] = country;
   }
 
   setPropertyPostal(postal: string) {
     console.log('Postal code set: ' + postal);
+    this.queries[8] = postal;
   }
 
   setPropertyX(x: string) {
     console.log('Property X set: ' + x);
+    this.queries[9] = x;
   }
 
   setPropertyY(y: string) {
     console.log('Property Y set: ' + y);
+    this.queries[10] = y;
   }
 
 }

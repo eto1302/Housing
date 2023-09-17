@@ -50,8 +50,8 @@
         class="btn btn-primary text-white py-3 px-4" (click)="openFilter()" id="filter">Filter
       </button>
       <ng-container *ngIf="infinite | async as properties">
-        <cdk-virtual-scroll-viewport itemSize="400"
-                                     (scrolledIndexChange)="nextBatch($event, (properties[properties.length - 1].id))">
+        <cdk-virtual-scroll-viewport itemSize="300"
+                                     (scrolledIndexChange)="nextBatch(properties[properties.length - 1].id)">
           <article
             *cdkVirtualFor="let property of properties; let i = index; trackBy: trackByIndex; templateCacheSize: 30"
             [class]="'postcard dark ' + getClass(i)">
