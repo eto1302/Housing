@@ -6,11 +6,21 @@ import {PropertyComponent} from './property/property.component';
 import {ContactComponent} from './contact/contact.component';
 import {SellComponent} from './sell/sell.component';
 import {CreatePropertyComponent} from './create-property/create-property.component';
-import {NotFoundComponent} from "./not-found/not-found.component";
-import {PasswordComponent} from "./password/password.component";
-import {AuthGuard} from "./auth/auth.guard";
+import {NotFoundComponent} from './not-found/not-found.component';
+import {PasswordComponent} from './password/password.component';
+import {AuthGuard} from './auth/auth.guard';
+import {ServicesComponent} from './services/services.component';
+import {ServiceComponent} from './service/service.component';
 
 const routes: Routes = [
+  {
+    path: 'service/:id',
+    component: ServiceComponent
+  },
+  {
+    path: 'services',
+    component: ServicesComponent
+  },
   {
     path: 'properties',
     component: PropertiesComponent
@@ -38,7 +48,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    pathMatch: "full",
+    pathMatch: 'full',
     component: HomeComponent
   },
   {

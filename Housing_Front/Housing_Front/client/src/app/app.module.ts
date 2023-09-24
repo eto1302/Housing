@@ -22,6 +22,7 @@ import {AuthService} from "./auth/auth.service";
 import {AuthGuard} from "./auth/auth.guard";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { ServiceComponent } from './service/service.component';
 
 @NgModule({
     declarations: [
@@ -38,6 +39,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
         NotFoundComponent,
         PasswordComponent,
         SafePipe,
+        ServiceComponent,
     ],
   imports: [
     BrowserModule,

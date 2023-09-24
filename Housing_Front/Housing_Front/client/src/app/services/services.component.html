@@ -1,1 +1,22 @@
-<p>services works!</p>
+<div class="dark-color services-body">
+  <section class="dark dark-color">
+    <div class="container py-3">
+      <h1 class="h1 text-center" id="header">Services</h1>
+          <article
+            *ngFor="let service of services"
+            [class]="'postcard dark'">
+            <a class="postcard__img_link" (click)='redirect("/service/" + service.id)'>
+              <img class="postcard__img" [src]="service.photoPath"
+                   alt="{{service.name}}"/>
+            </a>
+            <div class="postcard__text">
+              <h1 [class]="'postcard__title '"><a
+                (click)='redirect("/service/" + service.id)'>{{service.name}}</a></h1>
+              <div class="postcard__bar"></div>
+              <div class="postcard__preview-txt">{{service.description}}</div>
+            </div>
+          </article>
+    </div>
+  </section>
+</div>
+
