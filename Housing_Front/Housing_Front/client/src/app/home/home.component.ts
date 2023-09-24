@@ -1,9 +1,11 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { PropertyService } from '../../services/property.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import {Observable} from 'rxjs';
 import {Property} from '../../models/property';
+import {AgentService} from '../../services/agent-service.service';
+import {Agent} from '../../models/agent';
+
 
 @Component({
   selector: 'app-home',
@@ -12,11 +14,13 @@ import {Property} from '../../models/property';
 })
 export class HomeComponent implements OnInit {
   public properties: Observable<Property[]>;
+  agents: Agent[];
 
-  constructor(private propertyService: PropertyService, private sanitizer: DomSanitizer) {}
+  constructor(private propertyService: PropertyService, private sanitizer: DomSanitizer, private agentService: AgentService) {}
 
   ngOnInit() {
     this.properties = this.propertyService.getInRange(1, 4);
+    this.agents = this.agentService.agents;
   }
 
   getPath(photo: string): SafeResourceUrl {

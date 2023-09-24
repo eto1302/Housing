@@ -1,0 +1,18 @@
+.primary-color > * {
+  color: white;
+}
+
+#agentDetails {
+  padding-top: 180px;
+}
+
+
+.icon-tiktok {
+  background: url(../../assets/resources/images/tiktokWhite.svg) no-repeat;
+  width: 15px;
+  height: 15px;
+}
+
+.tiktokHover:hover > .icon-tiktok{
+  background: url(../../assets/resources/images/tiktokBlue.svg) no-repeat;
+}

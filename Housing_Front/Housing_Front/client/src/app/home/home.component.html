@@ -145,120 +145,44 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
+        <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" *ngFor="let agent of agents">
           <div class="h-100 person">
             <img
-              src="../../assets/resources/images/person_1-min.jpg"
+              src="{{agent.photoPath}}"
               alt="Image"
               class="img-fluid"
             />
 
             <div class="person-contents">
-              <h2 class="mb-0"><a href="#">James Doe</a></h2>
+              <h2 class="mb-0"><a href="/agent/{{agent.id}}">{{agent.name}}</a></h2>
               <span class="meta d-block mb-3">Real Estate Agent</span>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Facere officiis inventore cumque tenetur laboriosam, minus
-                culpa doloremque odio, neque molestias?
+                {{agent.shortDescription}}
               </p>
 
               <ul class="social list-unstyled list-inline dark-hover">
                 <li class="list-inline-item">
-                  <a href="#"><span class="icon-facebook"></span></a>
+                  <a href="//{{agent.facebookLink}}"><span class="icon-facebook"></span></a>
                 </li>
                 <li class="list-inline-item">
-                  <a href="#"><span class="icon-youtube-play"></span></a>
+                  <a href="//{{agent.youtubeLink}}"><span class="icon-youtube-play"></span></a>
                 </li>
                 <li class="list-inline-item">
-                  <a href="#"><span class="icon-instagram"></span></a>
+                  <a href="//{{agent.instagramLink}}"><span class="icon-instagram"></span></a>
                 </li>
                 <li class="list-inline-item">
-                  <a href="#" class="tiktokHover"><span class="icon-tiktok"></span></a>
+                  <a href="//{{agent.tiktokLink}}" class="tiktokHover"><span class="icon-tiktok"></span></a>
                 </li>
                 <li class="list-inline-item">
-                  <a href="#"><span class="icon-linkedin"></span></a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
-          <div class="h-100 person">
-            <img
-              src="../../assets/resources/images/person_2-min.jpg"
-              alt="Image"
-              class="img-fluid"
-            />
-
-            <div class="person-contents">
-              <h2 class="mb-0"><a href="#">Jean Smith</a></h2>
-              <span class="meta d-block mb-3">Real Estate Agent</span>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Facere officiis inventore cumque tenetur laboriosam, minus
-                culpa doloremque odio, neque molestias?
-              </p>
-
-              <ul class="social list-unstyled list-inline dark-hover">
-                <li class="list-inline-item">
-                  <a href="#"><span class="icon-facebook"></span></a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#"><span class="icon-youtube-play"></span></a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#"><span class="icon-instagram"></span></a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#" class="tiktokHover"><span class="icon-tiktok"></span></a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#"><span class="icon-linkedin"></span></a>
+                  <a href="//{{agent.linkedInLink}}"><span class="icon-linkedin"></span></a>
                 </li>
               </ul>
               <ul class="social list-inline">
-                <li class="list-inline-item"><span class="fa fa-star checked"></span></li>
-                <li class="list-inline-item"><span class="fa fa-star checked"></span></li>
-                <li class="list-inline-item"><span class="fa fa-star checked"></span></li>
-                <li class="list-inline-item"><span class="fa fa-star"></span></li>
-                <li class="list-inline-item"><span class="fa fa-star"></span></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
-          <div class="h-100 person">
-            <img
-              src="../../assets/resources/images/person_3-min.jpg"
-              alt="Image"
-              class="img-fluid"
-            />
-
-            <div class="person-contents">
-              <h2 class="mb-0"><a href="#">Alicia Huston</a></h2>
-              <span class="meta d-block mb-3">Real Estate Agent</span>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Facere officiis inventore cumque tenetur laboriosam, minus
-                culpa doloremque odio, neque molestias?
-              </p>
-
-              <ul class="social list-unstyled list-inline dark-hover">
-                <li class="list-inline-item">
-                  <a href="#"><span class="icon-facebook"></span></a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#"><span class="icon-youtube-play"></span></a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#"><span class="icon-instagram"></span></a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#" class="tiktokHover"><span class="icon-tiktok"></span></a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#"><span class="icon-linkedin"></span></a>
-                </li>
+                <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                  <li class="list-inline-item">
+                    <span [ngClass]="star <= agent.rating ? 'fa fa-star checked' : 'fa fa-star'"></span>
+                  </li>
+                </ng-container>
               </ul>
             </div>
           </div>

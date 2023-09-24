@@ -1,0 +1,38 @@
+<div class="section section-4 secondary-color" id="agentDetails">
+  <div class="container">
+    <div class="row justify-content-center align-items-center text-center mb-5">
+      <div class="col-lg-6">
+        <h2 class="font-weight-bold heading text-primary mb-4">
+          {{agent.name}}
+        </h2>
+        <ul class="social list-unstyled list-inline dark-hover">
+          <li class="list-inline-item">
+            <a href="//{{agent.facebookLink}}"><span class="icon-facebook"></span></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="//{{agent.youtubeLink}}"><span class="icon-youtube-play"></span></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="//{{agent.instagramLink}}"><span class="icon-instagram"></span></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="//{{agent.tiktokLink}}" class="tiktokHover"><span class="icon-tiktok"></span></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="//{{agent.linkedInLink}}"><span class="icon-linkedin"></span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col-lg-7">
+        <p class="text-black-50">
+          {{agent.description}}
+        </p>
+      </div>
+      <div class="col-lg-5">
+        <img src="{{agent.photoPath}}" class="img-fluid">
+      </div>
+    </div>
+  </div>
+</div>

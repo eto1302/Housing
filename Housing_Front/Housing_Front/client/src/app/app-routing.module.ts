@@ -11,8 +11,13 @@ import {PasswordComponent} from './password/password.component';
 import {AuthGuard} from './auth/auth.guard';
 import {ServicesComponent} from './services/services.component';
 import {ServiceComponent} from './service/service.component';
+import {AgentComponent} from './agent/agent.component';
 
 const routes: Routes = [
+  {
+    path: 'agent/:id',
+    component: AgentComponent
+  },
   {
     path: 'service/:id',
     component: ServiceComponent
