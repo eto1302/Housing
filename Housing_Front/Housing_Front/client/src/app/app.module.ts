@@ -18,12 +18,13 @@ import {CreatePropertyComponent} from './create-property/create-property.compone
 import {RouterModule} from "@angular/router";
 import {NotFoundComponent} from './not-found/not-found.component';
 import {PasswordComponent} from './password/password.component';
-import {AuthService} from "./auth/auth.service";
-import {AuthGuard} from "./auth/auth.guard";
+import {AuthService} from "../services/auth/auth.service";
+import {AuthGuard} from "../services/auth/auth.guard";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { ServiceComponent } from './service/service.component';
 import { AgentComponent } from './agent/agent.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
     declarations: [
@@ -42,6 +43,7 @@ import { AgentComponent } from './agent/agent.component';
         SafePipe,
         ServiceComponent,
         AgentComponent,
+        LoginComponent,
     ],
   imports: [
     BrowserModule,

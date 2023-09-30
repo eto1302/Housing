@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Property} from "../../models/property";
 import {HttpClient} from "@angular/common/http";
-import {AuthService} from "../auth/auth.service";
+import {AuthService} from "../../services/auth/auth.service";
 import {Router} from "@angular/router";
 
 @Component({

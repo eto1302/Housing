@@ -8,7 +8,7 @@ import {SellComponent} from './sell/sell.component';
 import {CreatePropertyComponent} from './create-property/create-property.component';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {PasswordComponent} from './password/password.component';
-import {AuthGuard} from './auth/auth.guard';
+import {AuthGuard} from '../services/auth/auth.guard';
 import {ServicesComponent} from './services/services.component';
 import {ServiceComponent} from './service/service.component';
 import {AgentComponent} from './agent/agent.component';
