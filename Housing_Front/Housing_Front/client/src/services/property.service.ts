@@ -33,8 +33,9 @@ export class PropertyService {
     return this.totalProperties;
   }
 
-  public getInRange(begin: number, end: number) : Observable<Property[]>{
-    return this.http.get<Property[]>(this.propertiesUrl + '/' + begin + '/' + end);
+  public getInRange(begin: number, end: number, queries: string[]) : Observable<Property[]>{
+    const requestBody = { queries };
+    return this.http.post<Property[]>(this.propertiesUrl + '/' + begin + '/' + end, requestBody);
   }
 
   setPhotos(propertyId: number, ids: number[]) : Observable<string>{

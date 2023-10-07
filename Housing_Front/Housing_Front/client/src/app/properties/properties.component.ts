@@ -1,12 +1,21 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {PropertyService} from '../../services/property.service';
 import {Property} from '../../models/property';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 
 import {CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
-import {map, mergeMap, scan, tap, throttleTime} from 'rxjs/operators';
+import {
+  catchError,
+  map,
+  mergeMap,
+  scan,
+  startWith,
+  takeUntil,
+  tap,
+  throttleTime
+} from 'rxjs/operators';
 import {AgentService} from '../../services/agent-service.service';
 
 const batchSize = 5;
@@ -24,32 +33,47 @@ export class PropertiesComponent implements OnInit {
 
   theEnd = false;
 
-  total: number;
-
   offset = new BehaviorSubject(null);
-  lastLoaded;
   infinite: Observable<Property[]>;
   agents;
   queries;
+  private filtered: boolean;
+  private batchMap: any;
 
   constructor(private propertyService: PropertyService, private agentService: AgentService,
               private elem: ElementRef, private sanitizer: DomSanitizer, private router: Router) {
   }
 
   ngOnInit() {
+    this.filtered = false;
     this.queries = new Array(11);
     this.agents = this.agentService.agents;
-    this.propertyService.totalProperties.subscribe(count => this.total = count);
-    const batchMap = this.offset.pipe(
+
+    this.clearAndReloadBatchMap();
+    document.getElementById('body').style.overflow = 'hidden';
+  }
+
+  clearAndReloadBatchMap() {
+    this.batchMap = of({});
+    this.infinite = of(null);
+    this.batchMap = this.offset.pipe(
       throttleTime(150),
       mergeMap(n => this.getBatch(n)),
       scan((acc, batch) => {
-        return {...acc, ...batch}
-      }, {})
+        return { ...acc, ...batch };
+      }, {}),
+      startWith({}) // Initialize with an empty object
     );
 
-    this.infinite = batchMap.pipe(map(v => Object.values(v)));
-    document.getElementById('body').style.overflow = 'hidden';
+    this.infinite = this.batchMap.pipe(map(v => Object.values(v)));
+  }
+
+
+  clearInfiniteScroll() {
+    // Reset the offset and reinitialize the infinite observable
+    this.offset.next(1);
+    this.theEnd = false;
+    this.clearAndReloadBatchMap();
   }
 
   getPath(photo: string): SafeResourceUrl {
@@ -73,18 +97,19 @@ export class PropertiesComponent implements OnInit {
   }
 
   nextBatch(offset) {
-    console.log("nextBatch");
     if (this.theEnd) {
       document.getElementById('body').style.overflow = 'auto';
       return;
     }
 
-    const end = this.viewport.getRenderedRange().end;
-    const total = this.viewport.getDataLength();
+    const end = this.filtered ? 1 : this.viewport.getRenderedRange().end;
+    const total = this.filtered ? 1 : this.viewport.getDataLength();
+
+
+    this.filtered = false;
 
     if (end >= total) {
       this.offset.next(offset);
-      this.lastLoaded = offset;
     }
   }
 
@@ -92,20 +117,12 @@ export class PropertiesComponent implements OnInit {
     return i;
   }
 
-  getBatch(lastSeen: number): Observable<any> {
-    console.log("getBatch");
-    if (lastSeen >= this.total) this.theEnd = true;
-
+  getBatch(lastSeen: number) {
     lastSeen = lastSeen == null ? 1 : lastSeen;
-
-    return this.propertyService.getInRange(lastSeen, lastSeen + batchSize).pipe(
-      tap(arr => console.log('After getInRange:', arr)),
+    return this.propertyService.getInRange(lastSeen, lastSeen + batchSize, this.queries).pipe(
+      tap(arr => (arr.length > 2 ? null : (this.theEnd = true))),
       map(arr => {
-        console.log('After map:', arr);
-        return this.queryFilter(arr);
-      }),
-      map((arr: any[]) => {
-        console.log('After reduce:', arr);
+        console.log(arr);
         return arr.reduce((acc, curr) => {
           const id = curr.id;
           return {...acc, [id]: curr};
@@ -119,31 +136,9 @@ export class PropertiesComponent implements OnInit {
   }
 
   closeFilter() {
+    this.filtered = true;
+    this.clearInfiniteScroll();
     document.getElementById('overlayFilter').style.width = '0%';
-  }
-
-  queryFilter(arr) {
-    const result = arr.filter(property => {
-      return (
-        (!this.queries[0] || property.agentName === this.queries[0]) &&
-        (!this.queries[1] || property.name === this.queries[1]) &&
-        (!this.queries[2] || property.price === this.queries[2]) &&
-        (!this.queries[3] || property.numberOfRooms === this.queries[3]) &&
-        (!this.queries[4] || property.property.address.street === this.queries[4]) &&
-        (!this.queries[5] || property.property.address.city === this.queries[5]) &&
-        (!this.queries[6] || property.property.address.region === this.queries[6]) &&
-        (!this.queries[7] || property.property.address.country === this.queries[7]) &&
-        (!this.queries[8] || property.property.address.postal === this.queries[8]) &&
-        (!this.queries[9] || property.property.address.x === this.queries[9]) &&
-        (!this.queries[10] || property.property.address.y === this.queries[10])
-      );
-    });
-    if(result.length === 0) {
-      this.lastLoaded += batchSize;
-      console.log("changed lastLoaded to " + this.lastLoaded);
-      this.nextBatch(this.lastLoaded);
-    }
-    return result;
   }
 
   setAgent(agent: string) {
@@ -200,5 +195,4 @@ export class PropertiesComponent implements OnInit {
     console.log('Property Y set: ' + y);
     this.queries[10] = y;
   }
-
 }

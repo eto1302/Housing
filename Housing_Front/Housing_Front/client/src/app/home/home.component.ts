@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   constructor(private propertyService: PropertyService, private sanitizer: DomSanitizer, private agentService: AgentService) {}
 
   ngOnInit() {
-    this.properties = this.propertyService.getInRange(1, 4);
+    this.properties = this.propertyService.getInRange(1, 4, null);
     this.agents = this.agentService.agents;
   }
 
