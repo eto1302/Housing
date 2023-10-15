@@ -1,9 +1,11 @@
 package com.example.Housing.Controllers;
 
+import com.example.Housing.Entities.Log;
 import com.example.Housing.Entities.Photo;
 import com.example.Housing.Entities.Property;
 import com.example.Housing.Repositories.PhotoRepository;
 import com.example.Housing.Repositories.PropertyRepository;
+import com.example.Housing.Services.LogService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +16,16 @@ import java.util.*;
 @CrossOrigin(origins = "http://localhost:4200")
 public class PropertyController {
 
-    public PropertyController(PropertyRepository propertyRepository, PhotoRepository photoRepository) {
+    public PropertyController(PropertyRepository propertyRepository, PhotoRepository photoRepository, LogService logService) {
         this.propertyRepository = propertyRepository;
         this.photoRepository = photoRepository;
+        this.logService = logService;
     }
 
     private final PropertyRepository propertyRepository;
     private final PhotoRepository photoRepository;
 
+    private final LogService logService;
     @GetMapping("/properties")
     public List<Property> getProperties() {
         return propertyRepository.findAll();
@@ -31,6 +35,7 @@ public class PropertyController {
     public ResponseEntity<Property> addProperty(@RequestBody Property property) {
         try {
             Property savedProperty = propertyRepository.save(property);
+            logService.saveLog(new Log("Property Added: " + savedProperty.getName() + " by " + savedProperty.getAgentName()));
             return new ResponseEntity<>(savedProperty, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

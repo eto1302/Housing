@@ -24,6 +24,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { ServiceComponent } from './service/service.component';
 import { AgentComponent } from './agent/agent.component';
+import { LogsComponent } from './logs/logs.component';
 
 @NgModule({
     declarations: [
@@ -42,6 +43,7 @@ import { AgentComponent } from './agent/agent.component';
         SafePipe,
         ServiceComponent,
         AgentComponent,
+        LogsComponent,
     ],
   imports: [
     BrowserModule,

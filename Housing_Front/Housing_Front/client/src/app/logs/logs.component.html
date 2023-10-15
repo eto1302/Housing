@@ -1,0 +1,6 @@
+<div class="dark-color body"*ngIf="logs | async as logs">
+  <div *ngFor="let log of logs">
+    <h3>{{log.date}}: {{log.text}}</h3>
+  </div>
+</div>
+

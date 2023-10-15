@@ -12,8 +12,13 @@ import {AuthGuard} from './auth/auth.guard';
 import {ServicesComponent} from './services/services.component';
 import {ServiceComponent} from './service/service.component';
 import {AgentComponent} from './agent/agent.component';
+import {LogsComponent} from "./logs/logs.component";
 
 const routes: Routes = [
+  {
+    path: 'logs',
+    component: LogsComponent
+  },
   {
     path: 'agent/:id',
     component: AgentComponent
