@@ -19,7 +19,7 @@ export class PasswordComponent implements OnInit {
       () => {
         if (isValid) {
           this.authService.Authenticate();
-          this.router.navigate(['/createProperties']);
+          // this.router.navigate(['/createProperties']);
         }
       });
   }

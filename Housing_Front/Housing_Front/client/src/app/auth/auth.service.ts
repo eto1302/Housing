@@ -1,4 +1,6 @@
 import {Injectable} from '@angular/core';
+import {Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +8,7 @@ import {Injectable} from '@angular/core';
 export class AuthService {
   isLoggedIn = false;
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
   isAuthenticated() {
@@ -14,5 +16,13 @@ export class AuthService {
   }
   Authenticate(){
     this.isLoggedIn = true;
+  }
+
+  authenticateWithPassword(password: string): Observable<boolean> {
+    // Replace 'your_authentication_endpoint' with your actual authentication endpoint
+    const authenticationEndpoint = 'http://localhost:8080/password';
+
+    // Return an Observable from the HTTP request
+    return this.http.post<boolean>(authenticationEndpoint, password);
   }
 }
