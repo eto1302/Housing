@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="sigoPropertiesHeader" datatype="html">
+        <source>SiGo Properties</source>
+        <target>Свойства SiGo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buyingButton" datatype="html">
+        <source>Buying</source>
+        <target>Покупка</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sellingButton" datatype="html">
+        <source>Selling</source>
+        <target>Продажа</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aboutUsHeader" datatype="html">
+        <source>About Us</source>
+        <target>О нас</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aboutUsDescription" datatype="html">
+        <source> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sodales augue vitae erat tincidunt dictum. Cras in eleifend est, et lacinia magna. Aenean a pharetra quam, vel elementum est. In ante sapien, egestas at mi vitae, dapibus elementum dolor. Donec porttitor rutrum condimentum. Integer suscipit rhoncus lorem sit amet vestibulum. Представьте себе не элементов.</source>
+        <target>Представьте себе не элементов. Сед лациния егестас дуи, нон фрингилла екс фрингилла сед. Ут ут егестас ест, ин виверра екс. Аенеан пеллентескуе еним финибус ауге импердит хендрерит. Дуис еу пулвинар диам. Пеллентескуе ид конгуе пурус. Донец вененатис нешам ин фрингилла. Нунц вехицула метус ин лорем лобортис, квуис консекуат јусто лациния. Нам егет соллицитудин нибх. Нунц тинцидунт, нунц ин волутпат рхонкус, фелис неьке соллицитудин ми, а вененатис теллус лео неьк фелис. Маурис сит амет орци орци. Ин теллус елит, малесуада квуис сем ат, виверра аликуам турпис. Аликуам лобортис лациния екс ид лаореет. Представьте себе не элементов.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">25,41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="popularPropertiesHeader" datatype="html">
+        <source> Popular Properties </source>
+        <target> Популярные объекты </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">54,55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="viewAllPropertiesLink" datatype="html">
+        <source><x id="START_LINK" ctype="x-a" equiv-text="View all properties&lt;/a&gt;"/>View all properties<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+        <target><x id="START_LINK" ctype="x-a" equiv-text="Просмотреть все объекты&lt;/a&gt;"/>Просмотреть все объекты<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">57,58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ourAgentsHeader" datatype="html">
+        <source> Our Agents </source>
+        <target> Наши агенты </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">135,136</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ourAgentsDescription" datatype="html">
+        <source> Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam enim pariatur similique debitis vel nisi qui reprehenderit totam? Quod maiores. </source>
+        <target> Представьте себе не элементов. Лорем ипсум долор сит амет, консектетур адиписцинг елит. Нумкуам еним париатур симиликуе дебитис вел ниси куи репрехендерит тотам? Цуод маиорес. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">138,141</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="realEstateAgentLabel" datatype="html">
+        <source>Real Estate Agent</source>
+        <target>Агент по недвижимости</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">155</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

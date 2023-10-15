@@ -2,12 +2,19 @@
   "name": "client",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve",
-    "build": "set NODE_OPTIONS=--openssl-legacy-provider && ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "ng":       "ng",
+    "start":    "set NODE_OPTIONS=--openssl-legacy-provider && ng serve --port=4200",
+    "build":    "set NODE_OPTIONS=--openssl-legacy-provider && ng build",
+    "start:fr": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve --configuration=fr --port=4201",
+    "build:fr": "set NODE_OPTIONS=--openssl-legacy-provider && ng build --configuration=fr",
+    "start:bg": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve --configuration=bg --port=4202",
+    "build:bg": "set NODE_OPTIONS=--openssl-legacy-provider && ng build --configuration=bg",
+    "start:ru": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve --configuration=ru --port=4203",
+    "build:ru": "set NODE_OPTIONS=--openssl-legacy-provider && ng build --configuration=ru",
+    "test":     "ng test",
+    "lint":     "ng lint",
+    "e2e":      "ng e2e",
+    "i18n:extract": "ng extract-i18n --output-path src/locale"
   },
   "private": true,
   "dependencies": {
@@ -17,6 +24,7 @@
     "@angular/compiler": "^15.2.9",
     "@angular/core": "^15.2.9",
     "@angular/forms": "^15.2.9",
+    "@angular/localize": "^15.2.10",
     "@angular/material": "^15.2.9",
     "@angular/platform-browser": "^15.2.9",
     "@angular/platform-browser-dynamic": "^15.2.9",

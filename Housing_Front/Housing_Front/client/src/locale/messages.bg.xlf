@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="sigoPropertiesHeader" datatype="html">
+        <source>SiGo Properties</source>
+        <target>Собствености СиГо</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="buyingButton" datatype="html">
+        <source>Buying</source>
+        <target>Покупка</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="sellingButton" datatype="html">
+        <source>Selling</source>
+        <target>Продажба</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aboutUsHeader" datatype="html">
+        <source>About Us</source>
+        <target>За Нас</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aboutUsDescription" datatype="html">
+        <source> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sodales augue vitae erat tincidunt dictum. Cras in eleifend est, et lacinia magna. Aenean a pharetra quam, vel elementum est. In ante sapien, egestas at mi vitae, dapibus elementum dolor. Donec porttitor rutrum condimentum. Integer suscipit rhoncus lorem sit amet vestibulum. Praesent non elementum felis. Sed lacinia egestas dui, non fringilla ex fringilla sed. Ut ut egestas est, in viverra ex. Aenean pellentesque enim finibus augue imperdiet hendrerit. Duis eu pulvinar diam. Pellentesque id congue purus. Donec venenatis non quam in fringilla. Nunc vehicula metus in lorem lobortis, quis consequat justo lacinia. Nam eget sollicitudin nibh. Nunc tincidunt, nunc in volutpat rhoncus, felis neque sollicitudin mi, a venenatis tellus leo nec felis. Mauris sit amet orci orci. In tellus elit, malesuada quis sem at, viverra aliquam turpis. Aliquam lobortis lacinia ex id laoreet. Praesent consequat volutpat auctor. Mauris gravida turpis tellus, non pretium mi tincidunt in. Suspendisse condimentum accumsan nibh quis dictum. Phasellus nisi sapien, ultricies vel blandit bibendum, sodales a sapien. Pellentesque vehicula lorem a est porta, quis iaculis nisi tempus. Vestibulum fringilla rutrum egestas. </source>
+        <target>Лорем ипсум долор сит амет, консектетур адиписцинг елит. Маурис содалес аугуе витае ерат тинцидунт диктум. Црас ин елеифенд ест, ет лациниа магна. Аенеан а фаретра куам, вел елементум ест. Ин анте сапиен, егестас ат ми витае, дапибус елементум долор. Донец порттитор рутрум кондиментум. Интегер сусципит рхонцус лорем сит амет вестибулум. Праесент нон елементум фелис. Сед лациниа егестас дуи, нон фрингилла екс фрингилла сед. Ут ут егестас ест, ин виверра екс. Аенеан пеллентескуе еним финибус аугуе импердиет хендрерит. Дуис еу пулвинар диам. Пеллентескуе ид конгуе пурус. Донец вененатис нон квам ин фрингилла. Нунц вехицула метус ин лорем лобортис, квуис консекуат јусто лациниа. Нам егет соллицитудин нибх. Нунц тинцидунт, нунц ин волутпат рхонцус, фелис неке соллицитудин ми, а вененатис теллус лео нек фелис. Маурис сит амет орци орци. Ин теллус елит, малесуада квуис сем ат, виверра аликуам турпис. Аликуам лобортис лациниа екс ид лаореет. Праесент консекуат волутпат ауктор. Маурис гравида турпис теллус, нон претиум ми тинцидунт ин. Суспендиссе кондиментум аццумсан нибх квуис диктум. Пхаселлус ниси сапиен, ултрициес вел бландит бибендум, содалес а сапиен. Пеллентескуе вехицула лорем а ест порта, квуис иацулис ниси темпус. Вестибулум фрингилла рутрум егестас. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">25,41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="popularPropertiesHeader" datatype="html">
+        <source> Popular Properties </source>
+        <target> Популярни Имоти </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">54,55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="viewAllPropertiesLink" datatype="html">
+        <source><x id="START_LINK" ctype="x-a" equiv-text="View all properties&lt;/a&gt;"/>View all properties<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+        <target><x id="START_LINK" ctype="x-a" equiv-text="Виж всички имоти&lt;/a&gt;"/>Виж всички имоти<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">57,58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ourAgentsHeader" datatype="html">
+        <source> Our Agents </source>
+        <target> Нашите Агенти </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">135,136</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ourAgentsDescription" datatype="html">
+        <source> Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam enim pariatur similique debitis vel nisi qui reprehenderit totam? Quod maiores. </source>
+        <target> Лорем ипсум долор сит амет, консектетур адиписцинг елит. Нумкуам еним париатур симиликуе дебитис вел ниси куи репрехендерит тотам? Цуод маиорес. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">138,141</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="realEstateAgentLabel" datatype="html">
+        <source>Real Estate Agent</source>
+        <target>Агент по Недвижими Имоти</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">155</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
