@@ -25,6 +25,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { ServiceComponent } from './service/service.component';
 import { AgentComponent } from './agent/agent.component';
 import { LogsComponent } from './logs/logs.component';
+import { EditPropertyComponent } from './edit-property/edit-property.component';
 
 @NgModule({
     declarations: [
@@ -44,6 +45,7 @@ import { LogsComponent } from './logs/logs.component';
         ServiceComponent,
         AgentComponent,
         LogsComponent,
+        EditPropertyComponent,
     ],
   imports: [
     BrowserModule,

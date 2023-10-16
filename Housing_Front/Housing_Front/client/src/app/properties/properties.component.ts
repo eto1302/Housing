@@ -93,6 +93,7 @@ export class PropertiesComponent implements OnInit {
   }
 
   redirect(s: string) {
+    document.getElementById('body').style.overflow = 'auto';
     this.router.navigate([s]);
   }
 

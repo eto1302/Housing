@@ -41,4 +41,13 @@ export class PropertyService {
   setPhotos(propertyId: number, ids: number[]) : Observable<string>{
     return this.http.post<string>(this.propertiesUrl + '/' + 'setPhotos' + '/' + propertyId, ids);
   }
+
+  public edit(property: Property): Observable<Property> {
+    return this.http.post<Property>(this.propertiesUrl + '/edit/' + property.id, property);
+  }
+
+  delete(id) {
+    console.log(id);
+    return this.http.delete<string>(this.propertiesUrl + '/' + id);
+  }
 }

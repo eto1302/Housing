@@ -13,6 +13,7 @@ import {ServicesComponent} from './services/services.component';
 import {ServiceComponent} from './service/service.component';
 import {AgentComponent} from './agent/agent.component';
 import {LogsComponent} from './logs/logs.component';
+import {EditPropertyComponent} from "./edit-property/edit-property.component";
 
 const routes: Routes = [
   {
@@ -41,8 +42,13 @@ const routes: Routes = [
     component: PasswordComponent
   },
   {
-    path: 'createProperties',
+    path: 'createProperty',
     component: CreatePropertyComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'editProperty',
+    component: EditPropertyComponent,
     canActivate: [AuthGuard]
   },
   {
