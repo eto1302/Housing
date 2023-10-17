@@ -30,11 +30,16 @@ export class PropertyComponent implements OnInit {
     const imageUrl = 'data:image/jpg;base64,' + photo;
     return this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
   }
+
   move(step: number) {
-    this.current = (this.current + step + this.property.photos.length + 1) % (this.property.photos.length + 1);
+    if(this.property.videoLink) this.current = (this.current + step + this.property.photos.length + 1) % (this.property.photos.length + 1);
+    else this.current = (this.current + step + this.property.photos.length) % (this.property.photos.length);
   }
 
   isActive(index: number) {
+    console.log(this.property.videoLink === undefined);
+    console.log(index);
+    console.log(this.current);
     if(this.property.videoLink) return index === this.current - 1;
     return index === this.current;
   }

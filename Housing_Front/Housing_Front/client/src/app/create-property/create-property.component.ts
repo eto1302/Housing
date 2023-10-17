@@ -32,6 +32,8 @@ export class CreatePropertyComponent implements OnInit {
     price: null,
     numberOfRooms: null,
     videoLink: null,
+    furnished: null,
+    area:null,
     dateOfAvailability: null,
     photos: [],
     includingUtilities: false

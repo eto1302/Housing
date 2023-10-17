@@ -12,5 +12,7 @@ export class Property {
   dateOfAvailability: Date;
   numberOfRooms: number;
   includingUtilities: boolean;
+  furnished: string;
+  area: number;
   photos: Photo[];
 }

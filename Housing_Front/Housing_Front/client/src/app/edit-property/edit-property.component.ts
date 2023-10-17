@@ -33,6 +33,8 @@ export class EditPropertyComponent implements OnInit {
     numberOfRooms: null,
     videoLink: null,
     dateOfAvailability: null,
+    furnished: null,
+    area:null,
     photos: [],
     includingUtilities: false
   };

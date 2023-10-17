@@ -10,12 +10,18 @@
   padding-right: 100px;
 }
 
+.icon{
+  width: 24px;
+  height: 24px;
+}
+
 .carousel-item {
+  object-fit: cover;
   position: relative;
   display: none;
   float: left;
-  width: 600px;
-  height: 400px;
+  width: 100vw;
+  height: 60vh;
   margin-right: -100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -78,3 +84,24 @@
     -webkit-transition: none;
     -o-transition: none;
     transition: none; } }
+
+.listing{
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.term{
+  width: 16rem;
+  border-bottom: 1px solid #e5e5e5;
+  margin:0;
+}
+
+.definition{
+  width: calc(100% - 16rem);
+  border-bottom: 1px solid #e5e5e5;
+  margin:0;
+}
+
+.features{
+  width:40vw;
+}

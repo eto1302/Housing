@@ -1,7 +1,8 @@
 <div *ngIf="property" class="section section-4 secondary-color" id="propertyDetails">
   <div class="container">
+<!--    photos-->
     <div class="row justify-content-center align-items-center text-center mb-5">
-      <div class="col-lg-2 pagination-button">
+      <div class="col-lg-1 pagination-button">
         <button
           class="primary-color"
           type="button"
@@ -11,10 +12,7 @@
           <span class="visually-hidden">Previous</span>
         </button>
       </div>
-      <div class="col-lg-6">
-        <h2 class="font-weight-bold heading text-primary mb-4">
-          {{property.name}}
-        </h2>
+      <div class="col-lg-8">
         <div class="img-about">
           <ng-container *ngIf="this.property.videoLink">
             <iframe width="600" height="400"
@@ -28,7 +26,7 @@
                [class.active]="isActive(index)" [src]="getPath(photo.photo)">
         </div>
       </div>
-      <div class="col-lg-2 pagination-button">
+      <div class="col-lg-1 pagination-button">
         <button
           class="primary-color"
           type="button"
@@ -39,99 +37,53 @@
         </button>
       </div>
     </div>
-    <div class="row justify-content-between mb-5">
-      <div class="col-lg-7 mb-5 mb-lg-0 order-lg-2">
-        <p class="text-black-50">
-          {{property.description}}
-        </p>
-      </div>
-      <div class="col-lg-4">
-        <div class="d-flex feature-h">
-              <span class="wrap-icon me-3">
-                <span class="icon-home2"></span>
-              </span>
-          <div class="feature-text">
-            <h3 class="heading">Address</h3>
-            <p class="text-black-50">
-              {{property.address.street}}
-            </p>
+<!--    name-->
+    <div class="col-lg-12">
+      <div class="row justify-content-start mb-2">
+        <h3 class="font-weight-bold heading text-primary">
+          {{property.name}}
+        </h3>
+        <h5 class="mb-3">{{property.address.city}}, {{property.address.country}}</h5>
+        <h3 class="font-weight-bold">
+          {{property.price}}
+        </h3>
+        <div class="row justify-content-start">
+          <div class="col-1">
+            <a><img src="assets/resources/images/area.png" class="icon"></a>
+            <h6>{{property.area}}</h6>
           </div>
-        </div>
-
-        <div class="d-flex feature-h">
-              <span class="wrap-icon me-3">
-                <span class="icon-person"></span>
-              </span>
-          <div class="feature-text">
-            <h3 class="heading">Date of Availability</h3>
-            <p class="text-black-50">
-              {{property.dateOfAvailability}}
-            </p>
+          <div class="col-1">
+            <img src="assets/resources/images/room.png" class="icon">
+            <h6>{{property.numberOfRooms}} rooms</h6>
           </div>
-        </div>
-
-        <div class="d-flex feature-h">
-              <span class="wrap-icon me-3">
-                <span class="icon-security"></span>
-              </span>
-          <div class="feature-text">
-            <h3 class="heading">Price:</h3>
-            <p class="text-black-50">
-              {{property.price}}
-            </p>
+          <div class="col-1">
+            <a><img src="assets/resources/images/furniture.png" class="icon"></a>
+            <h6>{{property.furnished}}</h6>
           </div>
         </div>
       </div>
     </div>
-    <!--    <div class="row section-counter mt-5">-->
-    <!--      <div-->
-    <!--        class="col-6 col-sm-6 col-md-6 col-lg-3"-->
-    <!--        data-aos="fade-up"-->
-    <!--        data-aos-delay="300"-->
-    <!--      >-->
-    <!--        <div class="counter-wrap mb-5 mb-lg-0">-->
-    <!--              <span class="number"-->
-    <!--              ><span class="countup text-primary">3298</span></span-->
-    <!--              >-->
-    <!--          <span class="caption text-black-50"># of Buy Properties</span>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--      <div-->
-    <!--        class="col-6 col-sm-6 col-md-6 col-lg-3"-->
-    <!--        data-aos="fade-up"-->
-    <!--        data-aos-delay="400"-->
-    <!--      >-->
-    <!--        <div class="counter-wrap mb-5 mb-lg-0">-->
-    <!--              <span class="number"-->
-    <!--              ><span class="countup text-primary">2181</span></span-->
-    <!--              >-->
-    <!--          <span class="caption text-black-50"># of Sell Properties</span>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--      <div-->
-    <!--        class="col-6 col-sm-6 col-md-6 col-lg-3"-->
-    <!--        data-aos="fade-up"-->
-    <!--        data-aos-delay="500"-->
-    <!--      >-->
-    <!--        <div class="counter-wrap mb-5 mb-lg-0">-->
-    <!--              <span class="number"-->
-    <!--              ><span class="countup text-primary">9316</span></span-->
-    <!--              >-->
-    <!--          <span class="caption text-black-50"># of All Properties</span>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--      <div-->
-    <!--        class="col-6 col-sm-6 col-md-6 col-lg-3"-->
-    <!--        data-aos="fade-up"-->
-    <!--        data-aos-delay="600"-->
-    <!--      >-->
-    <!--        <div class="counter-wrap mb-5 mb-lg-0">-->
-    <!--              <span class="number"-->
-    <!--              ><span class="countup text-primary">7191</span></span-->
-    <!--              >-->
-    <!--          <span class="caption text-black-50"># of Agents</span>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </div>-->
+    <hr>
+<!--    description-->
+    <div class="row justify-content-between mb-2">
+      <div class="col-lg-12">
+        <h3>Description</h3>
+        <p class="text-black-50">
+          {{property.description}}
+        </p>
+      </div>
+    </div>
+    <hr>
+    <div class="features">
+      <h3>Transfer</h3>
+      <dl class="listing">
+        <dt class="term">Price</dt>
+        <dd class="definition">{{property.price}}</dd>
+        <dt class="term">Price</dt>
+        <dd class="definition">{{property.price}}</dd>
+        <dt class="term">Price</dt>
+        <dd class="definition">{{property.price}}</dd>
+      </dl>
+    </div>
   </div>
 </div>
