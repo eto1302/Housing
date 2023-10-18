@@ -4,49 +4,97 @@
       <div class="col-lg-8 contact-us">
         <form [formGroup]="editPropertyForm">
           <h1>EDIT PROPERTY</h1>
-          <label for="id">PROPERTY ID<em>&#x2a;</em></label>
-          <input id="id" name="id" required="" type="text" (change)="loadProperty($event)"/>
           <label for="agentName">AGENT NAME <em>&#x2a;</em></label>
           <select name="agentName" id="agentName" formControlName="agentName">
-            <option *ngFor="let item of agents" [ngValue]="item.name">
-              {{item.name }}</option>
+            <option *ngFor="let item of agents" [ngValue]="item.name">{{ item.name }}</option>
           </select>
+
           <label for="name">PROPERTY NAME<em>&#x2a;</em></label>
-          <input id="name" name="name" required="" type="text" formControlName="propertyName"/>
+          <input id="name" name="name" required="" type="text" formControlName="name">
+
           <label for="description">PROPERTY DESCRIPTION <em>&#x2a;</em></label>
-          <textarea id="description"
-                    name="description"
-                    required=""
-                    rows="4" formControlName="propertyDescription"></textarea>
+          <textarea id="description" name="description" required="" rows="4" formControlName="description"></textarea>
+
           <label for="price">PROPERTY PRICE <em>&#x2a;</em></label>
-          <input id="price" name="price" required="" type="number" formControlName="price"/>
+          <input id="price" name="price" required="" type="number" formControlName="price">
+
           <label for="numberOfRooms">PROPERTY NUMBER OF ROOMS<em>&#x2a;</em></label>
-          <input id="numberOfRooms" name="numberOfRooms" required="" type="number"
-                 formControlName="propertyRooms"/>
+          <input id="numberOfRooms" name="numberOfRooms" required="" type="number" formControlName="numberOfRooms">
+
+          <label for="numberOfBedrooms">NUMBER OF BEDROOMS</label>
+          <input id="numberOfBedrooms" name="numberOfBedrooms" type="number" formControlName="numberOfBedrooms">
+
+          <label for="numberOfBathrooms">NUMBER OF BATHROOMS</label>
+          <input id="numberOfBathrooms" name="numberOfBathrooms" type="number" formControlName="numberOfBathrooms">
+
+          <label for="numberOfFloors">NUMBER OF FLOORS</label>
+          <input id="numberOfFloors" name="numberOfFloors" type="number" formControlName="numberOfFloors">
+
+          <label for="facilities">FACILITIES</label>
+          <textarea id="facilities" name="facilities" required="" rows="10" formControlName="facilities"></textarea>
+
+          <label for="interior">INTERIOR</label>
+          <input id="interior" name="interior" type="text" formControlName="interior">
+
+          <label for="livingArea">LIVING AREA (m^2)</label>
+          <input id="livingArea" name="livingArea" type="number" formControlName="livingArea">
+
+          <label for="plotArea">PLOT AREA (m^2)</label>
+          <input id="plotArea" name="plotArea" type="number" formControlName="plotArea">
+
+          <label for="volume">VOLUME (m^3)</label>
+          <input id="volume" name="volume" type="number" formControlName="volume">
+
+          <label for="status">STATUS</label>
+          <input id="status" name="status" type="text" formControlName="status">
+
+          <label for="typeOfHouse">TYPE OF HOUSE</label>
+          <input id="typeOfHouse" name="typeOfHouse" type="text" formControlName="typeOfHouse">
+
+          <label for="typeOfConstruction">TYPE OF CONSTRUCTION</label>
+          <input id="typeOfConstruction" name="typeOfConstruction" type="text" formControlName="typeOfConstruction">
+
+          <label for="yearOfConstruction">YEAR OF CONSTRUCTION</label>
+          <input id="yearOfConstruction" name="yearOfConstruction" type="number" formControlName="yearOfConstruction">
+
+          <label for="balconyArea">BALCONY AREA (sq ft)</label>
+          <input id="balconyArea" name="balconyArea" type="number" formControlName="balconyArea">
+
+          <label for="gardenArea">GARDEN AREA (sq ft)</label>
+          <input id="gardenArea" name="gardenArea" type="number" formControlName="gardenArea">
+
+          <label for="typeOfParking">TYPE OF PARKING</label>
+          <input id="typeOfParking" name="typeOfParking" type="text" formControlName="typeOfParking">
+
           <label for="propertyStreet">PROPERTY STREET<em>&#x2a;</em></label>
-          <input id="propertyStreet" name="propertyStreet" required="" type="text"
-                 formControlName="propertyStreet"/>
+          <input id="propertyStreet" name="propertyStreet" required="" type="text" formControlName="propertyStreet">
+
           <label for="propertyCity">PROPERTY CITY<em>&#x2a;</em></label>
-          <input id="propertyCity" name="propertyCity" required="" type="text"
-                 formControlName="propertyCity"/>
+          <input id="propertyCity" name="propertyCity" required="" type="text" formControlName="propertyCity">
+
           <label for="propertyRegion">PROPERTY REGION<em>&#x2a;</em></label>
-          <input id="propertyRegion" name="propertyRegion" required="" type="text"
-                 formControlName="propertyRegion"/>
+          <input id="propertyRegion" name="propertyRegion" required="" type="text" formControlName="propertyRegion">
+
           <label for="propertyCountry">PROPERTY COUNTRY<em>&#x2a;</em></label>
-          <input id="propertyCountry" name="propertyCountry" required="" type="text"
-                 formControlName="propertyCountry"/>
+          <input id="propertyCountry" name="propertyCountry" required="" type="text" formControlName="propertyCountry">
+
           <label for="propertyPostal">PROPERTY POSTAL CODE<em>&#x2a;</em></label>
-          <input id="propertyPostal" name="propertyPostal" required="" type="text"
-                 formControlName="propertyPostal"/>
+          <input id="propertyPostal" name="propertyPostal" required="" type="text" formControlName="propertyPostal">
+
           <label for="propertyX">PROPERTY X<em>&#x2a;</em></label>
-          <input id="propertyX" name="propertyX" required="" type="text"
-                 formControlName="propertyX"/>
+          <input id="propertyX" name="propertyX" required="" type="text" formControlName="propertyX">
+
           <label for="propertyY">PROPERTY Y<em>&#x2a;</em></label>
-          <input id="propertyY" name="propertyY" required="" type="text"
-                 formControlName="propertyY"/>
+          <input id="propertyY" name="propertyY" required="" type="text" formControlName="propertyY">
+
           <label for="videoLink">PROPERTY VIDEO<em>&#x2a;</em></label>
-          <input id="videoLink" name="videoLink" required="" type="text"
-                 formControlName="propertyVideo"/>
+          <input id="videoLink" name="videoLink" required="" type="text" formControlName="videoLink">
+
+          <label for="specifics">PROPERTY SPECIFICS</label>
+          <textarea id="specifics" name="specifics" required="" rows="4" formControlName="specifics"></textarea>
+
+          <label for="dateOfAvailability">DATE OF AVAILABILITY</label>
+          <input id="dateOfAvailability" name="dateOfAvailability" type="date" formControlName="dateOfAvailability">
           <label >PROPERTY IMAGES<em>&#x2a;</em></label>
           <input type="file" class="file-input"
                  (change)="onFileSelected($event)" #fileUpload multiple>

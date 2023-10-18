@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {UntypedFormBuilder} from '@angular/forms';
+import {FormGroup, UntypedFormBuilder} from '@angular/forms';
 import {PropertyService} from '../../services/property.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {PhotoService} from '../../services/photo.service';
 import {Observable} from 'rxjs';
 import {AgentService} from '../../services/agent-service.service';
+import {Property} from "../../models/property";
 
 @Component({
   selector: 'app-edit-property',
@@ -14,47 +15,10 @@ import {AgentService} from '../../services/agent-service.service';
 export class EditPropertyComponent implements OnInit {
   agents;
   fileName = '';
-  private property = {
-    id: null,
-    agentName: null,
-    name: null,
-    description: null,
-    address: {
-      id: null,
-      street: null,
-      city: null,
-      region: null,
-      country: null,
-      postalCode: null,
-      latitude: null,
-      longitude: null
-    },
-    price: null,
-    numberOfRooms: null,
-    videoLink: null,
-    dateOfAvailability: null,
-    furnished: null,
-    area:null,
-    photos: [],
-    includingUtilities: false
-  };
+  private property = new Property();
   private photos = [];
 
-  editPropertyForm = this.formBuilder.group({
-    agentName: '',
-    propertyName: '',
-    propertyDescription: '',
-    price: 0,
-    propertyRooms: '',
-    propertyStreet: '',
-    propertyCity: '',
-    propertyRegion: '',
-    propertyCountry: '',
-    propertyPostal: '',
-    propertyX: '',
-    propertyY: '',
-    propertyVideo: ''
-  });
+  editPropertyForm: FormGroup;
 
   constructor(
     private propertyService: PropertyService,
@@ -62,6 +26,38 @@ export class EditPropertyComponent implements OnInit {
     private photoService: PhotoService,
     private agentService: AgentService
   ) {
+    this.editPropertyForm = this.formBuilder.group({
+      agentName: '',
+      propertyName: '',
+      propertyDescription: '',
+      price: 0,
+      propertyRooms: '',
+      numberOfBedrooms: 0,
+      numberOfBathrooms: 0,
+      numberOfFloors: 0,
+      facilities: '',
+      interior: '',
+      livingArea: 0,
+      plotArea: 0,
+      volume: 0,
+      status: '',
+      typeOfHouse: '',
+      typeOfConstruction: '',
+      yearOfConstruction: 0,
+      balconyArea: 0,
+      gardenArea: 0,
+      typeOfParking: '',
+      propertyStreet: '',
+      propertyCity: '',
+      propertyRegion: '',
+      propertyCountry: '',
+      propertyPostal: '',
+      propertyX: '',
+      propertyY: '',
+      videoLink: '',
+      specifics: '',
+      dateOfAvailability: '',
+    });
   }
 
   onSubmit(): void {
@@ -101,6 +97,23 @@ export class EditPropertyComponent implements OnInit {
     this.property.agentName = this.editPropertyForm.value.agentName;
     this.property.name = this.editPropertyForm.value.propertyName;
     this.property.description = this.editPropertyForm.value.propertyDescription;
+    this.property.price = this.editPropertyForm.value.price;
+    this.property.numberOfRooms = this.editPropertyForm.value.propertyRooms;
+    this.property.numberOfBedrooms = this.editPropertyForm.value.numberOfBedrooms;
+    this.property.numberOfBathrooms = this.editPropertyForm.value.numberOfBathrooms;
+    this.property.numberOfFloors = this.editPropertyForm.value.numberOfFloors;
+    this.property.facilities = this.editPropertyForm.value.facilities;
+    this.property.interior = this.editPropertyForm.value.interior;
+    this.property.livingArea = this.editPropertyForm.value.livingArea;
+    this.property.plotArea = this.editPropertyForm.value.plotArea;
+    this.property.volume = this.editPropertyForm.value.volume;
+    this.property.status = this.editPropertyForm.value.status;
+    this.property.typeOfHouse = this.editPropertyForm.value.typeOfHouse;
+    this.property.typeOfConstruction = this.editPropertyForm.value.typeOfConstruction;
+    this.property.yearOfConstruction = this.editPropertyForm.value.yearOfConstruction;
+    this.property.balconyArea = this.editPropertyForm.value.balconyArea;
+    this.property.gardenArea = this.editPropertyForm.value.gardenArea;
+    this.property.typeOfParking = this.editPropertyForm.value.typeOfParking;
     this.property.address = {
       id: null,
       street: this.editPropertyForm.value.propertyStreet,
@@ -109,13 +122,12 @@ export class EditPropertyComponent implements OnInit {
       country: this.editPropertyForm.value.propertyCountry,
       postalCode: this.editPropertyForm.value.propertyPostal,
       latitude: this.editPropertyForm.value.propertyX,
-      longitude: this.editPropertyForm.value.propertyY
+      longitude: this.editPropertyForm.value.propertyY,
     };
-    this.property.price = this.editPropertyForm.value.price;
-    this.property.numberOfRooms = this.editPropertyForm.value.propertyRooms;
-    this.property.videoLink = this.editPropertyForm.value.propertyVideo;
-    this.property.dateOfAvailability = null;
-    this.property.includingUtilities = false;
+    this.property.videoLink = this.editPropertyForm.value.videoLink;
+    this.property.specifics = this.editPropertyForm.value.specifics;
+    this.property.dateOfAvailability = this.editPropertyForm.value.dateOfAvailability;
+    this.property.dateOfOffer = new Date();
   }
 
   onFileSelected($event: Event) {

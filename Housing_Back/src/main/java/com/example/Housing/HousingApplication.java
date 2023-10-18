@@ -42,7 +42,7 @@ public class HousingApplication {
     }
 
 
-    private void populateDatabase(PropertyRepository propertyRepository, PhotoRepository photoRepository, AddressRepository addressRepository) {
+    /*private void populateDatabase(PropertyRepository propertyRepository, PhotoRepository photoRepository, AddressRepository addressRepository) {
         int begin = 0;
         int end = 0;
         for (int i = 0; i < 5; ++i) {
@@ -88,7 +88,7 @@ public class HousingApplication {
             begin = end;
         }
         System.out.println("Data saved!");
-    }
+    }*/
 
     private Set<Photo> getPhotosBetween(List<Photo> photos, int begin, int end) {
         HashSet<Photo> result = new HashSet<>();

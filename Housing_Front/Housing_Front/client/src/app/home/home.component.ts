@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.properties = this.propertyService.getInRange(1, 4, null);
+    this.properties.subscribe(result => console.log(result));
     this.agents = this.agentService.agents;
   }
 

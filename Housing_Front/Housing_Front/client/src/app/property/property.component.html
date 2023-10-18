@@ -1,6 +1,6 @@
 <div *ngIf="property" class="section section-4 secondary-color" id="propertyDetails">
   <div class="container">
-<!--    photos-->
+    <!--    photos-->
     <div class="row justify-content-center align-items-center text-center mb-5">
       <div class="col-lg-1 pagination-button">
         <button
@@ -37,7 +37,7 @@
         </button>
       </div>
     </div>
-<!--    name-->
+    <!--    name-->
     <div class="col-lg-12">
       <div class="row justify-content-start mb-2">
         <h3 class="font-weight-bold heading text-primary">
@@ -48,23 +48,24 @@
           {{property.price}}
         </h3>
         <div class="row justify-content-start">
-          <div class="col-1">
+          <div class="col-1" *ngIf="property.livingArea">
             <a><img src="assets/resources/images/area.png" class="icon"></a>
-            <h6>{{property.area}}</h6>
+            <h6>{{ property.livingArea }} m²</h6>
           </div>
-          <div class="col-1">
+          <div class="col-1" *ngIf="property.numberOfRooms">
             <img src="assets/resources/images/room.png" class="icon">
-            <h6>{{property.numberOfRooms}} rooms</h6>
+            <h6>{{ property.numberOfRooms }} rooms</h6>
           </div>
-          <div class="col-1">
+          <div class="col-1" *ngIf="property.interior">
             <a><img src="assets/resources/images/furniture.png" class="icon"></a>
-            <h6>{{property.furnished}}</h6>
+            <h6>{{ property.interior }}</h6>
           </div>
         </div>
+
       </div>
     </div>
     <hr>
-<!--    description-->
+    <!--    description-->
     <div class="row justify-content-between mb-2">
       <div class="col-lg-12">
         <h3>Description</h3>
@@ -73,16 +74,90 @@
         </p>
       </div>
     </div>
+    <!--    Transfer-->
     <hr>
     <div class="features">
       <h3>Transfer</h3>
       <dl class="listing">
-        <dt class="term">Price</dt>
-        <dd class="definition">{{property.price}}</dd>
-        <dt class="term">Price</dt>
-        <dd class="definition">{{property.price}}</dd>
-        <dt class="term">Price</dt>
-        <dd class="definition">{{property.price}}</dd>
+        <dt class="term" *ngIf="property.price">Price</dt>
+        <dd class="definition" *ngIf="property.price">{{ property.price }}</dd>
+        <dt class="term" *ngIf="property.dateOfOffer">Offered Since</dt>
+        <dd class="definition" *ngIf="property.dateOfOffer">{{ property.dateOfOffer | date:'dd-MM-yyyy' }}</dd>
+        <dt class="term" *ngIf="property.status">Status</dt>
+        <dd class="definition" *ngIf="property.status">{{ property.status }}</dd>
+        <dt class="term" *ngIf="property.dateOfAvailability">Available From</dt>
+        <dd class="definition" *ngIf="property.dateOfAvailability">{{ property.dateOfAvailability | date:'dd-MM-yyyy' }}</dd>
+        <dt class="term" *ngIf="property.serviceCosts">Service Costs</dt>
+        <dd class="definition" *ngIf="property.serviceCosts">{{ property.serviceCosts }}</dd>
+        <dt class="term" *ngIf="property.specifics">Specifics</dt>
+        <dd class="definition" *ngIf="property.specifics">{{ property.specifics }}</dd>
+        <dt class="term" *ngIf="property.interior">Interior</dt>
+        <dd class="definition" *ngIf="property.interior">{{ property.interior }}</dd>
+      </dl>
+    </div>
+    <!--    Area-->
+    <hr>
+    <div class="features">
+      <h3>Area</h3>
+      <dl class="listing">
+        <dt class="term" *ngIf="property.livingArea">Living Area</dt>
+        <dd class="definition" *ngIf="property.livingArea">{{ property.livingArea }} m²</dd>
+        <dt class="term" *ngIf="property.plotArea">Plot Area</dt>
+        <dd class="definition" *ngIf="property.plotArea">{{ property.plotArea }} m²</dd>
+        <dt class="term" *ngIf="property.volume">Volume</dt>
+        <dd class="definition" *ngIf="property.volume">{{ property.volume }} m³</dd>
+      </dl>
+    </div>
+    <!--    Construction-->
+    <hr>
+    <div class="features">
+      <h3>Construction</h3>
+      <dl class="listing">
+        <dt class="term" *ngIf="property.typeOfHouse">Type of house</dt>
+        <dd class="definition" *ngIf="property.typeOfHouse">{{ property.typeOfHouse }} m²</dd>
+        <dt class="term" *ngIf="property.typeOfConstruction">Type of construction</dt>
+        <dd class="definition" *ngIf="property.typeOfConstruction">{{ property.typeOfConstruction }} m²</dd>
+        <dt class="term" *ngIf="property.yearOfConstruction">Year of construction</dt>
+        <dd class="definition" *ngIf="property.yearOfConstruction">{{ property.yearOfConstruction }} m³</dd>
+        <dt class="term" *ngIf="property.address.region">Region</dt>
+        <dd class="definition" *ngIf="property.address.region">{{ property.address.region }} m³</dd>
+      </dl>
+    </div>
+    <!--      Classification-->
+    <hr>
+    <div class="features">
+      <h3>Classification</h3>
+      <dl class="listing">
+        <dt class="term" *ngIf="property.numberOfRooms">Number Of Rooms</dt>
+        <dd class="definition" *ngIf="property.numberOfRooms">{{ property.numberOfRooms }}</dd>
+        <dt class="term" *ngIf="property.numberOfBedrooms">Number Of Bedrooms</dt>
+        <dd class="definition" *ngIf="property.numberOfBedrooms">{{ property.numberOfBedrooms }}</dd>
+        <dt class="term" *ngIf="property.numberOfBathrooms">Number Of Bathrooms</dt>
+        <dd class="definition" *ngIf="property.numberOfBathrooms">{{ property.numberOfBathrooms }}</dd>
+        <dt class="term" *ngIf="property.numberOfFloors">Number Of Floors</dt>
+        <dd class="definition" *ngIf="property.numberOfFloors">{{ property.numberOfFloors }}</dd>
+        <dt class="term" *ngIf="property.facilities">Facilities</dt>
+        <dd class="definition" *ngIf="property.facilities">{{ property.facilities }}</dd>
+      </dl>
+    </div>
+    <!--      Outside Space-->
+    <hr>
+    <div class="features">
+      <h3>Outside Space</h3>
+      <dl class="listing">
+        <dt class="term" *ngIf="property.balconyArea">Balcony</dt>
+        <dd class="definition" *ngIf="property.balconyArea">{{ property.balconyArea }} m²</dd>
+        <dt class="term" *ngIf="property.gardenArea">Garden</dt>
+        <dd class="definition" *ngIf="property.gardenArea">{{ property.gardenArea }} m²</dd>
+      </dl>
+    </div>
+    <!--      Parking-->
+    <hr>
+    <div class="features" *ngIf="property.typeOfParking">
+      <h3>Parking Facilities</h3>
+      <dl class="listing">
+        <dt class="term">Type of Parking</dt>
+        <dd class="definition">{{property.typeOfParking}}</dd>
       </dl>
     </div>
   </div>

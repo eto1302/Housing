@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {UntypedFormBuilder} from '@angular/forms';
+import {FormGroup, UntypedFormBuilder} from '@angular/forms';
 import {PropertyService} from '../../services/property.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {PhotoService} from '../../services/photo.service';
 import {Observable} from 'rxjs';
 import {AgentService} from '../../services/agent-service.service';
+import {Property} from '../../models/property';
 
 @Component({
   selector: 'app-create-property',
@@ -14,47 +15,10 @@ import {AgentService} from '../../services/agent-service.service';
 export class CreatePropertyComponent implements OnInit {
   agents;
   fileName = '';
-  private property = {
-    id: null,
-    agentName: null,
-    name: null,
-    description: null,
-    address: {
-      id: null,
-      street: null,
-      city: null,
-      region: null,
-      country: null,
-      postalCode: null,
-      latitude: null,
-      longitude: null
-    },
-    price: null,
-    numberOfRooms: null,
-    videoLink: null,
-    furnished: null,
-    area:null,
-    dateOfAvailability: null,
-    photos: [],
-    includingUtilities: false
-  };
+  private property = new Property();
   private photos = [];
 
-  createPropertyForm = this.formBuilder.group({
-    agentName: '',
-    propertyName: '',
-    propertyDescription: '',
-    price: 0,
-    propertyRooms: '',
-    propertyStreet: '',
-    propertyCity: '',
-    propertyRegion: '',
-    propertyCountry: '',
-    propertyPostal: '',
-    propertyX: '',
-    propertyY: '',
-    propertyVideo: ''
-  });
+  createPropertyForm: FormGroup;
 
   constructor(
     private propertyService: PropertyService,
@@ -62,6 +26,39 @@ export class CreatePropertyComponent implements OnInit {
     private photoService: PhotoService,
     private agentService: AgentService
   ) {
+    this.createPropertyForm = this.formBuilder.group({
+      agentName: '',
+      name: '',
+      description: '',
+      price: 0,
+      serviceCosts: 0,
+      numberOfRooms: '',
+      numberOfBedrooms: 0,
+      numberOfBathrooms: 0,
+      numberOfFloors: 0,
+      facilities: '',
+      interior: '',
+      livingArea: 0,
+      plotArea: 0,
+      volume: 0,
+      status: '',
+      typeOfHouse: '',
+      typeOfConstruction: '',
+      yearOfConstruction: 0,
+      balconyArea: 0,
+      gardenArea: 0,
+      typeOfParking: '',
+      propertyStreet: '',
+      propertyCity: '',
+      propertyRegion: '',
+      propertyCountry: '',
+      propertyPostal: '',
+      propertyX: '',
+      propertyY: '',
+      videoLink: '',
+      specifics: '',
+      dateOfAvailability: '',
+    });
   }
 
   onSubmit(): void {
@@ -99,8 +96,26 @@ export class CreatePropertyComponent implements OnInit {
 
   private setFields() {
     this.property.agentName = this.createPropertyForm.value.agentName;
-    this.property.name = this.createPropertyForm.value.propertyName;
-    this.property.description = this.createPropertyForm.value.propertyDescription;
+    this.property.name = this.createPropertyForm.value.name;
+    this.property.description = this.createPropertyForm.value.description;
+    this.property.price = this.createPropertyForm.value.price;
+    this.property.serviceCosts = this.createPropertyForm.value.serviceCosts;
+    this.property.numberOfRooms = this.createPropertyForm.value.numberOfRooms;
+    this.property.numberOfBedrooms = this.createPropertyForm.value.numberOfBedrooms;
+    this.property.numberOfBathrooms = this.createPropertyForm.value.numberOfBathrooms;
+    this.property.numberOfFloors = this.createPropertyForm.value.numberOfFloors;
+    this.property.facilities = this.createPropertyForm.value.facilities;
+    this.property.interior = this.createPropertyForm.value.interior;
+    this.property.livingArea = this.createPropertyForm.value.livingArea;
+    this.property.plotArea = this.createPropertyForm.value.plotArea;
+    this.property.volume = this.createPropertyForm.value.volume;
+    this.property.status = this.createPropertyForm.value.status;
+    this.property.typeOfHouse = this.createPropertyForm.value.typeOfHouse;
+    this.property.typeOfConstruction = this.createPropertyForm.value.typeOfConstruction;
+    this.property.yearOfConstruction = this.createPropertyForm.value.yearOfConstruction;
+    this.property.balconyArea = this.createPropertyForm.value.balconyArea;
+    this.property.gardenArea = this.createPropertyForm.value.gardenArea;
+    this.property.typeOfParking = this.createPropertyForm.value.typeOfParking;
     this.property.address = {
       id: null,
       street: this.createPropertyForm.value.propertyStreet,
@@ -109,14 +124,14 @@ export class CreatePropertyComponent implements OnInit {
       country: this.createPropertyForm.value.propertyCountry,
       postalCode: this.createPropertyForm.value.propertyPostal,
       latitude: this.createPropertyForm.value.propertyX,
-      longitude: this.createPropertyForm.value.propertyY
+      longitude: this.createPropertyForm.value.propertyY,
     };
-    this.property.price = this.createPropertyForm.value.price;
-    this.property.numberOfRooms = this.createPropertyForm.value.propertyRooms;
-    this.property.videoLink = this.createPropertyForm.value.propertyVideo;
-    this.property.dateOfAvailability = null;
-    this.property.includingUtilities = false;
+    this.property.videoLink = this.createPropertyForm.value.videoLink;
+    this.property.specifics = this.createPropertyForm.value.specifics;
+    this.property.dateOfAvailability = this.createPropertyForm.value.dateOfAvailability;
+    this.property.dateOfOffer = new Date();
   }
+
 
   onFileSelected($event: Event) {
     const files = ($event.target as HTMLInputElement).files;

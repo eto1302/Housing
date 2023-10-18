@@ -70,7 +70,6 @@ public class PropertyController {
             existingProperty.setDescription(newProperty.getDescription());
             existingProperty.setPrice(newProperty.getPrice());
             existingProperty.setDateOfAvailability(newProperty.getDateOfAvailability());
-            existingProperty.setIncludingUtilities(newProperty.isIncludingUtilities());
             existingProperty.setNumberOfRooms(newProperty.getNumberOfRooms());
             existingProperty.setVideoLink(newProperty.getVideoLink());
 
@@ -123,7 +122,7 @@ public class PropertyController {
     public List<Property> getPropertiesInRange(@PathVariable Long begin, @PathVariable Long end) {
         List<Property> result = new ArrayList<>();
         for (Long i = begin; i < end; ++i) {
-            if (end >= this.getCount()) break;
+            if (end > this.getCount()) break;
             var property = propertyRepository.findById(i);
 
             // Check if the property matches the query criteria
@@ -151,7 +150,7 @@ public class PropertyController {
 
 
         for (Long i = begin; i < end; ++i) {
-            if (end >= this.getCount()) break;
+            if (end > this.getCount()) break;
             var property = propertyRepository.findById(i);
 
             // Check if the property matches the query criteria
