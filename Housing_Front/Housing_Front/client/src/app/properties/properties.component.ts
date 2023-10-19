@@ -119,6 +119,7 @@ export class PropertiesComponent implements OnInit {
   }
 
   getBatch(lastSeen: number) {
+    console.log(lastSeen);
     lastSeen = lastSeen == null ? 1 : lastSeen;
     return this.propertyService.getInRange(lastSeen, lastSeen + batchSize, this.queries).pipe(
       tap(arr => (arr.length > 2 ? null : (this.theEnd = true))),

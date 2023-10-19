@@ -32,4 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 
-./Housing.mv.db
+Housing.mv.db

@@ -4,6 +4,8 @@
       <div class="col-lg-8 contact-us">
         <form [formGroup]="editPropertyForm">
           <h1>EDIT PROPERTY</h1>
+          <label for="id">PROPERTY ID<em>&#x2a;</em></label>
+          <input id="id" name="id" required="" type="text" (change)="loadProperty($event)"/>
           <label for="agentName">AGENT NAME <em>&#x2a;</em></label>
           <select name="agentName" id="agentName" formControlName="agentName">
             <option *ngFor="let item of agents" [ngValue]="item.name">{{ item.name }}</option>
@@ -17,6 +19,9 @@
 
           <label for="price">PROPERTY PRICE <em>&#x2a;</em></label>
           <input id="price" name="price" required="" type="number" formControlName="price">
+
+          <label for="serviceCosts">Service Costs <em>&#x2a;</em></label>
+          <input id="serviceCosts" name="serviceCosts" required="" type="number" formControlName="serviceCosts">
 
           <label for="numberOfRooms">PROPERTY NUMBER OF ROOMS<em>&#x2a;</em></label>
           <input id="numberOfRooms" name="numberOfRooms" required="" type="number" formControlName="numberOfRooms">

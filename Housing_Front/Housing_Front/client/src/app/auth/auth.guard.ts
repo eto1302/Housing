@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): boolean {
+  ) {
     if (this.authService.isAuthenticated()) {
       return true;
     } else {
@@ -19,27 +19,25 @@ export class AuthGuard implements CanActivate {
         const enteredPassword = prompt('Please enter your password:');
         if (enteredPassword) {
           this.authService.authenticateWithPassword(enteredPassword).subscribe(
-            (result) => {
-              console.log(result);
-              if (result) {
+            (response: string) => {
+              const token = response;
+              if (token) {
+                localStorage.setItem('authToken', token);
                 this.authService.Authenticate();
                 this.router.navigate([state.url]);
-                return true;
               } else {
-                // Handle incorrect password (e.g., show an error message)
                 alert('Incorrect password. Please try again.');
                 authenticate(); // Ask for the password again
               }
             },
             (error) => {
-              // Handle errors (e.g., show an error message)
               alert('An error occurred. Please try again.');
+              console.log(error);
               authenticate(); // Ask for the password again
             }
           );
         } else {
-          // User canceled or didn't provide a password
-          return false; // Deny access until a valid password is entered
+          return false; // User canceled or didn't provide a password
         }
       };
 

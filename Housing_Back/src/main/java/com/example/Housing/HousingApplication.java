@@ -1,8 +1,6 @@
 package com.example.Housing;
 
-import com.example.Housing.Entities.Address;
 import com.example.Housing.Entities.Photo;
-import com.example.Housing.Entities.Property;
 import com.example.Housing.Repositories.AddressRepository;
 import com.example.Housing.Repositories.PhotoRepository;
 import com.example.Housing.Repositories.PropertyRepository;
@@ -11,13 +9,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.*;
 
 import static com.example.Housing.Controllers.PasswordController.generatePassword;

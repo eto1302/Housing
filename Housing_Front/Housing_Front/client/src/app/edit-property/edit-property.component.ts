@@ -28,10 +28,11 @@ export class EditPropertyComponent implements OnInit {
   ) {
     this.editPropertyForm = this.formBuilder.group({
       agentName: '',
-      propertyName: '',
-      propertyDescription: '',
+      name: '',
+      description: '',
       price: 0,
-      propertyRooms: '',
+      serviceCosts: 0,
+      numberOfRooms: '',
       numberOfBedrooms: 0,
       numberOfBathrooms: 0,
       numberOfFloors: 0,
@@ -56,7 +57,7 @@ export class EditPropertyComponent implements OnInit {
       propertyY: '',
       videoLink: '',
       specifics: '',
-      dateOfAvailability: '',
+      dateOfAvailability: ''
     });
   }
 
@@ -95,10 +96,11 @@ export class EditPropertyComponent implements OnInit {
 
   private setFields() {
     this.property.agentName = this.editPropertyForm.value.agentName;
-    this.property.name = this.editPropertyForm.value.propertyName;
-    this.property.description = this.editPropertyForm.value.propertyDescription;
+    this.property.name = this.editPropertyForm.value.name;
+    this.property.description = this.editPropertyForm.value.description;
     this.property.price = this.editPropertyForm.value.price;
-    this.property.numberOfRooms = this.editPropertyForm.value.propertyRooms;
+    this.property.serviceCosts = this.editPropertyForm.value.serviceCosts;
+    this.property.numberOfRooms = this.editPropertyForm.value.numberOfRooms;
     this.property.numberOfBedrooms = this.editPropertyForm.value.numberOfBedrooms;
     this.property.numberOfBathrooms = this.editPropertyForm.value.numberOfBathrooms;
     this.property.numberOfFloors = this.editPropertyForm.value.numberOfFloors;
@@ -127,7 +129,6 @@ export class EditPropertyComponent implements OnInit {
     this.property.videoLink = this.editPropertyForm.value.videoLink;
     this.property.specifics = this.editPropertyForm.value.specifics;
     this.property.dateOfAvailability = this.editPropertyForm.value.dateOfAvailability;
-    this.property.dateOfOffer = new Date();
   }
 
   onFileSelected($event: Event) {
@@ -154,10 +155,14 @@ export class EditPropertyComponent implements OnInit {
   populateFormFromProperty(): void {
     this.editPropertyForm.setValue({
       agentName: this.property.agentName,
-      propertyName: this.property.name,
-      propertyDescription: this.property.description,
+      name: this.property.name,
+      description: this.property.description,
       price: this.property.price,
-      propertyRooms: this.property.numberOfRooms,
+      serviceCosts: this.property.serviceCosts,
+      numberOfRooms: this.property.numberOfRooms,
+      numberOfBedrooms: this.property.numberOfBedrooms,
+      numberOfBathrooms: this.property.numberOfBathrooms,
+      numberOfFloors: this.property.numberOfFloors,
       propertyStreet: this.property.address.street,
       propertyCity: this.property.address.city,
       propertyRegion: this.property.address.region,
@@ -165,9 +170,25 @@ export class EditPropertyComponent implements OnInit {
       propertyPostal: this.property.address.postalCode,
       propertyX: this.property.address.latitude,
       propertyY: this.property.address.longitude,
-      propertyVideo: this.property.videoLink,
+      videoLink: this.property.videoLink,
+      facilities: this.property.facilities,
+      interior: this.property.interior,
+      livingArea: this.property.livingArea,
+      plotArea: this.property.plotArea,
+      volume: this.property.volume,
+      status: this.property.status,
+      typeOfHouse: this.property.typeOfHouse,
+      typeOfConstruction: this.property.typeOfConstruction,
+      yearOfConstruction: this.property.yearOfConstruction,
+      balconyArea: this.property.balconyArea,
+      gardenArea: this.property.gardenArea,
+      typeOfParking: this.property.typeOfParking,
+      specifics: this.property.specifics,
+      dateOfAvailability: new Date(this.property.dateOfAvailability).toISOString()
+        .split('T')[0]
     });
   }
+
 
   loadProperty(event: any) {
     const id = event.target.value;

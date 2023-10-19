@@ -72,6 +72,24 @@ public class PropertyController {
             existingProperty.setDateOfAvailability(newProperty.getDateOfAvailability());
             existingProperty.setNumberOfRooms(newProperty.getNumberOfRooms());
             existingProperty.setVideoLink(newProperty.getVideoLink());
+            existingProperty.setServiceCosts(newProperty.getServiceCosts());
+            existingProperty.setSpecifics(newProperty.getSpecifics());
+            existingProperty.setNumberOfBedrooms(newProperty.getNumberOfBedrooms());
+            existingProperty.setNumberOfBathrooms(newProperty.getNumberOfBathrooms());
+            existingProperty.setNumberOfFloors(newProperty.getNumberOfFloors());
+            existingProperty.setFacilities(newProperty.getFacilities());
+            existingProperty.setInterior(newProperty.getInterior());
+            existingProperty.setLivingArea(newProperty.getLivingArea());
+            existingProperty.setPlotArea(newProperty.getPlotArea());
+            existingProperty.setVolume(newProperty.getVolume());
+            existingProperty.setStatus(newProperty.getStatus());
+            existingProperty.setTypeOfHouse(newProperty.getTypeOfHouse());
+            existingProperty.setTypeOfConstruction(newProperty.getTypeOfConstruction());
+            existingProperty.setYearOfConstruction(newProperty.getYearOfConstruction());
+            existingProperty.setBalconyArea(newProperty.getBalconyArea());
+            existingProperty.setGardenArea(newProperty.getGardenArea());
+            existingProperty.setTypeOfParking(newProperty.getTypeOfParking());
+
 
             // If the new property has a new address, create and associate it
             Address newAddress = newProperty.getAddress();
@@ -122,7 +140,7 @@ public class PropertyController {
     public List<Property> getPropertiesInRange(@PathVariable Long begin, @PathVariable Long end) {
         List<Property> result = new ArrayList<>();
         for (Long i = begin; i < end; ++i) {
-            if (end > this.getCount()) break;
+            if (i > this.getCount()) break;
             var property = propertyRepository.findById(i);
 
             // Check if the property matches the query criteria
@@ -150,7 +168,7 @@ public class PropertyController {
 
 
         for (Long i = begin; i < end; ++i) {
-            if (end > this.getCount()) break;
+            if (i > this.getCount()) break;
             var property = propertyRepository.findById(i);
 
             // Check if the property matches the query criteria
