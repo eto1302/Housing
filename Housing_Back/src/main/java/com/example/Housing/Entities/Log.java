@@ -2,9 +2,9 @@ package com.example.Housing.Entities;
 
 import jakarta.persistence.*;
 
-import javax.print.attribute.standard.DateTimeAtCompleted;
 import java.util.Date;
 import java.util.Objects;
+import java.util.TimeZone;
 
 @Entity
 @Table(name="logs")
@@ -12,12 +12,15 @@ public class Log {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @Column(name = "text", length = 16000)
     private String text;
+    private String type;
     private Date date;
 
-    public Log(String text) {
+    public Log(String text, String type) {
         this.text = text;
-        this.date = new Date();
+        this.type = type;
+        this.date = new Date(System.currentTimeMillis() + TimeZone.getTimeZone("Europe/Sofia").getRawOffset());
     }
 
     public Log() {
@@ -46,17 +49,30 @@ public class Log {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Log log)) return false;
-        return id == log.id && Objects.equals(text, log.text) && Objects.equals(date, log.date);
+        if (!(o instanceof Log)) return false;
+        Log log = (Log) o;
+        return id == log.id && Objects.equals(text, log.text) && Objects.equals(type, log.type) && Objects.equals(date, log.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, text, date);
+        return Objects.hash(id, text, type, date);
     }
 
     @Override
     public String toString() {
-        return date.toString() + ": " + text;
+        return "Log{" +
+                "text='" + text + '\'' +
+                ", type='" + type + '\'' +
+                ", date=" + date +
+                '}';
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

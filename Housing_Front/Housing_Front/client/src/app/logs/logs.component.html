@@ -1,6 +1,6 @@
-<div class="dark-color body"*ngIf="logs | async as logs">
+<div class="dark-color body" *ngIf="logs | async as logs">
   <div *ngFor="let log of logs">
-    <h3>{{log.date}}: {{log.text}}</h3>
+    <h3 [routerLink]="'/log/' + log.id">{{log.type}} -> {{log.date | date:'dd-MM-yyyy' }} : {{log.text | slice:0:50}}</h3>
   </div>
 </div>
 

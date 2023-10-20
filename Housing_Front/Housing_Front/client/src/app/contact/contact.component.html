@@ -1,31 +1,31 @@
-<div class="section section-4 primary-color">
+<div class="section section-4 primary-color body">
   <div class="container mx-auto">
     <div class="row justify-content-center text-center">
       <div class="col-lg-8 contact-us">
-        <form action="#">
+        <form [formGroup]="contactForm">
           <label for="name">NAME <em>&#x2a;</em></label>
           <input id="name"
                  name="name"
                  required=""
-                 type="text"/>
+                 type="text"
+                 formControlName="name"/>
           <label for="email">EMAIL <em>&#x2a;</em></label>
-          <input id="email" name="email" required="" type="email"/>
+          <input id="email" name="email" required="" type="email"
+                 formControlName="email"/>
           <label for="phone">PHONE <em>&#x2a;</em></label>
           <input id="phone"
                  name="phone"
-                 pattern="[0-9]{10}"
                  required=""
                  type="tel"
+                 formControlName="phone"
           />
           <label for="message">MESSAGE <em>&#x2a;</em></label>
           <textarea id="message"
                     name="message"
                     required=""
-                    rows="4"></textarea>
-          <label for="spamProtection">SPAM PROTECTION <em>&#x2a; </em>
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;What day comes before July 11th?</span></label>
-          <input id="spamProtection" name="spamProtection" type="text"/>
-          <button id="customerOrder">SUBMIT</button>
+                    rows="4"
+                    formControlName="message"></textarea>
+          <button id="customerOrder" (click)="onSubmit()">SUBMIT</button>
         </form>
       </div>
     </div>

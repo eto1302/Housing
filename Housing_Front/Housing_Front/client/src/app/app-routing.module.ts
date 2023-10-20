@@ -13,9 +13,15 @@ import {ServicesComponent} from './services/services.component';
 import {ServiceComponent} from './service/service.component';
 import {AgentComponent} from './agent/agent.component';
 import {LogsComponent} from './logs/logs.component';
-import {EditPropertyComponent} from "./edit-property/edit-property.component";
+import {EditPropertyComponent} from './edit-property/edit-property.component';
+import {LogComponent} from './log/log.component';
 
 const routes: Routes = [
+  {
+    path: 'log/:id',
+    component: LogComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'logs',
     component: LogsComponent,

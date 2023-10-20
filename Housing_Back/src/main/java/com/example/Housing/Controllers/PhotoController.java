@@ -36,7 +36,7 @@ public class PhotoController {
             Photo savedPhoto = new Photo();
             savedPhoto.setPhoto(photo.getBytes());
 
-            savedPhoto = photoRepository.save(savedPhoto);
+            savedPhoto = photoRepository.saveAndFlush(savedPhoto);
 
             return new ResponseEntity<Photo>(savedPhoto, HttpStatus.OK);
         } catch (Exception e) {

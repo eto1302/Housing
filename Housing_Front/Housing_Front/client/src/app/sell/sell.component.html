@@ -1,33 +1,42 @@
-<div class="section section-4 primary-color">
+<div class="section section-4 primary-color body">
   <div class="container mx-auto">
     <div class="row justify-content-center text-center">
       <div class="col-lg-8 contact-us">
-        <form action="#">
-          <label for="name">NAME <em>&#x2a;</em></label>
-          <input id="name"
-                 name="name"
-                 required=""
-                 type="text"/>
-          <label for="email">EMAIL <em>&#x2a;</em></label>
-          <input id="email" name="email" required="" type="email"/>
-          <label for="phone">PHONE <em>&#x2a;</em></label>
-          <input id="phone"
-                 name="phone"
-                 pattern="[0-9]{10}"
-                 required=""
-                 type="tel"
-          />
-          <label for="propertyAddress">PROPERTY ADDRESS <em>&#x2a;</em></label>
-          <input id="propertyAddress" name="propertyAddress" required="" type="text"/>
-          <label for="description">PROPERTY DESCRIPTION <em>&#x2a;</em></label>
-          <textarea id="description"
-                    name="description"
-                    required=""
-                    rows="4"></textarea>
-          <label for="spamProtection">SPAM PROTECTION <em>&#x2a; </em>
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;What day comes before July 11th?</span></label>
-          <input id="spamProtection" name="spamProtection" type="text"/>
-          <button id="customerOrder">SUBMIT</button>
+        <form [formGroup]="sellForm">
+          <div class="form-group">
+            <label for="name">NAME <em>&#x2a;</em></label>
+            <input id="name"
+                   name="name"
+                   required=""
+                   type="text"
+                   formControlName="name" />
+          </div>
+          <div class="form-group">
+            <label for="email">EMAIL <em>&#x2a;</em></label>
+            <input id="email" name="email" required="" type="email" formControlName="description" />
+          </div>
+          <div class="form-group">
+            <label for="phone">PHONE <em>&#x2a;</em></label>
+            <input id="phone"
+                   name="phone"
+                   required=""
+                   type="tel"
+                   formControlName="phone"
+            />
+          </div>
+          <div class="form-group">
+            <label for="propertyAddress">PROPERTY ADDRESS <em>&#x2a;</em></label>
+            <input id="propertyAddress" name="propertyAddress" required="" type="text" formControlName="address"/>
+          </div>
+          <div class="form-group">
+            <label for="description">PROPERTY DESCRIPTION <em>&#x2a;</em></label>
+            <textarea id="description"
+                      name="description"
+                      required=""
+                      rows="4"
+                      formControlName="description"></textarea>
+          </div>
+          <button id="customerOrder" class="btn btn-primary" (click)="onSubmit()">SUBMIT</button>
         </form>
       </div>
     </div>

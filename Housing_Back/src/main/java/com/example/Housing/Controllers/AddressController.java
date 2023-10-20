@@ -22,7 +22,7 @@ public class AddressController {
     }
 
     @PostMapping("/addresses")
-    void addAddress(@RequestBody Address property) {
-        addressRepository.save(property);
+    void addAddress(@RequestBody Address address) {
+        addressRepository.saveAndFlush(address);
     }
 }

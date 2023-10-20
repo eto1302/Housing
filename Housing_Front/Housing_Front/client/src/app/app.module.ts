@@ -26,6 +26,7 @@ import { ServiceComponent } from './service/service.component';
 import { AgentComponent } from './agent/agent.component';
 import { LogsComponent } from './logs/logs.component';
 import { EditPropertyComponent } from './edit-property/edit-property.component';
+import { LogComponent } from './log/log.component';
 
 @NgModule({
     declarations: [
@@ -46,6 +47,7 @@ import { EditPropertyComponent } from './edit-property/edit-property.component';
         AgentComponent,
         LogsComponent,
         EditPropertyComponent,
+        LogComponent,
     ],
   imports: [
     BrowserModule,

@@ -38,8 +38,8 @@ public class PropertyController {
     @PostMapping("/properties")
     public ResponseEntity<Property> addProperty(@RequestBody Property property) {
         try {
-            Property savedProperty = propertyRepository.save(property);
-            logService.saveLog(new Log("Property Added: " + savedProperty.getName() + " by " + savedProperty.getAgentName()));
+            Property savedProperty = propertyRepository.saveAndFlush(property);
+            logService.saveLog(new Log("Property Added: " + savedProperty.getName() + " by " + savedProperty.getAgentName(), "DB_Change"));
             return new ResponseEntity<>(savedProperty, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -112,7 +112,7 @@ public class PropertyController {
             // Save the updated property, which will also remove the old associated entities
             Property updatedProperty = propertyRepository.save(existingProperty);
 
-            logService.saveLog(new Log("Property Edited: " + updatedProperty.getName() + " by " + updatedProperty.getAgentName()));
+            logService.saveLog(new Log("Property Edited: " + updatedProperty.getName() + " by " + updatedProperty.getAgentName(), "DB_Change"));
 
             return new ResponseEntity<>(updatedProperty, HttpStatus.OK);
         } else {
@@ -133,13 +133,17 @@ public class PropertyController {
 
     @GetMapping("/properties/count")
     public int getCount() {
-        return getProperties().size();
+        return getProperties().stream()
+                .mapToInt(property -> (int) property.getId())
+                .max()
+                .orElse(0);
     }
 
     @GetMapping("/properties/{begin}/{end}")
     public List<Property> getPropertiesInRange(@PathVariable Long begin, @PathVariable Long end) {
         List<Property> result = new ArrayList<>();
         for (Long i = begin; i < end; ++i) {
+            System.out.println(begin + " : " + i + " : " + end);
             if (i > this.getCount()) break;
             var property = propertyRepository.findById(i);
 
@@ -181,10 +185,6 @@ public class PropertyController {
 
     // Utility method to check if a property matches the query criteria
     private boolean shouldIncludeProperty(Property property, List<String> queries) {
-        // Implement your logic to match the property with the queries
-        // Return true if the property should be included, false otherwise
-        // You can use the 'queries' array to filter properties based on your criteria
-        // Example: Check if property.getAgentName() is in the 'queries' array, etc.
         boolean sameAgent = queries.get(0) == null || property.getAgentName().equals(queries.get(0));
         boolean sameName = queries.get(1) == null || property.getName().toLowerCase().contains(queries.get(1).toLowerCase());
         //TODO add price
@@ -242,7 +242,7 @@ public class PropertyController {
                 // Delete the property itself
                 propertyRepository.delete(property);
 
-                logService.saveLog(new Log("Property Deleted: " + property.getName() + " by " + property.getAgentName()));
+                logService.saveLog(new Log("Property Deleted: " + property.getName() + " by " + property.getAgentName(), "DB_Change"));
 
                 return new ResponseEntity<>("Property with ID " + id + " has been deleted.", HttpStatus.OK);
             } else {
