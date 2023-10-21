@@ -5,6 +5,7 @@
 
     <!-- Overlay content -->
     <div class="overlay-content">
+      <button class="btn btn-primary text-white py-2 px-4" (click)="clearFilters()">Clear Filters</button>
       <label for="agentName">AGENT NAME <em>&#x2a;</em></label>
       <select name="agentName" id="agentName" #agentName (change)='setAgent(agentName.value)'>
         <option *ngFor="let item of agents" [ngValue]="item.name">
@@ -13,14 +14,23 @@
       <label for="name">PROPERTY NAME<em>&#x2a;</em></label>
       <input id="name" name="name" required="" type="text" #name (change)="setName(name.value)"/>
 
-      <label for="price">PROPERTY PRICE <em>&#x2a;</em></label>
-      <input id="price" name="price" required="" type="number" #price (change)="setPrice(price.value)"/>
+      <label for="minimalPrice">PROPERTY MINIMAL PRICE <em>&#x2a;</em></label>
+      <input id="minimalPrice" name="minimalPrice" required="" type="number" #minimalPrice (change)="setMinimalPrice(minimalPrice.value)"/>
+
+      <label for="maximalPrice">PROPERTY MAXIMAL PRICE <em>&#x2a;</em></label>
+      <input id="maximalPrice" name="maximalPrice" required="" type="number" #maximalPrice (change)="setMaximalPrice(maximalPrice.value)"/>
+
+      <label for="minimalArea">PROPERTY MINIMAL LIVING AREA <em>&#x2a;</em></label>
+      <input id="minimalArea" name="minimalArea" required="" type="number" #minimalArea (change)="setMinimalArea(minimalArea.value)"/>
+
+      <label for="maximalArea">PROPERTY MAXIMAL LIVING AREA <em>&#x2a;</em></label>
+      <input id="maximalArea" name="maximalArea" required="" type="number" #maximalArea (change)="setMaximalArea(maximalArea.value)"/>
 
       <label for="numberOfRooms">PROPERTY NUMBER OF ROOMS<em>&#x2a;</em></label>
       <input id="numberOfRooms" name="numberOfRooms" required="" type="number" #rooms (change)="setRooms(rooms.value)"/>
 
-      <label for="propertyStreet">PROPERTY STREET<em>&#x2a;</em></label>
-      <input id="propertyStreet" name="propertyStreet" required="" type="text" #street (change)="setPropertyStreet(street.value)" />
+      <label for="numberOfBedrooms">PROPERTY NUMBER OF BEDROOMS<em>&#x2a;</em></label>
+      <input id="numberOfBedrooms" name="numberOfBedrooms" required="" type="number" #numberOfBedrooms (change)="setNumberOfBedrooms(numberOfBedrooms.value)"/>
 
       <label for="propertyCity">PROPERTY CITY<em>&#x2a;</em></label>
       <input id="propertyCity" name="propertyCity" required="" type="text" #city (change)="setPropertyCity(city.value)" />
@@ -31,14 +41,17 @@
       <label for="propertyCountry">PROPERTY COUNTRY<em>&#x2a;</em></label>
       <input id="propertyCountry" name="propertyCountry" required="" type="text" #country (change)="setPropertyCountry(country.value)" />
 
-      <label for="propertyPostal">PROPERTY POSTAL CODE<em>&#x2a;</em></label>
-      <input id="propertyPostal" name="propertyPostal" required="" type="text" #postal (change)="setPropertyPostal(postal.value)" />
+      <label for="parking">Has Parking?<em>&#x2a;</em></label>
+      <select name="parking" id="parking" #parking (change)='setParking(parking.value)'>
+        <option [ngValue]="true">Yes</option>
+        <option [ngValue]="false">No</option>
+      </select>
 
-      <label for="propertyX">PROPERTY X<em>&#x2a;</em></label>
-      <input id="propertyX" name="propertyX" required="" type="text" #x (change)="setPropertyX(x.value)" />
-
-      <label for="propertyY">PROPERTY Y<em>&#x2a;</em></label>
-      <input id="propertyY" name="propertyY" required="" type="text" #y (change)="setPropertyY(y.value)" />
+      <label for="status">Status<em>&#x2a;</em></label>
+      <select name="status" id="status" #status (change)='setStatus(status.value)'>
+        <option [ngValue]="'Rent'">Rent</option>
+        <option [ngValue]="'Buy'">Buy</option>
+      </select>
     </div>
 
   </div>

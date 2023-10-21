@@ -1,18 +1,16 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {PropertyService} from '../../services/property.service';
 import {Property} from '../../models/property';
-import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 
 import {CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
 import {
-  catchError,
   map,
   mergeMap,
   scan,
   startWith,
-  takeUntil,
   tap,
   throttleTime
 } from 'rxjs/operators';
@@ -32,7 +30,7 @@ export class PropertiesComponent implements OnInit {
   viewport: CdkVirtualScrollViewport;
 
   theEnd = false;
-
+  queriesSize = 12;
   offset = new BehaviorSubject(null);
   infinite: Observable<Property[]>;
   agents;
@@ -46,7 +44,7 @@ export class PropertiesComponent implements OnInit {
 
   ngOnInit() {
     this.filtered = false;
-    this.queries = new Array(11);
+    this.clearFilters();
     this.agents = this.agentService.agents;
 
     this.clearAndReloadBatchMap();
@@ -60,7 +58,7 @@ export class PropertiesComponent implements OnInit {
       throttleTime(150),
       mergeMap(n => this.getBatch(n)),
       scan((acc, batch) => {
-        return { ...acc, ...batch };
+        return {...acc, ...batch};
       }, {}),
       startWith({}) // Initialize with an empty object
     );
@@ -70,7 +68,6 @@ export class PropertiesComponent implements OnInit {
 
 
   clearInfiniteScroll() {
-    // Reset the offset and reinitialize the infinite observable
     this.offset.next(1);
     this.theEnd = false;
     this.clearAndReloadBatchMap();
@@ -119,12 +116,10 @@ export class PropertiesComponent implements OnInit {
   }
 
   getBatch(lastSeen: number) {
-    console.log(lastSeen);
     lastSeen = lastSeen == null ? 1 : lastSeen;
     return this.propertyService.getInRange(lastSeen, lastSeen + batchSize, this.queries).pipe(
       tap(arr => (arr.length > 2 ? null : (this.theEnd = true))),
       map(arr => {
-        console.log(arr);
         return arr.reduce((acc, curr) => {
           const id = curr.id;
           return {...acc, [id]: curr};
@@ -153,48 +148,54 @@ export class PropertiesComponent implements OnInit {
     this.queries[1] = name;
   }
 
-  setPrice(price: string) {
-    console.log('Price set: ' + price);
-    this.queries[2] = price;
+  setMinimalPrice(value: string) {
+    this.queries[2] = value;
+  }
+
+  setMaximalPrice(value: string) {
+    this.queries[3] = value;
   }
 
   setRooms(rooms: string) {
-    console.log('Number of rooms set: ' + rooms);
-    this.queries[3] = rooms;
+    this.queries[4] = rooms;
   }
 
-  setPropertyStreet(street: string) {
-    console.log('Street set: ' + street);
-    this.queries[4] = street;
+  setNumberOfBedrooms(value: string) {
+    this.queries[5] = value;
   }
 
   setPropertyCity(city: string) {
     console.log('City set: ' + city);
-    this.queries[5] = city;
+    this.queries[6] = city;
   }
 
   setPropertyRegion(region: string) {
     console.log('Region set: ' + region);
-    this.queries[6] = region;
+    this.queries[7] = region;
   }
 
   setPropertyCountry(country: string) {
     console.log('Country set: ' + country);
-    this.queries[7] = country;
+    this.queries[8] = country;
   }
 
-  setPropertyPostal(postal: string) {
-    console.log('Postal code set: ' + postal);
-    this.queries[8] = postal;
+  setMinimalArea(value: string) {
+    this.queries[9] = value;
   }
 
-  setPropertyX(x: string) {
-    console.log('Property X set: ' + x);
-    this.queries[9] = x;
+  setMaximalArea(value: string) {
+    this.queries[10] = value;
   }
 
-  setPropertyY(y: string) {
-    console.log('Property Y set: ' + y);
-    this.queries[10] = y;
+  clearFilters() {
+    this.queries = new Array(this.queriesSize);
+  }
+
+  setParking(value: string) {
+    this.queries[11] = value;
+  }
+
+  setStatus(value: string) {
+    this.queries[12] = value;
   }
 }

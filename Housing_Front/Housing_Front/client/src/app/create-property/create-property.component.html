@@ -49,7 +49,10 @@
           <input id="volume" name="volume" type="number" formControlName="volume">
 
           <label for="status">STATUS</label>
-          <input id="status" name="status" type="text" formControlName="status">
+          <select name="status" id="status" formControlName="status">
+            <option [ngValue]="'Rent'">Rent</option>
+            <option [ngValue]="'Buy'">Buy</option>
+          </select>
 
           <label for="typeOfHouse">TYPE OF HOUSE</label>
           <input id="typeOfHouse" name="typeOfHouse" type="text" formControlName="typeOfHouse">
@@ -60,10 +63,10 @@
           <label for="yearOfConstruction">YEAR OF CONSTRUCTION</label>
           <input id="yearOfConstruction" name="yearOfConstruction" type="number" formControlName="yearOfConstruction">
 
-          <label for="balconyArea">BALCONY AREA (sq ft)</label>
+          <label for="balconyArea">BALCONY AREA (m^2)</label>
           <input id="balconyArea" name="balconyArea" type="number" formControlName="balconyArea">
 
-          <label for="gardenArea">GARDEN AREA (sq ft)</label>
+          <label for="gardenArea">GARDEN AREA (m^2)</label>
           <input id="gardenArea" name="gardenArea" type="number" formControlName="gardenArea">
 
           <label for="typeOfParking">TYPE OF PARKING</label>
