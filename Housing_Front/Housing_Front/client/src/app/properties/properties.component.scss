@@ -37,11 +37,9 @@ a, a:hover {
 
 /* Cards */
 .postcard {
-  height: 300px;
-
+  height: 50vh;
   flex-wrap: wrap;
   display: flex;
-
   box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
   border-radius: 10px;
   margin: 0 0 2rem 0;
@@ -371,6 +369,7 @@ a, a:hover {
   font-size: 20px; /* Increase font size */
   color: white; /* White text color */
   border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
+  z-index: 2;
 }
 
 #filter:hover{
