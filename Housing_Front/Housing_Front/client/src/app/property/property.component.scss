@@ -1,9 +1,15 @@
 .primary-color>*{
   color:white;
 }
-#propertyDetails{
+#propertyDetails {
   padding-top: 180px;
 }
+
+.iframe-fill {
+  height: 100%; /* Make the iframe fill its parent container */
+  width: 100%; /* Make the iframe take up the full width */
+}
+
 
 .pagination-button{
   //padding-left: 100px;
@@ -20,8 +26,6 @@
   position: relative;
   display: none;
   float: left;
-  width: 100vw;
-  height: 60vh;
   margin-right: -100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;

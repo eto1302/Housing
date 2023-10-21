@@ -1,41 +1,63 @@
 <div *ngIf="property" class="section section-4 secondary-color" id="propertyDetails">
   <div class="container">
-    <!--    photos-->
-    <div class="row justify-content-center align-items-center text-center mb-5">
-      <div class="col-lg-1 pagination-button">
-        <button
-          class="primary-color"
-          type="button"
-          (click)='move(-1)'
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-      </div>
-      <div class="col-lg-8">
-        <div class="img-about">
-          <ng-container *ngIf="this.property.videoLink">
-            <iframe width="600" height="400"
-                    [src]="this.property.videoLink | safe"
-                    class="carousel-item imageIcons img-fluid"
-                    [class.active]="isActive(-1)">
-            </iframe>
+<!--    &lt;!&ndash;    photos&ndash;&gt;-->
+<!--    <div class="row justify-content-center align-items-center text-center mb-5">-->
+<!--      <div class="col-1 pagination-button">-->
+<!--        <button class="primary-color" type="button" (click)='move(-1)'>-->
+<!--          <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+<!--          <span class="visually-hidden">Previous</span>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--      <div class="col-8">-->
+<!--        <div class="img-about">-->
+<!--          <ng-container *ngIf="this.property.videoLink">-->
+<!--            <iframe style="position: relative; height: 100%; width: 100%;"-->
+<!--              [src]="this.property.videoLink | safe"-->
+<!--              class="carousel-item imageIcons img-fluid iframe-fill"-->
+<!--              [class.active]="isActive(-1)"-->
+<!--            ></iframe>-->
+<!--          </ng-container>-->
+<!--          <img-->
+<!--            class="carousel-item imageIcons img-fluid"-->
+<!--            *ngFor="let photo of property.photos; let index = index"-->
+<!--            [class.active]="isActive(index)"-->
+<!--            [src]="getPath(photo.photo)"-->
+<!--          >-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-1 pagination-button">-->
+<!--        <button class="primary-color" type="button" (click)='move(1)'>-->
+<!--          <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+<!--          <span class="visually-hidden">Next</span>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </div>-->
+    <div id="carouselExampleControls" class="carousel slide mb-5" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <ng-container *ngIf="this.property.videoLink">-->
+            <iframe [src]="this.property.videoLink | safe"
+                    class="carousel-item w-100"
+                    [class.active]="isActive(-1)"
+                    style="height:660px"
+            ></iframe>
           </ng-container>
-          <img class="carousel-item imageIcons img-fluid"
-               *ngFor="let photo of property.photos; let index = index"
-               [class.active]="isActive(index)" [src]="getPath(photo.photo)">
+          <img
+            class="carousel-item w-100"
+            *ngFor="let photo of property.photos; let index = index"
+            [class.active]="isActive(index)"
+            [src]="getPath(photo.photo)"
+            style="height:660px"/>
         </div>
       </div>
-      <div class="col-lg-1 pagination-button">
-        <button
-          class="primary-color"
-          type="button"
-          (click)='move(1)'
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
+      <a class="carousel-control-prev" role="button" data-slide="prev"(click)="move(-1)">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" role="button" data-slide="next" (click)="move(1)">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
     </div>
     <!--    name-->
     <div class="col-lg-12">
@@ -48,15 +70,15 @@
           {{property.price}}
         </h3>
         <div class="row justify-content-start">
-          <div class="col-1" *ngIf="property.livingArea">
+          <div class="col-1 mx-2" *ngIf="property.livingArea">
             <a><img src="assets/resources/images/area.png" class="icon"></a>
             <h6>{{ property.livingArea }} m²</h6>
           </div>
-          <div class="col-1" *ngIf="property.numberOfRooms">
+          <div class="col-1 mx-2" *ngIf="property.numberOfRooms">
             <img src="assets/resources/images/room.png" class="icon">
             <h6>{{ property.numberOfRooms }} rooms</h6>
           </div>
-          <div class="col-1" *ngIf="property.interior">
+          <div class="col-1 mx-2" *ngIf="property.interior">
             <a><img src="assets/resources/images/furniture.png" class="icon"></a>
             <h6>{{ property.interior }}</h6>
           </div>
@@ -82,11 +104,13 @@
         <dt class="term" *ngIf="property.price">Price</dt>
         <dd class="definition" *ngIf="property.price">{{ property.price }}</dd>
         <dt class="term" *ngIf="property.dateOfOffer">Offered Since</dt>
-        <dd class="definition" *ngIf="property.dateOfOffer">{{ property.dateOfOffer | date:'dd-MM-yyyy' }}</dd>
+        <dd class="definition"
+            *ngIf="property.dateOfOffer">{{ property.dateOfOffer | date:'dd-MM-yyyy' }}</dd>
         <dt class="term" *ngIf="property.status">Status</dt>
         <dd class="definition" *ngIf="property.status">{{ property.status }}</dd>
         <dt class="term" *ngIf="property.dateOfAvailability">Available From</dt>
-        <dd class="definition" *ngIf="property.dateOfAvailability">{{ property.dateOfAvailability | date:'dd-MM-yyyy' }}</dd>
+        <dd class="definition"
+            *ngIf="property.dateOfAvailability">{{ property.dateOfAvailability | date:'dd-MM-yyyy' }}</dd>
         <dt class="term" *ngIf="property.serviceCosts">Service Costs</dt>
         <dd class="definition" *ngIf="property.serviceCosts">{{ property.serviceCosts }}</dd>
         <dt class="term" *ngIf="property.specifics">Specifics</dt>
@@ -116,9 +140,11 @@
         <dt class="term" *ngIf="property.typeOfHouse">Type of house</dt>
         <dd class="definition" *ngIf="property.typeOfHouse">{{ property.typeOfHouse }}</dd>
         <dt class="term" *ngIf="property.typeOfConstruction">Type of construction</dt>
-        <dd class="definition" *ngIf="property.typeOfConstruction">{{ property.typeOfConstruction }}</dd>
+        <dd class="definition"
+            *ngIf="property.typeOfConstruction">{{ property.typeOfConstruction }}</dd>
         <dt class="term" *ngIf="property.yearOfConstruction">Year of construction</dt>
-        <dd class="definition" *ngIf="property.yearOfConstruction">{{ property.yearOfConstruction }}</dd>
+        <dd class="definition"
+            *ngIf="property.yearOfConstruction">{{ property.yearOfConstruction }}</dd>
         <dt class="term" *ngIf="property.address.region">Region</dt>
         <dd class="definition" *ngIf="property.address.region">{{ property.address.region }}</dd>
       </dl>
@@ -131,9 +157,11 @@
         <dt class="term" *ngIf="property.numberOfRooms">Number Of Rooms</dt>
         <dd class="definition" *ngIf="property.numberOfRooms">{{ property.numberOfRooms }}</dd>
         <dt class="term" *ngIf="property.numberOfBedrooms">Number Of Bedrooms</dt>
-        <dd class="definition" *ngIf="property.numberOfBedrooms">{{ property.numberOfBedrooms }}</dd>
+        <dd class="definition"
+            *ngIf="property.numberOfBedrooms">{{ property.numberOfBedrooms }}</dd>
         <dt class="term" *ngIf="property.numberOfBathrooms">Number Of Bathrooms</dt>
-        <dd class="definition" *ngIf="property.numberOfBathrooms">{{ property.numberOfBathrooms }}</dd>
+        <dd class="definition"
+            *ngIf="property.numberOfBathrooms">{{ property.numberOfBathrooms }}</dd>
         <dt class="term" *ngIf="property.numberOfFloors">Number Of Floors</dt>
         <dd class="definition" *ngIf="property.numberOfFloors">{{ property.numberOfFloors }}</dd>
         <dt class="term" *ngIf="property.facilities">Facilities</dt>

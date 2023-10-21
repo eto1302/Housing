@@ -42,6 +42,7 @@ public class PropertyController {
             logService.saveLog(new Log("Property Added: " + savedProperty.getName() + " by " + savedProperty.getAgentName(), "DB_Change"));
             return new ResponseEntity<>(savedProperty, HttpStatus.OK);
         } catch (Exception e) {
+            System.out.println("Error while adding property: " + e.getMessage());
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -170,7 +171,6 @@ public class PropertyController {
 
         List<Property> result = new ArrayList<>();
 
-
         for (Long i = begin; i < end; ++i) {
             if (i > this.getCount()) break;
             var property = propertyRepository.findById(i);
@@ -187,16 +187,18 @@ public class PropertyController {
     private boolean shouldIncludeProperty(Property property, List<String> queries) {
         boolean sameAgent = queries.get(0) == null || property.getAgentName().equals(queries.get(0));
         boolean sameName = queries.get(1) == null || property.getName().toLowerCase().contains(queries.get(1).toLowerCase());
-        //TODO add price
-        boolean sameRooms = queries.get(3) == null || property.getNumberOfRooms() == Integer.parseInt(queries.get(3));
-        boolean sameStreet = queries.get(4) == null || property.getAddress().getStreet().toLowerCase().contains(queries.get(4).toLowerCase());
-        boolean sameCity = queries.get(5) == null || property.getAddress().getCity().toLowerCase().equals(queries.get(5).toLowerCase());
-        boolean sameRegion = queries.get(6) == null || property.getAddress().getRegion().toLowerCase().equals(queries.get(6).toLowerCase());
-        boolean sameCountry = queries.get(7) == null || property.getAddress().getCountry().toLowerCase().equals(queries.get(7).toLowerCase());
-        boolean samePostal = queries.get(8) == null || property.getAddress().getPostalCode().toLowerCase().equals(queries.get(8).toLowerCase());
-        boolean sameX = queries.get(9) == null || smallDifference(property.getAddress().getLongitude(), Double.parseDouble(queries.get(9)));
-        boolean sameY = queries.get(10) == null || smallDifference(property.getAddress().getLatitude(), Double.parseDouble(queries.get(10)));
-        return sameAgent && sameName && sameRooms && sameStreet && sameCity && sameRegion && sameCountry && samePostal && sameX && sameY;
+        boolean samePrice = (queries.get(2) == null || property.getPrice() >= Integer.parseInt(queries.get(2))) &&
+                (queries.get(3) == null || property.getPrice() <= Integer.parseInt(queries.get(3)));
+        boolean sameRooms = queries.get(4) == null || property.getNumberOfRooms() >= Integer.parseInt(queries.get(4));
+        boolean sameBedrooms = queries.get(5) == null || property.getNumberOfBedrooms() == Integer.parseInt(queries.get(5));
+        boolean sameCity = queries.get(6) == null || property.getAddress().getCity().toLowerCase().equals(queries.get(6).toLowerCase());
+        boolean sameRegion = queries.get(7) == null || property.getAddress().getRegion().toLowerCase().equals(queries.get(7).toLowerCase());
+        boolean sameCountry = queries.get(8) == null || property.getAddress().getCountry().toLowerCase().equals(queries.get(8).toLowerCase());
+        boolean sameArea = (queries.get(9) == null || property.getLivingArea() >= Integer.parseInt(queries.get(9))) &&
+                (queries.get(10) == null || property.getLivingArea() <= Integer.parseInt(queries.get(10)));
+        boolean sameParking = queries.get(11) == null || (property.getTypeOfParking().isEmpty() == (queries.get(11).equals("yes")));
+        boolean sameStatus = queries.get(12) == null || (Objects.equals(property.getStatus(), queries.get(12)));
+        return sameAgent && sameName && samePrice && sameRooms && sameBedrooms && sameCity && sameRegion && sameCountry && sameParking && sameArea && sameStatus;
     }
 
     private boolean smallDifference(double actual, double wanted) {
