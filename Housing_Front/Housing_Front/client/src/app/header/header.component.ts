@@ -6,7 +6,10 @@ import { Component, AfterContentInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements AfterContentInit{
-  constructor() { }
+  showMobileMenu: boolean;
+  constructor() {
+    this.showMobileMenu = false;
+  }
 
   ngAfterContentInit() {
     // (() => {
@@ -22,5 +25,12 @@ export class HeaderComponent implements AfterContentInit{
     //   });
     //   console.log('Listener added');
     // })()
+  }
+  showMobile() {
+    document.getElementById('mobile').style.width = '100%';
+  }
+
+  hideMobile() {
+    document.getElementById('mobile').style.width = '0%';
   }
 }
