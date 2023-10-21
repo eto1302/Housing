@@ -1,17 +1,16 @@
 <div class="hero primary-color" style="background-image: url(assets/resources/images/BackgroundImage.jpeg)">
   <div class="container">
-    <div class="row justify-content-center align-items-center">
-      <div class="col-lg-9 text-center">
-        <a href="#popularProperties">
-          <button class="third-color button-1" i18n="@@buyingButton">Buying</button>
-        </a>
-        <a [routerLink]="'/sell/'">
-          <button class="third-color button-1" i18n="@@sellingButton">Selling</button>
-        </a>
+    <div class="row justify-content-center align-items-end">
+      <div class="col-6 text-center">
+        <a href="/properties" class="btn btn-primary text-white w-100 py-3">Buying</a>
+      </div>
+      <div class="col-6 text-center">
+        <a href="/sell" class="btn btn-primary text-white w-100 py-3">Selling</a>
       </div>
     </div>
   </div>
 </div>
+
 
 <div class="section bg-light">
   <section id="about">
@@ -53,7 +52,8 @@
             Popular Properties
           </h2>
           <p i18n="@@viewAllPropertiesLink">
-            <a href="/properties" class="btn btn-primary text-white py-3 px-4">View all properties</a>
+            <a href="/properties" class="btn btn-primary text-white py-3 px-4">View all
+              properties</a>
           </p>
         </div>
       </div>
@@ -83,7 +83,8 @@
           </button>
         </div>
         <div class="carousel-inner py-4">
-          <div class="carousel-item" *ngFor="let property of (properties | async); let index = index"
+          <div class="carousel-item"
+               *ngFor="let property of (properties | async); let index = index"
                [class.active]="index == 0">
             <div class="container">
               <div class="row justify-content-center">
@@ -167,7 +168,8 @@
                   <a href="//{{agent.instagramLink}}"><span class="icon-instagram"></span></a>
                 </li>
                 <li class="list-inline-item">
-                  <a href="//{{agent.tiktokLink}}" class="tiktokHover"><span class="icon-tiktok"></span></a>
+                  <a href="//{{agent.tiktokLink}}" class="tiktokHover"><span
+                    class="icon-tiktok"></span></a>
                 </li>
                 <li class="list-inline-item">
                   <a href="//{{agent.linkedInLink}}"><span class="icon-linkedin"></span></a>
@@ -176,7 +178,8 @@
               <ul class="social list-inline">
                 <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
                   <li class="list-inline-item">
-                    <span [ngClass]="star <= agent.rating ? 'fa fa-star checked' : 'fa fa-star'"></span>
+                    <span
+                      [ngClass]="star <= agent.rating ? 'fa fa-star checked' : 'fa fa-star'"></span>
                   </li>
                 </ng-container>
               </ul>

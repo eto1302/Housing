@@ -4,16 +4,14 @@ h1 .heading {
 }
 
 .button-1 {
-  background-color: #fbeee0;
   border: 2px solid #422800;
-  border-radius: 30px;
-  box-shadow: #422800 4px 4px 0 0;
+  box-shadow: #422800 2px 2px 0 0;
   color: #422800;
   cursor: pointer;
   display: inline-block;
-  font-weight: 600;
+  font-weight: 300;
   font-size: 20px;
-  padding: 1% 5%;
+  padding: 3% 20%;
   margin: 45px;
   line-height: 50px;
   text-align: center;
@@ -21,6 +19,8 @@ h1 .heading {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  height: 5rem;
+  width: 15rem;
 }
 
 .button-1:hover {
