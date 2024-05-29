@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.TimeZone;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201", "http://localhost:4202", "http://localhost:4203"})
 public class LogController {
     private LogRepository logRepository;
 

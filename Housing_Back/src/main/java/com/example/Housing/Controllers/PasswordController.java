@@ -17,7 +17,7 @@ import java.time.Instant;
 import java.util.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201", "http://localhost:4202", "http://localhost:4203"})
 public class PasswordController {
     private static String pwd;
     private final long jwtExpirationInMinutes = 90;

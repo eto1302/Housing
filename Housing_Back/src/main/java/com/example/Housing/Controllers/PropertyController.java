@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201", "http://localhost:4202", "http://localhost:4203"})
 public class PropertyController {
 
     public PropertyController(PropertyRepository propertyRepository, AddressRepository addressRepository, PhotoRepository photoRepository, LogService logService) {
@@ -32,7 +32,7 @@ public class PropertyController {
 
     @GetMapping("/properties")
     public List<Property> getProperties() {
-        return propertyRepository.findAll();
+        return propertyRepository.findAllByOrderByIdDesc();
     }
 
     @PostMapping("/properties")
